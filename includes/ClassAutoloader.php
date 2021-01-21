@@ -1,0 +1,54 @@
+<?php
+
+
+
+// function myAutoloader($className){
+//     $url = $_SERVER['DOCUMENT_ROOT'];
+
+//     if (file_exists($_SERVER['HTTP_HOST'].'/jobportal/classes/model/'.$className.'.php')) {
+//         require_once $_SERVER['HTTP_HOST'] . '/jobportal/classes/model/' . $className . '.php';
+    
+//     } elseif (file_exists($_SERVER['HTTP_HOST'].'/jobportal/classes/view/'.$className.'.php')) {
+//         require_once $_SERVER['HTTP_HOST'] . '/jobportal/classes/view/' . $className . '.php';
+    
+//     } elseif (file_exists($_SERVER['HTTP_HOST'].'/jobportal/classes/controller/'.$className.'.php')) {
+//         require_once $_SERVER['HTTP_HOST'] . '/jobportal/classes/controller/' . $className . '.php';
+//     }
+
+//     require_once $url . '/jobportal/classes/view/' . $className . '.php';
+
+// }
+// spl_autoload_register('myAutoloader');
+
+//model
+include './classes/model/DB.php';
+include './classes/model/Model.php';
+include './classes/model/Users.php';
+include './classes/model/Applicants.php';
+include './classes/model/Employer.php';
+include './classes/model/Biography.php';
+include './classes/model/Skills.php';
+include './classes/model/Education.php';
+include './classes/model/Experience.php';
+
+//view
+include './classes/view/ViewInterface.php';
+include './classes/view/View.php';
+include './classes/view/UsersView.php';
+include './classes/view/ApplicantsView.php';
+include './classes/view/EmployerView.php';
+include './classes/view/BiographyView.php';
+include './classes/view/SkillsView.php';
+include './classes/view/EducationView.php';
+include './classes/view/ExperienceView.php';
+
+//controller
+include './classes/controller/ControllerInterface.php';
+include './classes/controller/UsersController.php';
+include './classes/controller/ApplicantsController.php';
+include './classes/controller/EmployerController.php';
+include './classes/controller/BiographyController.php';
+include './classes/controller/SkillsController.php';
+include './classes/controller/EducationController.php';
+include './classes/controller/ExperienceController.php';
+include './classes/controller/Controller.php';
