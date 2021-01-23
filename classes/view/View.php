@@ -12,7 +12,7 @@ class View
     { //remember to put type declaration
         echo "View initiated. retrieving user data";
         echo "<br>";
-        // $userView->getUser();
+
         $model->login($user);
         return $userView->getUser();
 
@@ -54,37 +54,23 @@ class View
         return $applicantProfObj;
         // if ($role  === 'applicant') {
 
-
-
-        //     $applicantView->getApplicant();
-        //     $bioView->getBiography();
-        //     $skillsView->getSkills();
-        //     $educationView->getEducation();
-        //     $experienceView->getExperience();
-
-
-        // } elseif ($role  === 'employer') {
-        //     $employerView = $viewArrs[0];
-        //     $bioView = $viewArrs[1];
-        //     $employerView->getEmployer();
-        //     $bioView->getBiography();
-
         // }
-        // $applicantView = $viewArrs[0];
-        // $bioView = $viewArrs[1];
-        // $skillsView = $viewArrs[2];
-        // $educationView = $viewArrs[3];
-        // $experienceView = $viewArrs[4];
 
-        // $applicantView->getApplicant();
-        // $bioView->getBiography();
-        // $skillsView->getSkills();
-        // $educationView->getEducation();
-        // $experienceView->getExperience();
 
 
 
         echo "profile is shown";
+        echo "<br>";
+    }
+
+    public function showAllJobs($model, $job, $jobView)
+    {
+        echo "View initiated. retrieving job data";
+        echo "<br>";
+        $model->showAllJobs($job);
+        return $jobView->getAllJobs();
+
+        echo "user logged in";
         echo "<br>";
     }
 }

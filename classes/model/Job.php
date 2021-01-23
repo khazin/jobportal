@@ -10,7 +10,9 @@ class Job
     private int $minSalary;
     private int $maxSalary;
     private String $description;
-    private Array $skills;
+    private array $skills;
+
+    private array $allJobs;
 
     public function __construct()
     {
@@ -78,7 +80,7 @@ class Job
         return $this->minSalary;
     }
 
-    
+
     public function setJobMaxSalary($maxSalary)
     {
         $this->maxSalary = $maxSalary;
@@ -148,5 +150,26 @@ class Job
         return $jobAttr;
         echo "getJob is run. returning data from DB";
         echo "<br>";
+    }
+
+
+    public function setAllJobs($allJobs)
+    {
+        $this->allJobs = $allJobs;
+    }
+
+    public function getAllJobs()
+    {
+        $jobAttr = new stdClass();
+        $jobAttr->id = $this->allJobs[0];
+        $jobAttr->jobTitle = $this->allJobs[1];
+        $jobAttr->employerId = $this->allJobs[2];
+        $jobAttr->location = $this->allJobs[3];
+        $jobAttr->minSalary = $this->allJobs[4];
+        $jobAttr->maxSalary = $this->allJobs[5];
+        $jobAttr->description = $this->allJobs[6];
+        $jobAttr->skills = $this->allJobs[7];
+
+        return $jobAttr;
     }
 }

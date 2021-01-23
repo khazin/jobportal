@@ -183,32 +183,24 @@
 
 ///////////////////CREATE EMPLOYER PROFILE//////////////////////////
 
- //biography model initiated
- $biography = new Biography();
+// //biography model initiated
+// $biography = new Biography();
 
-//  //employer model initiated
-//  $employer = new Employer();
 
- // store biography object in biography controller
- $biographyController = new BiographyController($biography);
+// // store biography object in biography controller
+// $biographyController = new BiographyController($biography);
 
-//  // store employer object in employer controller
-//  $employerController = new EmployerController($employer);
 
-  //set biography data
-$id = 7; // id take from session id
-  $biographyBio = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, quam?';
-  $biographyController->setBiography($biographyBio, $id);
+// //set biography data
+// $id = 7; // id take from session id
+// $biographyBio = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, quam?';
+// $biographyController->setBiography($biographyBio, $id);
 
-// $employerArr = ['sdgsdg','sdfhe',2352325,'sdfhzdg'];
-// //set employer data
-// $employerController->setEmployer($employerArr, $id = 0);
+// $model = new Model();
+// $modelArr = [$biography];
 
-$model = new Model();
-$modelArr = [$biography];
-
- $controller = new Controller();
- $controller->createProfile($model, $modelArr);
+// $controller = new Controller();
+// $controller->createProfile($model, $modelArr);
 
 ///////////////////SHOW APPLICANT PROFILE//////////////////////////
 
@@ -269,36 +261,36 @@ $modelArr = [$biography];
    
  ///////////////////SHOW EMPLOYER PROFILE//////////////////////////
  
-//     // initialise employers   
-//     $employer = new Employer();
+    // initialise employers   
+    $employer = new Employer();
 
-//     // initialise biography   
-//     $biography = new Biography();
+    // initialise biography   
+    $biography = new Biography();
     
 
-//     $id = 1; // id is session id
+    $id = 1; // id is session id
   
-//   // store employer object in employer controller
-//   $employerController = new EmployerController($employer);
+  // store employer object in employer controller
+  $employerController = new EmployerController($employer);
 
-//   // store biography object in biography controller
-//   $biographyController = new BiographyController($biography);
+  // store biography object in biography controller
+  $biographyController = new BiographyController($biography);
   
-//  $employerController->setEmployerId($id);
-//  $biographyController->setBiographyId($id);
+ $employerController->setEmployerId($id);
+ $biographyController->setBiographyId($id);
 
-//   // store employer object in employer view
-//   $employerView = new EmployerView($employer);
+  // store employer object in employer view
+  $employerView = new EmployerView($employer);
   
-//   // store biography object in biography view
-//   $biographyView = new BiographyView($biography);
+  // store biography object in biography view
+  $biographyView = new BiographyView($biography);
 
-//   $modelArr = [$employer,$biography];
-//   $viewArr = [$employerView,$biographyView];
+  $modelArr = [$employer,$biography];
+  $viewArr = [$employerView,$biographyView];
 
-//   $model = new Model();
-//   $view = new View();
+  $model = new Model();
+  $view = new View();
 
-//   $employerProfObj = $view->showProfile($model, $modelArr, $viewArr);
-//   $employerAttr = $employerProfObj->employerAttr;
-//   $biographyAttr = $employerProfObj->biographyAttr;
+  $employerProfObj = $view->showProfile($model, $modelArr, $viewArr);
+  $employerAttr = $employerProfObj->employerAttr;
+  $biographyAttr = $employerProfObj->biographyAttr;

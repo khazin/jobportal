@@ -42,6 +42,7 @@ include './classes/view/BiographyView.php';
 include './classes/view/SkillsView.php';
 include './classes/view/EducationView.php';
 include './classes/view/ExperienceView.php';
+include './classes/view/JobView.php';
 
 //controller
 include './classes/controller/ControllerInterface.php';

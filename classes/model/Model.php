@@ -331,4 +331,40 @@ class Model extends DB
         // echo $stmt;
         $this->insertData($stmt);
     }
+
+    public function showAllJobs($job){
+        $stmt = "SELECT * FROM jobs";
+        $this->retrieveData($stmt);
+        $jobId = [];
+        $jobTitle = [];
+        $employerId = [];
+        $location = [];
+        $minSalary = [];
+        $maxSalary = [];
+        $description = [];
+        $skills = [];
+
+      
+        if (mysqli_num_rows($this->result) > 0) {
+            while ($this->row = mysqli_fetch_assoc($this->result)) {
+                //  $job->setAllJobs($this->row);
+                // print_r($this->result->num_rows);
+                array_push($jobId,$this->row['job_id']);
+                array_push($jobTitle,$this->row['job_title']);
+                array_push($employerId,$this->row['employer_id']);
+                array_push($location,$this->row['location']);
+                array_push($minSalary,$this->row['min_salary']);
+                array_push($maxSalary,$this->row['max_salary']);
+                array_push($description,$this->row['job_description']);
+                array_push($skills,$this->row['skills']);
+              
+            }
+            $allJobs = [$jobId,$jobTitle,$employerId,$location,
+            $minSalary,$maxSalary,$description,$skills];
+            
+            $job->setAllJobs($allJobs);
+
+        }
+
+    }
 }

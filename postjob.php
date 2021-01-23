@@ -5,18 +5,12 @@
  //job model initiated
  $job = new Job();
 
-//  //employer model initiated
-//  $employer = new Employer();
-
  // store job object in job controller
  $jobController = new JobController($job);
 
-//  // store employer object in employer controller
-//  $employerController = new EmployerController($employer);
-
   //set job data
     $id=0;
-    $employerId = 7; // id take from session id
+    $employerId = 7; // employer id take from session id
     $jobTitle = 'web dev';
     $location = 'woodlands, sg';
     $minSalary = 1000;
@@ -25,8 +19,6 @@
     $skills = ['html','css','php','js'];
     $jobArr = [$jobTitle,$employerId,$location,$minSalary,$maxSalary,$description,$skills];
     $jobController->setJob($jobArr, $id);
-
-
 
     $model = new Model();
     $controller = new Controller();

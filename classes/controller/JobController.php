@@ -56,4 +56,8 @@ class JobController
     {
         $this->job->setJob($jobArr, $id);
     }
+
+    public function setAllJobs($allJobs) {
+        $this->job->setAllJobs($allJobs);
+    }
 }
