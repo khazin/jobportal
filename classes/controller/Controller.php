@@ -6,8 +6,8 @@ class Controller
     public function register($model, $modelArr) { //remember to put type declaration
         echo "controller initiated. registering user and applicants data";
         echo "<br>";
-        $model->registerApplicant($modelArr);
-        // $model->registerEmployer($modelArr);
+        // $model->registerApplicant($modelArr);
+        $model->registerEmployer($modelArr);
        
         echo "user registered";
         echo "<br>";
@@ -27,10 +27,17 @@ class Controller
         // } elseif ($_SESSION['role']='employer') {
         //     $model->createEmployerProfile($modelArr);
         // }
-        // $model->createEmployerProfile($modelArr);
-        $model->createApplicantProfile($modelArr);
+        $model->createEmployerProfile($modelArr);
+        // $model->createApplicantProfile($modelArr);
         
         echo 'profile created';
+        echo '<br>';
+    }
+
+    public function postJob($model, $job) {
+        $model->postJob($job);
+
+        echo 'job created';
         echo '<br>';
     }
     

@@ -108,15 +108,15 @@ class Model extends DB
         // var_dump($this->result);
 
         if (mysqli_num_rows($this->result) > 0) {
-            while($this->row = mysqli_fetch_assoc($this->result)) {
+            while ($this->row = mysqli_fetch_assoc($this->result)) {
 
                 // if (password_verify($this->password, $this->row['password'])) {
 
-                    $user->setUserId($this->row['user_id']);
-                    $user->setUserEmail($this->row['email']);
-                    $user->setUserPassword($this->row['password']);
-                    $user->setUserRole($this->row['role']);
-                    // var_dump($_SESSION);
+                $user->setUserId($this->row['user_id']);
+                $user->setUserEmail($this->row['email']);
+                $user->setUserPassword($this->row['password']);
+                $user->setUserRole($this->row['role']);
+                // var_dump($_SESSION);
                 // }
             }
         }
@@ -153,7 +153,6 @@ class Model extends DB
         '$graduateYear','$jobTitle','$company','$yearFrom','$yearTo');";
 
         $this->insertData($stmt);
-
     }
 
     public function createEmployerProfile($modelArr)
@@ -165,9 +164,8 @@ class Model extends DB
 
         $stmt = "CALL procCreateEmployer(
             '$biographyId','$biographyBio');";
-            // echo $stmt;
+        // echo $stmt;
         $this->insertData($stmt);
-
     }
 
     public function showEmployerProfile($modelArr)
@@ -177,20 +175,20 @@ class Model extends DB
 
         $employerId = $employer->getEmployerId();
         $biographyId = $biography->getBiographyId();
-        
+
         $stmt1 = "SELECT * FROM employer WHERE `employer_id` = '$employerId'";
         // echo "$stmt";
         $this->retrieveData($stmt1);
 
         if (mysqli_num_rows($this->result) > 0) {
-            while($this->row = mysqli_fetch_assoc($this->result)) {
+            while ($this->row = mysqli_fetch_assoc($this->result)) {
 
-                    $employer->setEmployerId($this->row['employer_id']);
-                    $employer->setEmployerCompanyName($this->row['company_name']);
-                    $employer->setEmployerCompanyType($this->row['company_type']);
-                    $employer->setEmployerCompanyContact($this->row['company_contact']);
-                    $employer->setEmployerCompanyAdmin($this->row['company_admin']);
-                    // var_dump($this->result);
+                $employer->setEmployerId($this->row['employer_id']);
+                $employer->setEmployerCompanyName($this->row['company_name']);
+                $employer->setEmployerCompanyType($this->row['company_type']);
+                $employer->setEmployerCompanyContact($this->row['company_contact']);
+                $employer->setEmployerCompanyAdmin($this->row['company_admin']);
+                // var_dump($this->result);
             }
         }
 
@@ -199,11 +197,11 @@ class Model extends DB
         $this->retrieveData($stmt2);
 
         if (mysqli_num_rows($this->result) > 0) {
-            while($this->row = mysqli_fetch_assoc($this->result)) {
+            while ($this->row = mysqli_fetch_assoc($this->result)) {
 
-                    $biography->setBiographyId($this->row['biography_id']);
-                    $biography->setBiographyBio($this->row['bio']);
-                    // var_dump($this->result);
+                $biography->setBiographyId($this->row['biography_id']);
+                $biography->setBiographyBio($this->row['bio']);
+                // var_dump($this->result);
             }
         }
 
@@ -227,26 +225,26 @@ class Model extends DB
         // echo $skillsId;
         // echo $educationId;
         // echo $experienceId;
-        
+
         // get applicant statement
         $stmt1 = "SELECT * FROM applicant WHERE `applicant_id` = '$applicantId'";
         // echo $stmt1;
         $this->retrieveData($stmt1);
 
         if (mysqli_num_rows($this->result) > 0) {
-            while($this->row = mysqli_fetch_assoc($this->result)) {
+            while ($this->row = mysqli_fetch_assoc($this->result)) {
 
-                    $applicant->setApplicantId($this->row['applicant_id']);
-                    $applicant->setApplicantFirstname($this->row['firstname']);
-                    $applicant->setApplicantLastname($this->row['lastname']);
-                    $applicant->setApplicantGender($this->row['gender']);
-                    $applicant->setApplicantDob($this->row['dob']);
-                    $applicant->setApplicantJobTitle($this->row['job_title']);
-                    $applicant->setApplicantCompany($this->row['company']);
-                    $applicant->setApplicantCountry($this->row['country']);
-                    $applicant->setApplicantCity($this->row['city']);
-                    
-                    // var_dump($this->result);
+                $applicant->setApplicantId($this->row['applicant_id']);
+                $applicant->setApplicantFirstname($this->row['firstname']);
+                $applicant->setApplicantLastname($this->row['lastname']);
+                $applicant->setApplicantGender($this->row['gender']);
+                $applicant->setApplicantDob($this->row['dob']);
+                $applicant->setApplicantJobTitle($this->row['job_title']);
+                $applicant->setApplicantCompany($this->row['company']);
+                $applicant->setApplicantCountry($this->row['country']);
+                $applicant->setApplicantCity($this->row['city']);
+
+                // var_dump($this->result);
             }
         }
 
@@ -257,13 +255,13 @@ class Model extends DB
         $this->retrieveData($stmt2);
 
         if (mysqli_num_rows($this->result) > 0) {
-            while($this->row = mysqli_fetch_assoc($this->result)) {
+            while ($this->row = mysqli_fetch_assoc($this->result)) {
 
-                    $biography->setBiographyId($this->row['biography_id']);
-                        // echo $this->row['biography_id'];
+                $biography->setBiographyId($this->row['biography_id']);
+                // echo $this->row['biography_id'];
 
-                    $biography->setBiographyBio($this->row['bio']);
-                    // var_dump($this->result);
+                $biography->setBiographyBio($this->row['bio']);
+                // var_dump($this->result);
             }
         }
 
@@ -274,11 +272,11 @@ class Model extends DB
         $this->retrieveData($stmt3);
 
         if (mysqli_num_rows($this->result) > 0) {
-            while($this->row = mysqli_fetch_assoc($this->result)) {
+            while ($this->row = mysqli_fetch_assoc($this->result)) {
 
-                    $skills->setSkillsId($this->row['skills_id']);
-                    $skills->setSkillsSkills(json_decode($this->row['skills']));
-                    // var_dump($this->result);
+                $skills->setSkillsId($this->row['skills_id']);
+                $skills->setSkillsSkills(json_decode($this->row['skills']));
+                // var_dump($this->result);
             }
         }
 
@@ -288,14 +286,14 @@ class Model extends DB
         $this->retrieveData($stmt4);
 
         if (mysqli_num_rows($this->result) > 0) {
-            while($this->row = mysqli_fetch_assoc($this->result)) {
+            while ($this->row = mysqli_fetch_assoc($this->result)) {
 
-                    $education->setEducationId($this->row['education_id']);
-                    $education->setEducationCertification($this->row['certification']);
-                    $education->setEducationSchool($this->row['school']);
-                    $education->setEducationCourse($this->row['course']);
-                    $education->setEducationGraduateYear($this->row['gradYear']);
-                    // var_dump($this->result);
+                $education->setEducationId($this->row['education_id']);
+                $education->setEducationCertification($this->row['certification']);
+                $education->setEducationSchool($this->row['school']);
+                $education->setEducationCourse($this->row['course']);
+                $education->setEducationGraduateYear($this->row['gradYear']);
+                // var_dump($this->result);
             }
         }
 
@@ -305,15 +303,32 @@ class Model extends DB
         $this->retrieveData($stmt5);
 
         if (mysqli_num_rows($this->result) > 0) {
-            while($this->row = mysqli_fetch_assoc($this->result)) {
+            while ($this->row = mysqli_fetch_assoc($this->result)) {
 
-                    $experience->setExperienceId($this->row['experience_id']);
-                    $experience->setExperienceJobTitle($this->row['job_title']);
-                    $experience->setExperienceCompany($this->row['company']);
-                    $experience->setExperienceYearFrom($this->row['year_from']);
-                    $experience->setExperienceYearTo($this->row['year_to']);
-                    // var_dump($this->result);
+                $experience->setExperienceId($this->row['experience_id']);
+                $experience->setExperienceJobTitle($this->row['job_title']);
+                $experience->setExperienceCompany($this->row['company']);
+                $experience->setExperienceYearFrom($this->row['year_from']);
+                $experience->setExperienceYearTo($this->row['year_to']);
+                // var_dump($this->result);
             }
         }
+    }
+
+    public function postJob($job)
+    {
+
+        $jobTitle = $job->getJobTitle();
+        $employerId = $job->getJobEmployerId();
+        $location = $job->getJobLocation();
+        $minSalary = $job->getJobMinSalary();
+        $maxSalary = $job->getJobMaxSalary();
+        $description = $job->getJobDescription();
+        $skills = json_encode($job->getJobSkills());
+
+        $stmt = "CALL procPostJob('$employerId','$jobTitle','$location',
+        '$minSalary','$maxSalary','$description','$skills');";
+        // echo $stmt;
+        $this->insertData($stmt);
     }
 }

@@ -183,88 +183,88 @@
 
 ///////////////////CREATE EMPLOYER PROFILE//////////////////////////
 
-//  //biography model initiated
-//  $biography = new Biography();
+ //biography model initiated
+ $biography = new Biography();
 
-// //  //employer model initiated
-// //  $employer = new Employer();
+//  //employer model initiated
+//  $employer = new Employer();
 
-//  // store biography object in biography controller
-//  $biographyController = new BiographyController($biography);
+ // store biography object in biography controller
+ $biographyController = new BiographyController($biography);
 
-// //  // store employer object in employer controller
-// //  $employerController = new EmployerController($employer);
+//  // store employer object in employer controller
+//  $employerController = new EmployerController($employer);
 
-//   //set biography data
-// $id = 1; // id take from session id
-//   $biographyBio = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, quam?';
-//   $biographyController->setBiography($biographyBio, $id);
+  //set biography data
+$id = 7; // id take from session id
+  $biographyBio = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, quam?';
+  $biographyController->setBiography($biographyBio, $id);
 
-// // $employerArr = ['sdgsdg','sdfhe',2352325,'sdfhzdg'];
-// // //set employer data
-// // $employerController->setEmployer($employerArr, $id = 0);
+// $employerArr = ['sdgsdg','sdfhe',2352325,'sdfhzdg'];
+// //set employer data
+// $employerController->setEmployer($employerArr, $id = 0);
 
-// $model = new Model();
-// $modelArr = [$biography];
+$model = new Model();
+$modelArr = [$biography];
 
-//  $controller = new Controller();
-//  $controller->createProfile($model, $modelArr);
+ $controller = new Controller();
+ $controller->createProfile($model, $modelArr);
 
 ///////////////////SHOW APPLICANT PROFILE//////////////////////////
 
-// initialise applicants model
-$applicant = new Applicants();
-// initialise biography model
-$biography = new Biography();
-//initialise skills model
-$skills = new Skills();
-//initialise education model
-$education = new Education();
-//initialise experience model
-$experience = new Experience();
+// // initialise applicants model
+// $applicant = new Applicants();
+// // initialise biography model
+// $biography = new Biography();
+// //initialise skills model
+// $skills = new Skills();
+// //initialise education model
+// $education = new Education();
+// //initialise experience model
+// $experience = new Experience();
 
-$id = 5; // id is session id
+// $id = 5; // id is session id
 
-// store applicant object in applicant controller
-$applicantController = new ApplicantsController($applicant);
-// store biography object in biography controller
-$biographyController = new BiographyController($biography);
-// store skills object in skills controller
-$skillsController = new skillsController($skills);
-// store education object in education controller
-$educationController = new EducationController($education);
-// store experience object in experience controller
-$experienceController = new ExperienceController($experience);
+// // store applicant object in applicant controller
+// $applicantController = new ApplicantsController($applicant);
+// // store biography object in biography controller
+// $biographyController = new BiographyController($biography);
+// // store skills object in skills controller
+// $skillsController = new skillsController($skills);
+// // store education object in education controller
+// $educationController = new EducationController($education);
+// // store experience object in experience controller
+// $experienceController = new ExperienceController($experience);
 
-$applicantController->setApplicantId($id);
-$biographyController->setBiographyId($id);
-$skillsController->setSkillsId($id);
-$educationController->setEducationId($id);
-$experienceController->setExperienceId($id);
+// $applicantController->setApplicantId($id);
+// $biographyController->setBiographyId($id);
+// $skillsController->setSkillsId($id);
+// $educationController->setEducationId($id);
+// $experienceController->setExperienceId($id);
 
-// store applicant object in applicant view
-$applicantView = new ApplicantsView($applicant);
-// store biography object in biography view
-$biographyView = new BiographyView($biography);
-// store skills object in skills view
-$skillsView = new SkillsView($skills);
-// store education object in education view
-$educationView = new EducationView($education);
-// store experience object in experience view
-$experienceView = new ExperienceView($experience);
+// // store applicant object in applicant view
+// $applicantView = new ApplicantsView($applicant);
+// // store biography object in biography view
+// $biographyView = new BiographyView($biography);
+// // store skills object in skills view
+// $skillsView = new SkillsView($skills);
+// // store education object in education view
+// $educationView = new EducationView($education);
+// // store experience object in experience view
+// $experienceView = new ExperienceView($experience);
 
-$modelArr = [$applicant, $biography, $skills, $education, $experience];
-$viewArr = [$applicantView, $biographyView, $skillsView, $educationView, $experienceView];
+// $modelArr = [$applicant, $biography, $skills, $education, $experience];
+// $viewArr = [$applicantView, $biographyView, $skillsView, $educationView, $experienceView];
 
-$model = new Model();
-$view = new View();
+// $model = new Model();
+// $view = new View();
 
-$applicantProfObj = $view->showProfile($model, $modelArr, $viewArr);
-$applicantAttr = $applicantProfObj->applicantAttr;
-$biographyAttr = $applicantProfObj->biographyAttr;
-$skillsAttr = $applicantProfObj->skillsAttr;
-$educationAttr = $applicantProfObj->educationAttr;
-$experienceAttr = $applicantProfObj->experienceAttr;
+// $applicantProfObj = $view->showProfile($model, $modelArr, $viewArr);
+// $applicantAttr = $applicantProfObj->applicantAttr;
+// $biographyAttr = $applicantProfObj->biographyAttr;
+// $skillsAttr = $applicantProfObj->skillsAttr;
+// $educationAttr = $applicantProfObj->educationAttr;
+// $experienceAttr = $applicantProfObj->experienceAttr;
 
    
  ///////////////////SHOW EMPLOYER PROFILE//////////////////////////
