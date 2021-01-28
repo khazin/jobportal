@@ -1,4 +1,7 @@
-.form__applicant {
+.form__employer {
+  display: none; }
+
+.form__credential {
   display: none; }
 
 .card__container {
