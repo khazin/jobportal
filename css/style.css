@@ -5,7 +5,7 @@
   display: none; }
 
 .card__container {
-  display: none; }
+  display: initial; }
 
 .form__skills {
   display: none; }
@@ -15,3 +15,9 @@
 
 .form__experience {
   display: none; }
+
+.card__form-login {
+  display: none; }
+
+.btn-icon__remove {
+  cursor: pointer; }

@@ -3,15 +3,24 @@
 class Controller
 {
     
-    public function register($model, $modelArr) { //remember to put type declaration
+    public function registerApplicant($model, $modelArr) { //remember to put type declaration
         echo "controller initiated. registering user and applicants data";
         echo "<br>";
-        // $model->registerApplicant($modelArr);
+
+        $model->registerApplicant($modelArr);
+       
+        echo "user registered";
+        echo "<br>";
+    }
+
+    public function registerEmployer($model, $modelArr) { //remember to put type declaration
+        echo "controller initiated. registering user and employer data";
+        echo "<br>";
+
         $model->registerEmployer($modelArr);
        
         echo "user registered";
         echo "<br>";
-
     }
 
     public function login($model, $user) {

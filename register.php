@@ -16,10 +16,10 @@
 <body>
    <?php include 'includes/header.php'; ?>
    <div class="container col-12 bg-success d-flex flex-column align-items-center" style="height:100vh">
-      <form action="" method="post" class="form col-6 d-flex flex-column align-items-center">
+      <form action="" method="post" class="form col-6 d-flex flex-column align-items-center" id="formRegister">
 
          <div class="card mt-5" style="width: 38rem;">
-            <nav class="nav nav-pills nav-fill">
+            <nav class="nav nav-pills nav-fill navbar__register" id="registerNavbar">
                <a class="nav-link active" href="#" onclick="return nextForm(formEmployer,formApplicant)">For IT Profesionals</a>
                <a class="nav-link" href="#" onclick="return nextForm(formApplicant,formEmployer)">For employer</a>
             </nav>
@@ -75,8 +75,7 @@
                   </div>
                </div>
 
-               <button type="button" class="btn btn-primary" id="formApplicantNextBtn" name="formApplicantNextBtn"
-               onclick="return nextForm(formApplicant, formCredential)">Next</button>
+               <button type="button" class="btn btn-primary" id="formApplicantNextBtn" value="applicant" onclick="return toRegisterCredentialForm(this)">Next</button>
 
             </div>
 
@@ -95,15 +94,16 @@
                   <input type="text" class="form-control" id="companyType" name="companyType">
                </div>
                <div class="mb-3">
-                  <label for="companyAdmin" class="form-label">Company Admin</label>
-                  <input type="text" class="form-control" id="companyAdmin" name="companyAdmin">
-               </div>
-               <div class="mb-3">
                   <label for="companyContact" class="form-label">Company Contact</label>
                   <input type="number" class="form-control" id="companyContact" name="companyContact">
                </div>
-               <button type="button" class="btn btn-primary" id="formEmployerNextBtn" 
-               onclick="return nextForm(formEmployer, formCredential)">Next</button>
+               <div class="mb-3">
+                  <label for="companyAdmin" class="form-label">Company Admin</label>
+                  <input type="text" class="form-control" id="companyAdmin" name="companyAdmin">
+               </div>
+
+               <button type="button" class="btn btn-primary" id="formEmployerNextBtn" value="employer" onclick="return toRegisterCredentialForm(this)">Next</button>
+
             </div>
 
             <!-- form 3 credentials-->
@@ -122,80 +122,129 @@
                   <label for="confirmPassword" class="form-label">Confirm Password</label>
                   <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
                </div>
-               <button type="button" class="btn btn-primary" id="formApplicantBackBtn" onclick="return prevForm(formApplicant,formCredential)">Back</button>
-
-               <button type="submit" class="btn btn-primary" id="formCredentialSubmitBtn">Confirm</button>
+               <input type="hidden" name="role" id="role" value="">
+               <button type="button" class="btn btn-primary" id="formApplicantBackBtn" onclick="return toUserTegisterForm()">Back</button>
+               <button type="submit" class="btn btn-primary" id="formCredentialSubmitBtn" name="register" onclick="return validateCredentials()">Confirm</button>
             </div>
          </div>
 
 
       </form>
+      <form action="" method="post" class="form col-6 card__form-login" id="formToLogin">
+         <div class="card " style="width: 18rem;">
+            <div class="card-body col-12 d-flex flex-column align-items-center">
+               <h5 class="card-title">Proceed to login?</h5>
+               <h6 class="card-subtitle mb-2 text-muted">yes or no?</h6>
+               <div class="d-flex col-12 ">
+                  <button type="submit" class="btn btn-primary col-6" id="" value="" onclick="">Yes</button>
+                  <button type="button" class="btn btn-secondary col-6" id="" value="" onclick="">No</button>
+               </div>
+            </div>
+         </div>
+      </form>
    </div>
+
+
 </body>
-<script src="js/script.js"></script>
+
 <script src="library/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="js/script.js"></script>
 
 </html>
 
 <?php
 
-///////////////////////REGISTER APPLICANT//////////////////////////
+if (isset($_POST['register'])) {
+   $email = $_POST['email'];
+   $password = $_POST['password'];
+   $role = $_POST['role'];
+
+   $userArr = [$email, $password, $role];
+
+   //user model initiated
+   $user = new Users();
+
+   // store user object in user controller
+   $userController = new UsersController($user);
+
+   //set user data
+   $userController->setUser($userArr, $userid = 0);
+   if ($role == 'applicant') {
+
+      ///////////////////////REGISTER APPLICANT//////////////////////////
 
 
-//  //user model initiated
-//  $user = new Users();
+      $firstname = $_POST['firstname'];
+      $lastname = $_POST['lastname'];
+      $gender = $_POST['gender'];
+      $birthday = $_POST['birthday'];
+      $country = $_POST['country'];
+      $city = $_POST['city'];
+      $job = $_POST['job'];
+      $company = $_POST['company'];
 
-//  //applicant model initiated
-//  $applicant = new Applicants();
+      $applicantArr = [$firstname, $lastname, $gender, $birthday, $country, $city, $job, $company];
 
-//  // store user object in user controller
-//  $userController = new UsersController($user);
+      //applicant model initiated
+      $applicant = new Applicants();
 
-//  // store applicant object in applicant controller
-//  $applicantController = new ApplicantsController($applicant);
+      // store applicant object in applicant controller
+      $applicantController = new ApplicantsController($applicant);
 
-//  //set user data
-//  $userid = 0;
-//  $userArr = ['appemail','apppasword', 'applicant'];
-// $userController->setUser($userArr, $userid);
+      //set applicant data
+      $applicantController->setapplicant($applicantArr, $id = 0);
 
-// $applicantArr = ['firstname','lastname','gender ','dob','country','city','job','compnay'];
-// //set applicant data
-// $applicantController->setapplicant($applicantArr, $id = 0);
+      $model = new Model();
+      $modelArr = [$user, $applicant];
 
-// $model = new Model();
-// $modelArr = [$user,$applicant];
+      $controller = new Controller();
+      $controller->registerApplicant($model, $modelArr);
+   } elseif ($role == 'employer') {
 
-//  $controller = new Controller();
-//  $controller->register($model, $modelArr);
+      ///////////////////////REGISTER EMPLOYER//////////////////////////
 
+      $companyName = $_POST['companyName'];
+      $companyType = $_POST['companyType'];
+      $companyContact = $_POST['companyContact'];
+      $companyAdmin = $_POST['companyAdmin'];
 
-///////////////////////REGISTER EMPLOYER//////////////////////////
+      $employerArr = [$companyName, $companyType, $companyContact, $companyAdmin];
 
+      //employer model initiated
+      $employer = new Employer();
 
-// //user model initiated
-// $user = new Users();
+      // store employer object in employer controller
+      $employerController = new EmployerController($employer);
 
-// //employer model initiated
-// $employer = new Employer();
+      //set employer data
+      $employerController->setEmployer($employerArr, $id = 0);
 
-// // store user object in user controller
-// $userController = new UsersController($user);
+      $model = new Model();
+      $modelArr = [$user, $employer];
 
-// // store employer object in employer controller
-// $employerController = new EmployerController($employer);
+      $controller = new Controller();
+      $controller->registerEmployer($model, $modelArr);
+   };
+   // $proceedLogin = '<script type="text/JavaScript">  
+   // confirm("Want to proceed to login?"); 
+   // </script>';
 
-// //set user data
-// $userid = 1;
-// $userArr = ['email', 'pasword', 'role'];
-// $userController->setUser($userArr, $userid);
+   // if ($proceedLogin == true) {
+   //    // store user object in user view
+   //    $userView = new UsersView($user);
 
-// $employerArr = ['sdgsdg', 'sdfhe', 2352325, 'sdfhzdg'];
-// //set employer data
-// $employerController->setEmployer($employerArr, $id = 0);
+   //    $model = new Model();
+   //    $view = new View();
 
-// $model = new Model();
-// $modelArr = [$user, $employer];
+   //    $userObj = $view->login($model, $user, $userView);
+   //    // var_dump($userObj);
 
-// $controller = new Controller();
-// $controller->register($model, $modelArr);
+   //    session_start();
+   //    $_SESSION['user_id'] = $userObj->userId;
+   //    $_SESSION['email'] = $userObj->userEmail;
+   //    $_SESSION['password'] = $userObj->userPassword;
+   //    $_SESSION['role'] = $userObj->userRole;
+   //    // var_dump($_SESSION);
+   //    header('Location: home.php');
+   // }
+}

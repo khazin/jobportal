@@ -13,11 +13,17 @@ class View
         echo "View initiated. retrieving user data";
         echo "<br>";
 
-        $model->login($user);
-        return $userView->getUser();
 
-        echo "user logged in";
-        echo "<br>";
+        if ($model->login($user) == true) {
+            return $userView->getUser();
+            echo "user logged in";
+            echo "<br>";
+
+        } else {
+            echo "Your email or password is wrong";
+            echo "<br>";
+            return false;
+        };
     }
 
     public function showProfile($model, $modelArr, $viewArr)
