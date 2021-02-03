@@ -260,7 +260,7 @@ function addSkills() {
   list.setAttribute("class", "badge rounded-pill bg-light ml-3");
   input.setAttribute("type", "hidden");
   input.setAttribute("class", "skills");
-  input.setAttribute("name", "skills[]");
+  input.setAttribute("name", "skillsArr[]");
   input.setAttribute("value", value);
   remove.setAttribute("class", "fas fa-times ml-1 btn-icon__remove");
   remove.setAttribute("onclick", "removePill(this)");
@@ -308,25 +308,25 @@ function addEducations() {
     var certificationInput = document.createElement("input");
     certificationInput.setAttribute("type", "hidden");
     certificationInput.setAttribute("class", "certification");
-    certificationInput.setAttribute("name", "certifications[]");
+    certificationInput.setAttribute("name", "certificationsArr[]");
     certificationInput.setAttribute("value", certification);
 
     var schoolInput = document.createElement("input");
     schoolInput.setAttribute("type", "hidden");
     schoolInput.setAttribute("class", "school");
-    schoolInput.setAttribute("name", "schools[]");
+    schoolInput.setAttribute("name", "schoolsArr[]");
     schoolInput.setAttribute("value", school);
 
     var courseInput = document.createElement("input");
     courseInput.setAttribute("type", "hidden");
     courseInput.setAttribute("class", "course");
-    courseInput.setAttribute("name", "courses[]");
+    courseInput.setAttribute("name", "coursesArr[]");
     courseInput.setAttribute("value", course);
 
     var graduateYearInput = document.createElement("input");
     graduateYearInput.setAttribute("type", "hidden");
     graduateYearInput.setAttribute("class", "graduateYear");
-    graduateYearInput.setAttribute("name", "graduateYears[]");
+    graduateYearInput.setAttribute("name", "graduateYearsArr[]");
     graduateYearInput.setAttribute("value", graduateYear);
 
     var remove = document.createElement("i");
@@ -379,25 +379,25 @@ function addExperiences() {
     var jobTitleInput = document.createElement("input");
     jobTitleInput.setAttribute("type", "hidden");
     jobTitleInput.setAttribute("class", "jobTitle");
-    jobTitleInput.setAttribute("name", "jobTitles[]");
+    jobTitleInput.setAttribute("name", "jobTitlesArr[]");
     jobTitleInput.setAttribute("value", jobTitle);
 
     var companyInput = document.createElement("input");
     companyInput.setAttribute("type", "hidden");
     companyInput.setAttribute("class", "company");
-    companyInput.setAttribute("name", "companys[]");
+    companyInput.setAttribute("name", "companiesArr[]");
     companyInput.setAttribute("value", company);
 
     var startYearInput = document.createElement("input");
     startYearInput.setAttribute("type", "hidden");
     startYearInput.setAttribute("class", "startYear");
-    startYearInput.setAttribute("name", "startYears[]");
+    startYearInput.setAttribute("name", "startYearsArr[]");
     startYearInput.setAttribute("value", startYear);
 
     var endYearInput = document.createElement("input");
     endYearInput.setAttribute("type", "hidden");
     endYearInput.setAttribute("class", "endYear");
-    endYearInput.setAttribute("name", "endYears[]");
+    endYearInput.setAttribute("name", "endYearsArr[]");
     endYearInput.setAttribute("value", endYear);
 
     var remove = document.createElement("i");

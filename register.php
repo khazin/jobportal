@@ -225,26 +225,4 @@ if (isset($_POST['register'])) {
       $controller = new Controller();
       $controller->registerEmployer($model, $modelArr);
    };
-   // $proceedLogin = '<script type="text/JavaScript">  
-   // confirm("Want to proceed to login?"); 
-   // </script>';
-
-   // if ($proceedLogin == true) {
-   //    // store user object in user view
-   //    $userView = new UsersView($user);
-
-   //    $model = new Model();
-   //    $view = new View();
-
-   //    $userObj = $view->login($model, $user, $userView);
-   //    // var_dump($userObj);
-
-   //    session_start();
-   //    $_SESSION['user_id'] = $userObj->userId;
-   //    $_SESSION['email'] = $userObj->userEmail;
-   //    $_SESSION['password'] = $userObj->userPassword;
-   //    $_SESSION['role'] = $userObj->userRole;
-   //    // var_dump($_SESSION);
-   //    header('Location: home.php');
-   // }
 }

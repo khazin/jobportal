@@ -71,6 +71,6 @@ if (isset($_POST['login'])) {
   $_SESSION['password'] = $userObj->userPassword;
   $_SESSION['role'] = $userObj->userRole;
   // var_dump($_SESSION);
-  header('Location: home.php');
+  header('Location: createprofile.php');
 
 }

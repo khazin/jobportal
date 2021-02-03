@@ -4,10 +4,11 @@ class Experience
 {
 
     private int $id;
-    private String $jobTitle;
-    private String $company;
-    private int $yearFrom;
-    private int $yearTo;
+    private int $userId;
+    private Array $jobTitle;
+    private Array $company;
+    private Array $yearFrom;
+    private Array $yearTo;
 
     public function __construct()
     {
@@ -25,6 +26,18 @@ class Experience
     public function getExperienceId()
     {
         return $this->id;
+    }
+
+    public function setExperienceUserId($userId)
+    {
+        $this->userId = $userId;
+        echo "experience userId is set";
+        echo "<br>";
+    }
+
+    public function getExperienceUserId()
+    {
+        return $this->userId;
     }
 
     public function setExperienceJobTitle($jobTitle)
@@ -79,10 +92,11 @@ class Experience
     { //remember to put type declaration in arguments
 
         $this->setExperienceId($id);
-        $this->setExperienceJobTitle($experienceArr[0]);
-        $this->setExperienceCompany($experienceArr[1]);
-        $this->setExperienceYearFrom($experienceArr[2]);
-        $this->setExperienceYearTo($experienceArr[3]);
+        $this->setExperienceUserId($experienceArr[0]);
+        $this->setExperienceJobTitle($experienceArr[1]);
+        $this->setExperienceCompany($experienceArr[2]);
+        $this->setExperienceYearFrom($experienceArr[3]);
+        $this->setExperienceYearTo($experienceArr[4]);
 
         echo "experience is set";
         echo "<br>";
@@ -94,6 +108,7 @@ class Experience
 
         $experienceAttr = new stdClass();
         $experienceAttr->id = $this->getExperienceId();
+        $experienceAttr->userId = $this->getExperienceUserId();
         $experienceAttr->jobTitle = $this->getExperienceJobTitle();
         $experienceAttr->company = $this->getExperienceCompany();
         $experienceAttr->yearFrom = $this->getExperienceYearFrom();

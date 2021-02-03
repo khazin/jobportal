@@ -1,4 +1,5 @@
 <?php
+session_start();
 class Model extends DB
 {
     public $result;
@@ -132,10 +133,9 @@ class Model extends DB
         $education = $modelArr[2];
         $experience = $modelArr[3];
 
-        $biographyId = $biography->getBiographyId();
         $biographyBio = $biography->getBiographyBio();
 
-        $id = $biographyId; // replace with session id
+        $id = $_SESSION['user_id']; 
 
         $skillsSkills = json_encode($skills->getSkillsSkills());
 
@@ -149,11 +149,25 @@ class Model extends DB
         $yearFrom = $experience->getExperienceYearFrom();
         $yearTo = $experience->getExperienceYearTo();
 
-        $stmt = "CALL procCreateApplicant('$id' ,'$biographyBio' , 
-        '$skillsSkills','$course','$certification','$school',
-        '$graduateYear','$jobTitle','$company','$yearFrom','$yearTo');";
+        $stmt1 = "CALL procCreateApplicant('$id' ,'$biographyBio' , 
+        '$skillsSkills');";
 
-        $this->insertData($stmt);
+        $this->insertData($stmt1);   
+
+        for ($i = 0; $i < count($course); $i++) {
+            $stmt2 = "INSERT INTO `jobportal`.`education` (`education_user_id`, `course`, `certification`, `school`, `gradYear`) 
+            VALUES ('$id', '$course[$i]', '$certification[$i]', '$school[$i]', '$graduateYear[$i]');";
+
+            $this->insertData($stmt2);
+        }
+
+
+        for ($i = 0; $i < count($jobTitle); $i++) {
+            $stmt3 = "INSERT INTO `jobportal`.`experience` (`experience_user_id`, `job_title`, `company`, `year_from`, `year_to`) 
+        VALUES ('$id', '$jobTitle[$i]', '$company[$i]', '$yearFrom[$i]', '$yearTo[$i]');";
+
+            $this->insertData($stmt3);
+        }
     }
 
     public function createEmployerProfile($modelArr)

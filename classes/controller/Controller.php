@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 class Controller
 {
     
@@ -31,13 +31,11 @@ class Controller
     public function createProfile($model, $modelArr) { //remember to put type declaration
         echo 'controller initiated. creating profile';
         echo '<br>';
-        // if ($_SESSION['role']='applicant') {
-        //     $model->createApplicantProfile($modelArr);
-        // } elseif ($_SESSION['role']='employer') {
-        //     $model->createEmployerProfile($modelArr);
-        // }
-        $model->createEmployerProfile($modelArr);
-        // $model->createApplicantProfile($modelArr);
+        if ($_SESSION['role'] == 'applicant') {
+            $model->createApplicantProfile($modelArr);
+        } elseif ($_SESSION['role'] == 'employer') {
+            $model->createEmployerProfile($modelArr);
+        }
         
         echo 'profile created';
         echo '<br>';

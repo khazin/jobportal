@@ -4,10 +4,11 @@ class Education
 {
 
     private int $id;
-    private String $certification;
-    private String $school;
-    private String $course;
-    private int $graduateYear;
+    private int $userId;
+    private Array $certification;
+    private Array $school;
+    private Array $course;
+    private Array $graduateYear;
 
     public function __construct()
     {
@@ -24,6 +25,18 @@ class Education
     public function getEducationId()
     {
         return $this->id;
+    }
+
+    public function setEducationUserId($userId)
+    {
+        $this->userId = $userId;
+        echo "education userId is set";
+        echo "<br>";
+    }
+
+    public function getEducationUserId()
+    {
+        return $this->userId;
     }
 
     public function setEducationCertification($certification)
@@ -77,10 +90,11 @@ class Education
     public function setEducation($educationArr, $id)
     { //remember to put type declaration in arguments
         $this->setEducationId($id);
-        $this->setEducationCertification($educationArr[0]);
-        $this->setEducationSchool($educationArr[1]);
-        $this->setEducationCourse($educationArr[2]);
-        $this->setEducationGraduateYear($educationArr[3]);
+        $this->setEducationUserId($educationArr[0]);
+        $this->setEducationCertification($educationArr[1]);
+        $this->setEducationSchool($educationArr[2]);
+        $this->setEducationCourse($educationArr[3]);
+        $this->setEducationGraduateYear($educationArr[4]);
 
         echo "education is set";
         echo "<br>";
@@ -92,6 +106,7 @@ class Education
 
         $educationAttr = new stdClass();
         $educationAttr->id = $this->getEducationId();
+        $educationAttr->userId = $this->getEducationUserId();
         $educationAttr->certification = $this->getEducationCertification();
         $educationAttr->school = $this->getEducationSchool();
         $educationAttr->course = $this->getEducationCourse();

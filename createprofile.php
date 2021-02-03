@@ -1,4 +1,6 @@
+<?php session_start(); ?>
 <?php include './includes/ClassAutoloader.php'; ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -86,7 +88,7 @@
               </datalist>
               <h6>Skills</h6>
               <div class="row container__skills" id="skillsContainer">
-                
+
                 <span class="badge rounded-pill bg-light ml-3 pills">Windows Server<i class="fas fa-times ml-1 btn-icon__remove" onclick="removePill(this)"></i></span>
               </div>
             </div>
@@ -123,8 +125,7 @@
               </div>
             </div>
             <button type="button" class="btn btn-secondary" onclick="return addEducations()">Add</button>
-            <button type="button" class="btn btn-primary" 
-            onclick="return nextForm(formEducation, formExperience)">Next</button>
+            <button type="button" class="btn btn-primary" onclick="return nextForm(formEducation, formExperience)">Next</button>
             <button type="button" class="btn btn-primary" onclick="return nextForm(formEducation, formSkills)">Back</button>
           </div>
           <!-- form 4 job experience -->
@@ -172,70 +173,93 @@
 </html>
 
 <?php
+
+
+print_r($_SESSION);
 if (isset($_POST['create'])) {
-    print_r($_POST);
 
+  if ($_SESSION['role'] == 'applicant') {
+
+    ///////////////////CREATE APPLICANTS PROFILE//////////////////////////
+
+    $biographyBio = $_POST['bio'];
+
+    $skillsArr = $_POST['skillsArr'];
+
+    $certificationsArr = $_POST['certificationsArr'];
+    $schoolsArr = $_POST['schoolsArr'];
+    $coursesArr = $_POST['coursesArr'];
+    $graduateYearsArr = $_POST['graduateYearsArr'];
+
+    $jobTitlesArr = $_POST['jobTitlesArr'];
+    $companiesArr = $_POST['companiesArr'];
+    $startYearsArr = $_POST['startYearsArr'];
+    $endYearsArr = $_POST['endYearsArr'];
+
+    //initialise biography model
+    $biography = new Biography();
+    //initialise skills model
+    $skills = new Skills();
+    //initialise education model
+    $education = new Education();
+    //initialise experience model
+    $experience = new Experience();
+
+    // store biography object in biography controller
+    $biographyController = new biographyController($biography);
+    // store skills object in skills controller
+    $skillsController = new skillsController($skills);
+    // store education object in education controller
+    $educationController = new EducationController($education);
+    // store experience object in experience controller
+    $experienceController = new ExperienceController($experience);
+
+    $userId = $_SESSION['user_id']; // id take from session id
+    //set biography data
+
+    $biographyController->setBiography($biographyBio, $userId);
+    //set skills data
+    $skillsController->setSkills($skillsArr, $userId);
+    //set education data
+    $educationArr = [$userId, $certificationsArr, $schoolsArr, $coursesArr, $graduateYearsArr];
+    $educationController->setEducation($educationArr, $id = 0);
+    //set experience data
+    $experienceArr = [$userId, $jobTitlesArr, $companiesArr, $startYearsArr, $endYearsArr];
+    $experienceController->setExperience($experienceArr, $id = 0);
+
+    $model = new Model();
+    $modelArr = [$biography, $skills, $education, $experience];
+
+    $controller = new Controller();
+    $controller->createProfile($model, $modelArr);
+  } elseif ($_SESSION['role'] == 'employer') {
+    ///////////////////CREATE EMPLOYER PROFILE//////////////////////////
+    $userId = $_SESSION['user_id']; // id take from session id
+
+    //biography model initiated
+    $biography = new Biography();
+
+    // store biography object in biography controller
+    $biographyController = new BiographyController($biography);
+
+    //set biography data
+    $biographyController->setBiography($biographyBio, $userId);
+
+    $model = new Model();
+    $modelArr = [$biography];
+
+    $controller = new Controller();
+    $controller->createProfile($model, $modelArr);
+  }
 }
-///////////////////CREATE APPLICANTS PROFILE//////////////////////////
 
 
 
-// //initialise biography model
-// $biography = new Biography();
-// //initialise skills model
-// $skills = new Skills();
-// //initialise education model
-// $education = new Education();
-// //initialise experience model
-// $experience = new Experience();
 
 
-// // store biography object in biography controller
-// $biographyController = new biographyController($biography);
-// // store skills object in skills controller
-// $skillsController = new skillsController($skills);
-// // store education object in education controller
-// $educationController = new EducationController($education);
-// // store experience object in experience controller
-// $experienceController = new ExperienceController($experience);
-
-// $id = 5; // id take from session id
-// //set biography data
-// $biographyBio = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, quam?';
-// $biographyController->setBiography($biographyBio, $id);
-// //set skills data
-// $skillsArr = ['html','css','js','pythin','mysql'];
-// $skillsController->setSkills($skillsArr, $id);
-// //set education data
-// $educationArr = ['diploma','NYP', 'information techology', '2009'];
-// $educationController->setEducation($educationArr, $id);
-// //set experience data
-// $experienceArr = ['web dev','suntell', 2005, 2009];
-// $experienceController->setExperience($experienceArr, $id);
-
-// $model = new Model();
-// $modelArr = [$biography,$skills,$education,$experience];
-
-// $controller = new Controller();
-// $controller->createProfile($model,$modelArr);
-
-///////////////////CREATE EMPLOYER PROFILE//////////////////////////
-
-// //biography model initiated
-// $biography = new Biography();
 
 
-// // store biography object in biography controller
-// $biographyController = new BiographyController($biography);
 
 
-// //set biography data
-// $id = 7; // id take from session id
-// $biographyBio = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, quam?';
-// $biographyController->setBiography($biographyBio, $id);
 
-// $model = new Model();
-// $modelArr = [$biography];
 
-// $controller = new Controller();
-// $controller->createProfile($model, $modelArr);
