@@ -30,10 +30,3 @@
     </div>
 </body>
 </html>
-
-<?php
-
-$db = new DB();
-$db->connection();
- 
-?>
