@@ -370,7 +370,7 @@ class Model extends DB
 
         $skillsArr = $skills->getSkillsSkills();
 
-        $stmt1 =  "SELECT `firstname`,`lastname`,`gender`,`dob`, 
+        $stmt1 =  "SELECT `applicant_id`,`firstname`,`lastname`,`gender`,`dob`, 
         `country`,`city`, `job_title`, `company`,
         skills.skills_arr as `skills_arr`
         from `applicant`
@@ -391,12 +391,32 @@ class Model extends DB
 
         $this->retrieveData($stmt);
 
+        $applicantId = [];
+        $firstname = [];
+        $lastname = [];
+        $gender = [];
+        $dob = [];
+        $jobTitle = [];
+        $company = [];
+        $country = [];
+        $city = [];
+
+        $skillsArr = [];
         if (mysqli_num_rows($this->result) > 0) {
             while ($this->row = mysqli_fetch_assoc($this->result)) {
-
+                array_push($applicantId, $this->row['applicant_id']);
+                array_push($firstname, $this->row['firstname']);
+                array_push($lastname, $this->row['lastname']);
+                array_push($gender, $this->row['gender']);
+                array_push($dob, $this->row['dob']);
+                array_push($jobTitle, $this->row['job_title']);
+                array_push($company, $this->row['company']);
+                array_push($country, $this->row['country']);
+                array_push($city, $this->row['city']);
+                array_push($skillsArr, explode(",", $this->row['skills_arr']));
             }
-          
-
+            
+         
         }
     }
 
