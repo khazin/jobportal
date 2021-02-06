@@ -58,6 +58,8 @@ class ApplicantsController
         $this->applicant->setApplicantCity($city);
     }
 
+ 
+
     public function setApplicant($applicantArr, $id) {//remember to put type declaration in arguments
         $this->applicant->setApplicant($applicantArr, $id);
     }

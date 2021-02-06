@@ -127,6 +127,8 @@ class Applicants
         return $this->city;
     }
 
+  
+
     public function setApplicant($applicantArr, $id) //remember to put type declaration in arguments
     {
 

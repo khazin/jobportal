@@ -26,29 +26,38 @@ class View
         };
     }
 
-    public function showProfile($model, $modelArr, $viewArr)
+    public function showEmployerProfile($model, $modelArr, $viewArr)
     { //remember to put type declaration
         echo "View initiated. retrieveing applicants data";
         echo "<br>";
-        // $role = $_SESSION['role'];
 
-        // session employer        
-        // $employerView = $viewArr[0];
-        // $biographyView = $viewArr[1];
+        $employerView = $viewArr[0];
+        $biographyView = $viewArr[1];
 
-        // $model->showEmployerProfile($modelArr);
+        $model->showEmployerProfile($modelArr);
 
-        // $employerProfObj = new stdClass();
-        // $employerProfObj->employerAttr = $employerView->getEmployer();
-        // $employerProfObj->biographyAttr = $biographyView->getBiography();
-        // return $employerProfObj;
+        $employerProfObj = new stdClass();
+        $employerProfObj->employerAttr = $employerView->getEmployer();
+        $employerProfObj->biographyAttr = $biographyView->getBiography();
+        return $employerProfObj;
 
-        //session applicant
+        
+ 
+        echo "employer profile is shown";
+        echo "<br>";
+    }
+
+    public function showApplicantProfile($model, $modelArr, $viewArr)
+    { //remember to put type declaration
+        echo "View initiated. retrieveing applicants data";
+        echo "<br>";
+        
         $applicantView = $viewArr[0];
         $biographyView = $viewArr[1];
         $skillsView = $viewArr[2];
         $educationView = $viewArr[3];
         $experienceView = $viewArr[4];
+
         $model->showApplicantProfile($modelArr);
 
         $applicantProfObj = new stdClass();
@@ -58,14 +67,8 @@ class View
         $applicantProfObj->educationAttr = $educationView->getEducation();
         $applicantProfObj->experienceAttr = $experienceView->getExperience();
         return $applicantProfObj;
-        // if ($role  === 'applicant') {
-
-        // }
-
-
-
-
-        echo "profile is shown";
+ 
+        echo "applicant profile is shown";
         echo "<br>";
     }
 

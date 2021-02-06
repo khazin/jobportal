@@ -30,6 +30,12 @@ class UsersController
         $this->user->setUserRole($role);
     }
 
+    public function setUserFirstLogin($firstLogin)
+    {
+        $this->user->setUserFirstLogin($firstLogin);
+     
+    }
+
     
     public function setUser($userArr, $id){ //remember to put type declaration in arguments
      

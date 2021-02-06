@@ -32,6 +32,11 @@ class UsersView
         return $this->user->getUserRole();
     }
 
+    public function getUserFirstLogin()
+    {
+        return $this->user->getUserFirstLogin();
+    }
+
     public function getUser()
     { //remember to put type declaration in arguments
         return $this->user->getUser();

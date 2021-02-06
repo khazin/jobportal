@@ -76,6 +76,8 @@ class Employer
         return $this->companyAdmin;
     }
 
+    
+
     public function setEmployer($employerArr, $id)
     { //remember to put type declaration in arguments
 

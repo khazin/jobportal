@@ -6,7 +6,8 @@ class Users
     private int $id;
     private String $email;
     private String $password;
-    public String $role = 'employer';
+    public String $role;
+    private bool $firstLogin;
 
     public function __construct()
     {
@@ -62,6 +63,18 @@ class Users
         return $this->role;
     }
 
+    public function setUserFirstLogin($firstLogin)
+    {
+        $this->firstLogin = $firstLogin;
+        echo 'User first login is set';
+        echo '<br>';
+    }
+
+    public function getUserFirstLogin()
+    {
+        return $this->firstLogin;
+    }
+
 
 
     public function setUser($userArr, $id)
@@ -86,6 +99,7 @@ class Users
         $userObj->userEmail = $this->getUserEmail();
         $userObj->userPassword = $this->getUserPassword();
         $userObj->userRole = $this->getUserRole();
+        $userObj->userFirstLogin = $this->getUserFirstLogin();
 
         return $userObj;
 

@@ -2,50 +2,60 @@
 // session_start();
 class Controller
 {
-    
-    public function registerApplicant($model, $modelArr) { //remember to put type declaration
+
+    public function registerApplicant($model, $modelArr)
+    { //remember to put type declaration
         echo "controller initiated. registering user and applicants data";
         echo "<br>";
 
         $model->registerApplicant($modelArr);
-       
+
         echo "user registered";
         echo "<br>";
     }
 
-    public function registerEmployer($model, $modelArr) { //remember to put type declaration
+    public function registerEmployer($model, $modelArr)
+    { //remember to put type declaration
         echo "controller initiated. registering user and employer data";
         echo "<br>";
 
         $model->registerEmployer($modelArr);
-       
+
         echo "user registered";
         echo "<br>";
     }
 
-    public function login($model, $user) {
-       return $model->login($user);
-
+    public function login($model, $user)
+    {
+        return $model->login($user);
     }
 
-    public function createProfile($model, $modelArr) { //remember to put type declaration
+    public function createApplicantProfile($model, $modelArr)
+    { //remember to put type declaration
         echo 'controller initiated. creating profile';
         echo '<br>';
-        if ($_SESSION['role'] == 'applicant') {
-            $model->createApplicantProfile($modelArr);
-        } elseif ($_SESSION['role'] == 'employer') {
-            $model->createEmployerProfile($modelArr);
-        }
-        
-        echo 'profile created';
+
+        $model->createApplicantProfile($modelArr);
+
+        echo 'applicant profile created';
         echo '<br>';
     }
 
-    public function postJob($model, $job) {
+    public function createEmployerProfile($model, $modelArr)
+    { //remember to put type declaration
+        echo 'controller initiated. creating profile';
+        echo '<br>';
+
+        $model->createEmployerProfile($modelArr);
+
+        echo 'employer profile created';
+        echo '<br>';
+    }
+    public function postJob($model, $job)
+    {
         $model->postJob($job);
 
         echo 'job created';
         echo '<br>';
     }
-    
 }

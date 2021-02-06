@@ -3,8 +3,8 @@
 class ApplicantsView
 {
     private Object $applicant;
-    
-    public function __construct($applicant)//remember to put type declaration in arguments
+
+    public function __construct($applicant) //remember to put type declaration in arguments
     {
         $this->applicant = $applicant;
         echo "applicantsView initiated. applicants object is stored";
@@ -20,7 +20,7 @@ class ApplicantsView
     {
         return $this->applicant->getApplicantFirstname();
     }
-    
+
     public function getApplicantLastname()
     {
         return $this->applicant->getApplicantLastname();
@@ -55,9 +55,9 @@ class ApplicantsView
     {
         return $this->applicant->getApplicantCity();
     }
-    public function getApplicant() { //remember to put type declaration in arguments
+ 
+    public function getApplicant()
+    { 
         return $this->applicant->getApplicant();
     }
-
 }
-

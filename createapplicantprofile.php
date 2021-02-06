@@ -178,7 +178,7 @@
 print_r($_SESSION);
 if (isset($_POST['create'])) {
 
-  if ($_SESSION['role'] == 'applicant') {
+
 
     ///////////////////CREATE APPLICANTS PROFILE//////////////////////////
 
@@ -231,27 +231,12 @@ if (isset($_POST['create'])) {
     $modelArr = [$biography, $skills, $education, $experience];
 
     $controller = new Controller();
-    $controller->createProfile($model, $modelArr);
-  } elseif ($_SESSION['role'] == 'employer') {
-    ///////////////////CREATE EMPLOYER PROFILE//////////////////////////
-    $userId = $_SESSION['user_id']; // id take from session id
+    $controller->createApplicantProfile($model, $modelArr);
+    header('Location: home.php');
 
-    //biography model initiated
-    $biography = new Biography();
-
-    // store biography object in biography controller
-    $biographyController = new BiographyController($biography);
-
-    //set biography data
-    $biographyController->setBiography($biographyBio, $userId);
-
-    $model = new Model();
-    $modelArr = [$biography];
-
-    $controller = new Controller();
-    $controller->createProfile($model, $modelArr);
   }
-}
+  
+
 
 
 

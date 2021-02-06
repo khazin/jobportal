@@ -60,7 +60,6 @@ if (isset($_POST['login'])) {
 
   $model = new Model();
   $view = new View();
-  $controller = new Controller();
 
   $userObj = $view->login($model, $user, $userView);
   // var_dump($userObj);
@@ -70,7 +69,15 @@ if (isset($_POST['login'])) {
   $_SESSION['email'] = $userObj->userEmail;
   $_SESSION['password'] = $userObj->userPassword;
   $_SESSION['role'] = $userObj->userRole;
-  // var_dump($_SESSION);
-  header('Location: createprofile.php');
-
+  $_SESSION['first_login'] = $userObj->userFirstLogin;
+  var_dump($_SESSION);
+  if ($_SESSION['first_login'] == 1) {
+    header('Location: home.php');
+  } else {
+    if ($_SESSION['role'] == 'applicant') {
+      header('Location: createapplicantprofile.php');
+    } elseif ($_SESSION['role'] == 'employer') {
+      header('Location: createemployerprofile.php');
+    }
+  }
 }

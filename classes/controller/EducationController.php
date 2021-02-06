@@ -13,6 +13,11 @@ class EducationController
         $this->education->setEducationId($id);
     }
 
+    public function setEducationUserId($userId)
+    {
+        $this->education->setEducationUserId($userId);
+    }
+
     public function setEducationCertification($certification)
     {
         $this->education->setEducationCertification($certification);

@@ -16,6 +16,10 @@ class ExperienceController
         $this->experience->setExperienceId($id);
     }
 
+    public function setExperienceUserId($userId)
+    {
+        $this->experience->setExperienceUserId($userId);
+    }
 
     public function setExperienceJobTitle($jobTitle)
     {

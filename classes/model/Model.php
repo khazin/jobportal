@@ -1,5 +1,4 @@
 <?php
-session_start();
 class Model extends DB
 {
     public $result;
@@ -104,9 +103,7 @@ class Model extends DB
         $password = $user->getUserPassword();
 
         $stmt = "SELECT * FROM user WHERE `email` = '$email' AND `password` = '$password'";
-        // echo "$stmt";
         $this->retrieveData($stmt);
-        // var_dump($this->result);
 
         if (mysqli_num_rows($this->result) > 0) {
             while ($this->row = mysqli_fetch_assoc($this->result)) {
@@ -117,7 +114,7 @@ class Model extends DB
                 $user->setUserEmail($this->row['email']);
                 $user->setUserPassword($this->row['password']);
                 $user->setUserRole($this->row['role']);
-                // var_dump($_SESSION);
+                $user->setUserFirstLogin($this->row['first_login']);
                 // }
             }
             return true;
@@ -133,9 +130,10 @@ class Model extends DB
         $education = $modelArr[2];
         $experience = $modelArr[3];
 
+        $biographyId = $biography->getBiographyId();
         $biographyBio = $biography->getBiographyBio();
 
-        $id = $_SESSION['user_id']; 
+        $id = $biographyId;
 
         $skillsSkills = json_encode($skills->getSkillsSkills());
 
@@ -152,7 +150,7 @@ class Model extends DB
         $stmt1 = "CALL procCreateApplicant('$id' ,'$biographyBio' , 
         '$skillsSkills');";
 
-        $this->insertData($stmt1);   
+        $this->insertData($stmt1);
 
         for ($i = 0; $i < count($course); $i++) {
             $stmt2 = "INSERT INTO `jobportal`.`education` (`education_user_id`, `course`, `certification`, `school`, `gradYear`) 
@@ -234,12 +232,13 @@ class Model extends DB
         $applicantId = $applicant->getApplicantId();
         $biographyId = $biography->getBiographyId();
         $skillsId = $skills->getSkillsId();
-        $educationId = $education->getEducationId();
-        $experienceId = $experience->getExperienceId();
+        $educationUserId = $education->getEducationUserId();
+        $experiencUserId = $experience->getExperienceUserId();
         // echo $applicantId;
+        // echo $biographyId;
         // echo $skillsId;
-        // echo $educationId;
-        // echo $experienceId;
+        // echo $educationUserId;
+        // echo $experiencUserId;
 
         // get applicant statement
         $stmt1 = "SELECT * FROM applicant WHERE `applicant_id` = '$applicantId'";
@@ -296,37 +295,54 @@ class Model extends DB
         }
 
         // get education statement
-        $stmt4 = "SELECT * FROM education WHERE `education_id` = '$educationId'";
+        $stmt4 = "SELECT * FROM education WHERE `education_user_id` = '$educationUserId'";
 
         $this->retrieveData($stmt4);
+        $educationId = [];
+        $educationCertification = [];
+        $educationSchool = [];
+        $educationCourse = [];
+        $educationgraduateYear = [];
 
         if (mysqli_num_rows($this->result) > 0) {
             while ($this->row = mysqli_fetch_assoc($this->result)) {
-
-                $education->setEducationId($this->row['education_id']);
-                $education->setEducationCertification($this->row['certification']);
-                $education->setEducationSchool($this->row['school']);
-                $education->setEducationCourse($this->row['course']);
-                $education->setEducationGraduateYear($this->row['gradYear']);
-                // var_dump($this->result);
+                array_push($educationId, $this->row['education_id']);
+                array_push($educationCertification, $this->row['certification']);
+                array_push($educationSchool, $this->row['school']);
+                array_push($educationCourse, $this->row['course']);
+                array_push($educationgraduateYear, $this->row['gradYear']);
             }
+            $education->setEducationId($educationId);
+            $education->setEducationCertification($educationCertification);
+            $education->setEducationSchool($educationSchool);
+            $education->setEducationCourse($educationCourse);
+            $education->setEducationGraduateYear($educationgraduateYear);
         }
 
         // get experience statement
-        $stmt5 = "SELECT * FROM experience WHERE `experience_id` = '$experienceId'";
-
+        $stmt5 = "SELECT * FROM experience WHERE `experience_user_id` = '$experiencUserId'";
         $this->retrieveData($stmt5);
+
+        $experienceId = [];
+        $experienceJobTitle = [];
+        $experienceCompany = [];
+        $experienceYearFrom = [];
+        $experienceYearTo = [];
 
         if (mysqli_num_rows($this->result) > 0) {
             while ($this->row = mysqli_fetch_assoc($this->result)) {
-
-                $experience->setExperienceId($this->row['experience_id']);
-                $experience->setExperienceJobTitle($this->row['job_title']);
-                $experience->setExperienceCompany($this->row['company']);
-                $experience->setExperienceYearFrom($this->row['year_from']);
-                $experience->setExperienceYearTo($this->row['year_to']);
-                // var_dump($this->result);
+                array_push($experienceId, $this->row['experience_id']);
+                array_push($experienceJobTitle, $this->row['job_title']);
+                array_push($experienceCompany, $this->row['company']);
+                array_push($experienceYearFrom, $this->row['year_from']);
+                array_push($experienceYearTo, $this->row['year_to']);
             }
+            // var_dump($this->result);
+            $experience->setExperienceId($experienceId);
+            $experience->setExperienceJobTitle($experienceJobTitle);
+            $experience->setExperienceCompany($experienceCompany);
+            $experience->setExperienceYearFrom($experienceYearFrom);
+            $experience->setExperienceYearTo($experienceYearTo);
         }
     }
 

@@ -3,7 +3,7 @@
 class Experience
 {
 
-    private int $id;
+    private Array $id;
     private int $userId;
     private Array $jobTitle;
     private Array $company;
