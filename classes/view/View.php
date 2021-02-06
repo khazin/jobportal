@@ -72,6 +72,19 @@ class View
         echo "<br>";
     }
 
+    public function searchApplicant($model, $modelArr, $viewArr) {
+        echo "View initiated. retrieving applicabnts  data";
+        echo "<br>";
+        $applicantsView = $viewArr[0];
+        $skillsView = $viewArr[1];
+        $model->searchApplicant($modelArr);
+        // $applicantsObj = $applicantsView->getAllApplicants();
+        // $skillsObj = $skillsView->getAllSkills();
+
+        echo "user logged in";
+        echo "<br>";
+    }
+
     public function showAllJobs($model, $job, $jobView)
     {
         echo "View initiated. retrieving job data";

@@ -1,4 +1,8 @@
-<?php session_start(); ?>
+<?php 
+session_start(); 
+ob_start();
+?>
+
 <?php include './includes/ClassAutoloader.php'; ?>
 
 
@@ -222,10 +226,10 @@ if (isset($_POST['create'])) {
     $skillsController->setSkills($skillsArr, $userId);
     //set education data
     $educationArr = [$userId, $certificationsArr, $schoolsArr, $coursesArr, $graduateYearsArr];
-    $educationController->setEducation($educationArr, $id = 0);
+    $educationController->setEducation($educationArr, $id = []);
     //set experience data
     $experienceArr = [$userId, $jobTitlesArr, $companiesArr, $startYearsArr, $endYearsArr];
-    $experienceController->setExperience($experienceArr, $id = 0);
+    $experienceController->setExperience($experienceArr, $id = []);
 
     $model = new Model();
     $modelArr = [$biography, $skills, $education, $experience];

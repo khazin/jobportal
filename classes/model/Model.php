@@ -34,12 +34,21 @@ class Model extends DB
         $this->sql = $stmt;
         $this->connection();
         $this->result = mysqli_query($this->connection, $this->sql);
-        // create new object, interate data and store in object 
-        //extract data
-
-
-        // return;   
     }
+
+    function arrToStr($arr)
+    {
+        $str = implode(" ", $arr);
+        $str = str_replace(' ', ',', $str);
+        return $str;
+    }
+
+    function strToArr($str)
+    {
+        $arr = explode(" ", $str);
+        return $arr;
+    }
+
 
     public function registerApplicant($modelArr)
     {
@@ -135,7 +144,7 @@ class Model extends DB
 
         $id = $biographyId;
 
-        $skillsSkills = json_encode($skills->getSkillsSkills());
+        $skillsSkills = implode(",", $skills->getSkillsSkills());
 
         $certification = $education->getEducationCertification();
         $school = $education->getEducationSchool();
@@ -289,7 +298,7 @@ class Model extends DB
             while ($this->row = mysqli_fetch_assoc($this->result)) {
 
                 $skills->setSkillsId($this->row['skills_id']);
-                $skills->setSkillsSkills(json_decode($this->row['skills']));
+                $skills->setSkillsSkills(explode(",", $this->row['skills_arr']));
                 // var_dump($this->result);
             }
         }
@@ -343,6 +352,51 @@ class Model extends DB
             $experience->setExperienceCompany($experienceCompany);
             $experience->setExperienceYearFrom($experienceYearFrom);
             $experience->setExperienceYearTo($experienceYearTo);
+        }
+    }
+
+    public function searchApplicant($modelArr)
+    {
+        $applicant = $modelArr[0];
+        $skills = $modelArr[1];
+
+        $firstname = $applicant->getApplicantFirstname();
+        $lastname = $applicant->getApplicantLastname();
+        $gender = $applicant->getApplicantGender();
+        $jobTitle = $applicant->getApplicantJobTitle();
+        $company = $applicant->getApplicantCompany();
+        $country = $applicant->getApplicantCountry();
+        $city = $applicant->getApplicantCity();
+
+        $skillsArr = $skills->getSkillsSkills();
+
+        $stmt1 =  "SELECT `firstname`,`lastname`,`gender`,`dob`, 
+        `country`,`city`, `job_title`, `company`,
+        skills.skills_arr as `skills_arr`
+        from `applicant`
+        join `skills` on `skills_id` = `applicant_id`
+        where applicant.firstname like '%$firstname%' 
+        or applicant.lastname like '%$lastname%' 
+        or applicant.gender like '%$gender%' 
+        or applicant.country like '%$country%' 
+        or applicant.city like '%$city%' 
+        or applicant.job_title like '%$jobTitle%' 
+        or applicant.company like '%$company%'";
+
+        $stmt2 = '';
+        for ($i=0; $i < count($skillsArr) ; $i++) { 
+            $stmt2 .= " or FIND_IN_SET('$skillsArr[$i]', skills.skills_arr)";
+        }
+        $stmt = $stmt1 . $stmt2;
+
+        $this->retrieveData($stmt);
+
+        if (mysqli_num_rows($this->result) > 0) {
+            while ($this->row = mysqli_fetch_assoc($this->result)) {
+
+            }
+          
+
         }
     }
 

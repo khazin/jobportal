@@ -31,6 +31,7 @@ function toRegisterCredentialForm(node) {
   }
 }
 
+
 function toUserTegisterForm() {
   if (role == "applicant") {
     nextForm(formCredential, formApplicant);
@@ -40,6 +41,7 @@ function toUserTegisterForm() {
   registerNavbar.style.display = "flex";
 }
 
+//validate empty text field
 function validateEmptyTextField(fieldValue, fieldStr) {
   if (fieldValue == "") {
     alert(fieldStr + " must be filled out");
@@ -48,6 +50,7 @@ function validateEmptyTextField(fieldValue, fieldStr) {
   return true;
 }
 
+//validate text field length
 function validateLengthTextField(fieldValue, fieldName, min, max) {
   if (fieldValue.length < min || fieldValue.length > max) {
     alert(fieldName + " must be between " + min + " and " + max);
@@ -56,6 +59,7 @@ function validateLengthTextField(fieldValue, fieldName, min, max) {
   return true;
 }
 
+//validate register password
 function validateConfirmPassword(passwordValue, confirmPasswordValue) {
   if (passwordValue !== confirmPasswordValue) {
     alert("Password does not match");
@@ -64,6 +68,7 @@ function validateConfirmPassword(passwordValue, confirmPasswordValue) {
   return true;
 }
 
+//validate email format
 function validateEmail(emailValue) {
   if (
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
@@ -76,6 +81,7 @@ function validateEmail(emailValue) {
   return false;
 }
 
+//validate register credentials form
 function validateCredentials() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
@@ -108,6 +114,7 @@ function validateCredentials() {
   }
 }
 
+//validate register applicant form
 function validateApplicant() {
   const firstname = document.getElementById("firstname").value;
   const lastname = document.getElementById("lastname").value;
@@ -146,6 +153,7 @@ function validateApplicant() {
   }
 }
 
+//validate register employer form
 function validateEmployer() {
   const companyName = document.getElementById("companyName").value;
   const companyType = document.getElementById("companyType").value;
@@ -183,6 +191,7 @@ function validateEmployer() {
   }
 }
 
+//validate login process
 function validateLogin() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
@@ -257,7 +266,7 @@ function addSkills() {
 
   var value = document.getElementById("skill").value;
 
-  list.setAttribute("class", "badge rounded-pill bg-light ml-3");
+  list.setAttribute("class", "badge rounded-pill bg-primary ml-3");
   input.setAttribute("type", "hidden");
   input.setAttribute("class", "skills");
   input.setAttribute("name", "skillsArr[]");
