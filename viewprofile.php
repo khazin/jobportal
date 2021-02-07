@@ -1,14 +1,10 @@
 <?php session_start(); ?>
 <?php include './includes/ClassAutoloader.php'; ?>
 
-
 <?php
-
-
-if ($_SESSION['role'] == 'applicant') {
-  ///////////////////SHOW APPLICANT PROFILE//////////////////////////
-
-  $userId = $_SESSION['user_id'];
+if (isset($_GET['id'])) {
+    
+  $userId = $_GET['id'];
   // initialise applicants model
   $applicant = new Applicants();
   // initialise biography model
@@ -60,48 +56,26 @@ if ($_SESSION['role'] == 'applicant') {
   $view = new View();
 
   $applicantProfObj = $view->showApplicantProfile($model, $modelArr, $viewArr);
-  $applicantAttr = $applicantProfObj->applicantAttr;
+
+    $applicantAttr = $applicantProfObj->applicantAttr;
   $biographyAttr = $applicantProfObj->biographyAttr;
   $skillsAttr = $applicantProfObj->skillsAttr;
   $educationAttr = $applicantProfObj->educationAttr;
   $experienceAttr = $applicantProfObj->experienceAttr;
 
-} elseif ($_SESSION['role'] == 'employer') {
-  ///////////////////SHOW EMPLOYER PROFILE//////////////////////////
-  $userId = $_SESSION['user_id'];
-
-  // initialise employers   
-  $employer = new Employer();
-
-  // initialise biography   
-  $biography = new Biography();
-
-  // store employer object in employer controller
-  $employerController = new EmployerController($employer);
-
-  // store biography object in biography controller
-  $biographyController = new BiographyController($biography);
-
-  $employerController->setEmployerId($userId);
-  $biographyController->setBiographyId($userId);
-
-  // store employer object in employer view
-  $employerView = new EmployerView($employer);
-
-  // store biography object in biography view
-  $biographyView = new BiographyView($biography);
-
-  $modelArr = [$employer, $biography];
-  $viewArr = [$employerView, $biographyView];
-
-  $model = new Model();
-  $view = new View();
-
-  $employerProfObj = $view->showEmployerProfile($model, $modelArr, $viewArr);
-  $employerAttr = $employerProfObj->employerAttr;
-  $biographyAttr = $employerProfObj->biographyAttr;
+  var_dump($applicantAttr);
+  echo '<br>';
+  var_dump($biographyAttr);
+  echo '<br>';
+  var_dump($skillsAttr);
+  echo '<br>';
+  var_dump($educationAttr);
+  echo '<br>';
+  var_dump($experienceAttr);
 }
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 

@@ -55,9 +55,15 @@ class ApplicantsView
     {
         return $this->applicant->getApplicantCity();
     }
- 
+
     public function getApplicant()
-    { 
+    {
         return $this->applicant->getApplicant();
+    }
+
+    public function getAllApplicants()
+    {
+
+        return $this->applicant->getAllApplicants();
     }
 }

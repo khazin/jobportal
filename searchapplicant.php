@@ -1,4 +1,72 @@
 <?php include './includes/ClassAutoloader.php'; ?>
+
+<?php
+if (isset($_POST['search'])) {
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
+    $gender = $_POST['gender'];
+    $city = $_POST['city'];
+    $country = $_POST['country'];
+    $jobTitle = $_POST['jobTitle'];
+    $company = $_POST['company'];
+    $skillsArr = $_POST['skillsArr'];
+
+    $applicantArr = [
+        $firstname, $lastname, $gender, $birthday = '',
+        $country, $city, $jobTitle, $company
+    ];
+
+    print_r($applicantArr);
+    print_r($skillsArr);
+    //applicant model initiated
+    $applicant = new Applicants();
+    //skills model initiated
+    $skills = new Skills();
+
+    //Biography model initiated
+    $biography = new Biography();
+
+    // store applicant object in applicant controller
+    $applicantController = new ApplicantsController($applicant);
+    // store skills object in skills controller
+    $skillsController = new SkillsController($skills);
+
+    //set applicant data
+    $applicantController->setApplicant($applicantArr, $id = 0);
+    //set skills data
+    $skillsController->setSkills($skillsArr, $id = 0);
+
+    // store applicants object in applicants view
+    $applicantsView = new ApplicantsView($applicant);
+    // store skills object in skills view
+    $skillsView = new skillsView($skills);
+        // store biography object in biography view
+        $biographyView = new biographyView($biography);
+
+    $model = new Model();
+    $view = new View();
+    $modelArr = [$applicant, $skills, $biography];
+    $viewArr = [$applicantsView, $skillsView, $biographyView];
+
+    $controller = new Controller();
+    $searchApplicantsAttr = $view->searchApplicant($model, $modelArr, $viewArr);
+
+    $applicantsObj = $searchApplicantsAttr->applicantsObj;
+    $skillsObj = $searchApplicantsAttr->skillsObj;
+    $biographysObj = $searchApplicantsAttr->biographysObj;
+
+    $applicantIdArr = $applicantsObj->id;
+    $firstnameArr = $applicantsObj->firstname;
+    $lastnameArr = $applicantsObj->lastname;
+    $genderArr = $applicantsObj->gender;
+    $cityArr = $applicantsObj->city;
+    $countryArr = $applicantsObj->country;
+    $jobTitleArr = $applicantsObj->jobTitle;
+    $companyArr = $applicantsObj->company;
+    $skillsArr = $skillsObj->skills;
+    $bioArr = $biographysObj->bio;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -88,72 +156,35 @@
                 </form>
             </div>
             <div class=" col-10  bg-secondary ">
-                <div class="card mt-5" style="width: 18rem;">
-                    <div class="card-body">
-                        <h6 class="card-title">Firstname Lastname</h6>
-                        <h6 class="card-title">city, country</h6>
-                        <h6 class="card-title">jobtitle at company</h6>
-                        <div class="card-text mb-4" style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis;"> write bio here bio bio bio</div>
-                        <div class="my-4">
-                            <h6 class="card-title">Skills</h6>
-                            <div style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis;">
-                                <span class="badge rounded-pill bg-primary">HTML</span>
-                                <span class="badge rounded-pill bg-primary">CSS</span>
-                                <span class="badge rounded-pill bg-primary">CSS</span>
-                                <span class="badge rounded-pill bg-primary">CSS</span>
-                                <span class="badge rounded-pill bg-primary">CSS</span>
-                                <span class="badge rounded-pill bg-primary">CSS</span>
-                                <span class="badge rounded-pill bg-primary">CSS</span>
+                <?php
+                for ($i = 0; $i < count($applicantIdArr); $i++) {
+                ?>
+                    <div class="card mt-5" style="width: 18rem;">
+                        <div class="card-body">
+                            <h6 class="card-title"><?= $firstnameArr[$i] . " " . $lastnameArr[$i] ?></h6>
+                            <h6 class="card-title"><?= $cityArr[$i] . ", " . $countryArr[$i] ?></h6>
+                            <h6 class="card-title"><?= $jobTitleArr[$i] . " at " . $lastnameArr[$i] ?></h6>
+                            <div class="card-text mb-4" style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis;">
+                             <?=$bioArr[$i]?>
+                             </div>
+                            <div class="my-4">
+                                <h6 class="card-title">Skills</h6>
+                                <div style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis;">
+                                    <?php
+                                    for ($j = 0; $j < count($skillsArr[$i]); $j++) {
+                                        echo '<span class="badge rounded-pill bg-primary mr-2">' . $skillsArr[$i][$j] . '</span>';
+                                    };
+                                    ?>
+                                </div>
                             </div>
-                        </div>
 
-                        <a href="#" class="btn btn-primary">View Profile</a>
-                    </div>
-                </div>
-                <div class="card mt-5" style="width: 18rem;">
-                    <div class="card-body">
-                        <h6 class="card-title">Firstname Lastname</h6>
-                        <h6 class="card-title">city, country</h6>
-                        <h6 class="card-title">jobtitle at company</h6>
-                        <div class="card-text mb-4" style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis;"> write bio here bio bio bio</div>
-                        <div class="my-4">
-                            <h6 class="card-title">Skills</h6>
-                            <div style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis;">
-                                <span class="badge rounded-pill bg-primary">HTML</span>
-                                <span class="badge rounded-pill bg-primary">CSS</span>
-                                <span class="badge rounded-pill bg-primary">CSS</span>
-                                <span class="badge rounded-pill bg-primary">CSS</span>
-                                <span class="badge rounded-pill bg-primary">CSS</span>
-                                <span class="badge rounded-pill bg-primary">CSS</span>
-                                <span class="badge rounded-pill bg-primary">CSS</span>
-                            </div>
+                            <a href="viewprofile.php?id=<?=$applicantIdArr[$i]?>" class="btn btn-primary">View Profile</a>
                         </div>
-
-                        <a href="#" class="btn btn-primary">View Profile</a>
                     </div>
-                </div>
-                <div class="card mt-5" style="width: 18rem;">
-                    <div class="card-body">
-                        <h6 class="card-title">Firstname Lastname</h6>
-                        <h6 class="card-title">city, country</h6>
-                        <h6 class="card-title">jobtitle at company</h6>
-                        <div class="card-text mb-4" style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis;"> write bio here bio bio bio</div>
-                        <div class="my-4">
-                            <h6 class="card-title">Skills</h6>
-                            <div style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis;">
-                                <span class="badge rounded-pill bg-primary">HTML</span>
-                                <span class="badge rounded-pill bg-primary">CSS</span>
-                                <span class="badge rounded-pill bg-primary">CSS</span>
-                                <span class="badge rounded-pill bg-primary">CSS</span>
-                                <span class="badge rounded-pill bg-primary">CSS</span>
-                                <span class="badge rounded-pill bg-primary">CSS</span>
-                                <span class="badge rounded-pill bg-primary">CSS</span>
-                            </div>
-                        </div>
+                <?php
+                }
+                ?>
 
-                        <a href="#" class="btn btn-primary">View Profile</a>
-                    </div>
-                </div>
 
             </div>
 
@@ -167,51 +198,3 @@
 <script src="library/node_modules/jquery/dist/jquery.min.js"></script>
 
 </html>
-
-<?php
-if (isset($_POST['search'])) {
-    $firstname = $_POST['firstname'];
-    $lastname = $_POST['lastname'];
-    $gender = $_POST['gender'];
-    $city = $_POST['city'];
-    $country = $_POST['country'];
-    $jobTitle = $_POST['jobTitle'];
-    $company = $_POST['company'];
-    $skillsArr = $_POST['skillsArr'];
-
-    $applicantArr = [
-        $firstname, $lastname, $gender, $birthday = '',
-        $country, $city, $jobTitle, $company
-    ];
-
-    print_r($applicantArr);
-    print_r($skills);
-    //applicant model initiated
-    $applicant = new Applicants();
-    //skills model initiated
-    $skills = new Skills();
-
-    // store applicant object in applicant controller
-    $applicantController = new ApplicantsController($applicant);
-    // store skills object in skills controller
-    $skillsController = new SkillsController($skills);
-
-    //set applicant data
-    $applicantController->setApplicant($applicantArr, $id = 0);
-    //set skills data
-    $skillsController->setSkills($skillsArr, $id = 0);
-
-    // store applicants object in applicants view
-    $applicantsView = new ApplicantsView($applicant);
-    // store skills object in skills view
-    $skillsView = new skillsView($skills);
-
-    $model = new Model();
-    $view = new View();
-    $modelArr = [$applicant, $skills];
-    $viewArr = [$applicantsView, $skillsView];
-
-    $controller = new Controller();
-    $applicantsAttr = $view->searchApplicant($model, $modelArr, $viewArr);
-}
-?>

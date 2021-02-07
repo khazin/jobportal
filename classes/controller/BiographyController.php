@@ -26,6 +26,9 @@ class BiographyController
     public function setBiography($bio, $id) {
         $this->biography->setBiography($bio, $id);
     }
-
+    public function setAllBiographys($allBiographys)
+    {
+        $this->biography->setAllBiographys($allBiographys);
+    }
 
 }

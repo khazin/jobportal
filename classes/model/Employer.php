@@ -9,6 +9,7 @@ class Employer
     private int $companyContact;
     private String $companyAdmin;
 
+    private array $allEmployers;
 
     public function __construct()
     {
@@ -106,5 +107,24 @@ class Employer
 
         echo "getEmployer is run. returning data from DB";
         echo "<br>";
+    }
+
+    public function setAllEmployers($allEmployers)
+    {
+        $this->allEmployers = $allEmployers;
+        echo "setAllEmployers data is set";
+        echo "<br>";
+    }
+
+    public function getAllEmployers()
+    {
+        $employersAttr = new stdClass();
+        $employersAttr->id = $this->allEmployers[0];
+        $employersAttr->companyName = $this->allEmployers[1];
+        $employersAttr->companyType = $this->allEmployers[2];
+        $employersAttr->companyContact = $this->allEmployers[3];
+        $employersAttr->companyAdmin = $this->allEmployers[4];
+
+        return $employersAttr;
     }
 }

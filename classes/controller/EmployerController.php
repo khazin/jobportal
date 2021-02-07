@@ -41,4 +41,10 @@ class EmployerController
     { //remember to put type declaration in arguments
         $this->employer->setEmployer($employerArr, $id);
     }
+
+    
+    public function setAllEmployers($allEmployers)
+    {
+        $this->employer->setAllEmployers($allEmployers);
+    }
 }

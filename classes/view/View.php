@@ -77,11 +77,36 @@ class View
         echo "<br>";
         $applicantsView = $viewArr[0];
         $skillsView = $viewArr[1];
+        $biographyView = $viewArr[2];
         $model->searchApplicant($modelArr);
-        // $applicantsObj = $applicantsView->getAllApplicants();
-        // $skillsObj = $skillsView->getAllSkills();
+      
+        $searchApplicantsAttr = new stdClass();
+        $searchApplicantsAttr->applicantsObj = $applicantsView->getAllApplicants();
+        $searchApplicantsAttr->skillsObj = $skillsView->getSkills();
+        $searchApplicantsAttr->biographysObj = $biographyView->getAllBiographys();
 
-        echo "user logged in";
+        return $searchApplicantsAttr;
+    
+
+        echo "user is searched";
+        echo "<br>";
+    }
+
+    public function searchEmployer($model, $modelArr, $viewArr) {
+        echo "View initiated. retrieving employers  data";
+        echo "<br>";
+        $EmployerView = $viewArr[0];
+        $biographyView = $viewArr[1];
+        $model->searchEmployer($modelArr);
+      
+        $searchEmployerAttr = new stdClass();
+        $searchEmployerAttr->employersObj = $EmployerView->getAllEmployers();
+        $searchEmployerAttr->biographysObj = $biographyView->getAllBiographys();
+
+        return $searchEmployerAttr;
+    
+
+        echo "user is searched";
         echo "<br>";
     }
 

@@ -359,6 +359,7 @@ class Model extends DB
     {
         $applicant = $modelArr[0];
         $skills = $modelArr[1];
+        $biography = $modelArr[2];
 
         $firstname = $applicant->getApplicantFirstname();
         $lastname = $applicant->getApplicantLastname();
@@ -372,9 +373,11 @@ class Model extends DB
 
         $stmt1 =  "SELECT `applicant_id`,`firstname`,`lastname`,`gender`,`dob`, 
         `country`,`city`, `job_title`, `company`,
-        skills.skills_arr as `skills_arr`
+        skills.skills_arr as `skills_arr`,
+        biography.bio as `bio_arr`
         from `applicant`
         join `skills` on `skills_id` = `applicant_id`
+        join `biography` on `biography_id` = `applicant_id`
         where applicant.firstname like '%$firstname%' 
         or applicant.lastname like '%$lastname%' 
         or applicant.gender like '%$gender%' 
@@ -402,6 +405,8 @@ class Model extends DB
         $city = [];
 
         $skillsArr = [];
+        $bioArr = [];
+
         if (mysqli_num_rows($this->result) > 0) {
             while ($this->row = mysqli_fetch_assoc($this->result)) {
                 array_push($applicantId, $this->row['applicant_id']);
@@ -414,10 +419,64 @@ class Model extends DB
                 array_push($country, $this->row['country']);
                 array_push($city, $this->row['city']);
                 array_push($skillsArr, explode(",", $this->row['skills_arr']));
+                array_push($bioArr, $this->row['bio_arr']);
             }
-            
+            $applicantsArr = [$applicantId,$firstname,$lastname,$gender,
+            $dob,$jobTitle,$company,$country, $city];
+            $biographysArr = [[], $bioArr];
+            $applicant->setAllApplicants($applicantsArr);
+            $skills->setSkillsSkills($skillsArr);
+            $biography->setAllBiographys($biographysArr);
          
         }
+    }
+
+    public function searchEmployer($modelArr) {
+        $employer = $modelArr[0];
+        $biography = $modelArr[1];
+
+        $companyName = $employer->getEmployerCompanyName();
+        $companyType = $employer->getEmployerCompanyType();
+
+
+        $stmt =  "SELECT `employer_id`,`company_name`,`company_type`,
+        `company_contact`,`company_admin`,
+        biography.bio as `bio_arr`
+        from `employer`
+        join `biography` on `biography_id` = `employer_id`
+        where employer.company_name like '%$companyName%' 
+        or employer.company_type like '%$companyType%';";
+
+        $this->retrieveData($stmt);
+
+        $employerIdArr = [];
+        $companyNameArr = [];
+        $companyTypeArr = [];
+        $companyContactArr = [];
+        $companyAdminArr = [];
+        
+        $bioArr = [];
+
+        if (mysqli_num_rows($this->result) > 0) {
+            while ($this->row = mysqli_fetch_assoc($this->result)) {
+                array_push($employerIdArr, $this->row['employer_id']);
+                array_push($companyNameArr, $this->row['company_name']);
+                array_push($companyTypeArr, $this->row['company_type']);
+                array_push($companyContactArr, $this->row['company_contact']);
+                array_push($companyAdminArr, $this->row['company_admin']);
+             
+                array_push($bioArr, $this->row['bio_arr']);
+            }
+            $employerArr = [$employerIdArr,$companyNameArr,
+            $companyTypeArr,$companyContactArr,$companyAdminArr];
+            $biographysArr = [[], $bioArr];
+            
+            $employer->setAllEmployers($employerArr);
+            $biography->setAllBiographys($biographysArr);
+         
+        }
+        
+
     }
 
     public function postJob($job)

@@ -65,5 +65,9 @@ class ApplicantsController
     }
 
  
+    public function setAllApplicants($allApplicants)
+    {
+        $this->applicant->setAllApplicants($allApplicants);
+    }
 
 }

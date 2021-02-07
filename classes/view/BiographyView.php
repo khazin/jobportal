@@ -25,5 +25,11 @@ class BiographyView
         return $this->biography->getBiography();
     }
 
+    public function getAllBiographys()
+    {
+        return $this->biography->getAllBiographys();
+
+    }
+
 }
 

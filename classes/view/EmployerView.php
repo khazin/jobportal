@@ -32,8 +32,12 @@ class EmployerView
     }
 
 
-    public function getEmployer() { //remember to put type declaration in arguments
+    public function getEmployer() {
         return $this->employer->getEmployer();
+    }
+    
+    public function getAllEmployers() {
+        return $this->employer->getAllEmployers();
     }
 
 }
