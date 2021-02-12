@@ -120,4 +120,15 @@ class View
         echo "user logged in";
         echo "<br>";
     }
+
+    public function showJob($model, $job, $jobView)
+    {
+        echo "View initiated. retrieving job data";
+        echo "<br>";
+        $model->showJob($job);
+        return $jobView->getJob();
+
+        echo "user logged in";
+        echo "<br>";
+    }
 }

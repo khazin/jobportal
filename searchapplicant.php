@@ -16,8 +16,7 @@ if (isset($_POST['search'])) {
         $country, $city, $jobTitle, $company
     ];
 
-    print_r($applicantArr);
-    print_r($skillsArr);
+
     //applicant model initiated
     $applicant = new Applicants();
     //skills model initiated

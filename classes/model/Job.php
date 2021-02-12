@@ -11,6 +11,7 @@ class Job
     private int $maxSalary;
     private String $description;
     private array $skills;
+    private String $jobType;
 
     private array $allJobs;
 
@@ -117,6 +118,18 @@ class Job
         return $this->skills;
     }
 
+    public function setJobType($jobType)
+    {
+        $this->jobType = $jobType;
+        echo "Job jobType is set";
+        echo "<br>";
+    }
+
+    public function getJobType()
+    {
+        return $this->jobType;
+    }
+    
     public function setJob($jobArr, $id)
     { //remember to put type declaration in arguments
 
@@ -128,6 +141,7 @@ class Job
         $this->setJobMaxSalary($jobArr[4]);
         $this->setJobDescription($jobArr[5]);
         $this->setJobSkills($jobArr[6]);
+        $this->setJobType($jobArr[7]);
 
         echo "Job is set";
         echo "<br>";
@@ -146,6 +160,7 @@ class Job
         $jobAttr->maxSalary = $this->getJobMaxSalary();
         $jobAttr->description = $this->getJobDescription();
         $jobAttr->skills = $this->getJobSkills();
+        $jobAttr->jobType = $this->getJobType();
 
         return $jobAttr;
         echo "getJob is run. returning data from DB";
@@ -169,6 +184,7 @@ class Job
         $jobAttr->maxSalary = $this->allJobs[5];
         $jobAttr->description = $this->allJobs[6];
         $jobAttr->skills = $this->allJobs[7];
+        $jobAttr->jobType = $this->allJobs[8];
 
         return $jobAttr;
     }

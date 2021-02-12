@@ -43,6 +43,11 @@ class JobView
     public function getJobSkills(){
         return $this->job->getJobSkills();
     }
+    
+    public function getJobType()
+    {
+        return $this->job->getJobType();
+    }
     public function getJob() {
         return $this->job->getJob();
     }

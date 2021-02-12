@@ -1,10 +1,7 @@
 <?php session_start(); ?>
 <?php include './includes/ClassAutoloader.php'; ?>
 
-
 <?php
-
-
 if ($_SESSION['role'] == 'applicant') {
   ///////////////////SHOW APPLICANT PROFILE//////////////////////////
 
@@ -66,6 +63,7 @@ if ($_SESSION['role'] == 'applicant') {
   $educationAttr = $applicantProfObj->educationAttr;
   $experienceAttr = $applicantProfObj->experienceAttr;
 
+  $_SESSION['name'] = $applicantAttr->firstname . ' ' . $applicantAttr->lastname;
 } elseif ($_SESSION['role'] == 'employer') {
   ///////////////////SHOW EMPLOYER PROFILE//////////////////////////
   $userId = $_SESSION['user_id'];
@@ -100,6 +98,8 @@ if ($_SESSION['role'] == 'applicant') {
   $employerProfObj = $view->showEmployerProfile($model, $modelArr, $viewArr);
   $employerAttr = $employerProfObj->employerAttr;
   $biographyAttr = $employerProfObj->biographyAttr;
+
+  $_SESSION['name'] = $employerAttr->companyName;
 }
 ?>
 <!DOCTYPE html>
@@ -145,7 +145,7 @@ if ($_SESSION['role'] == 'applicant') {
               <i class="far fa-user bg-light"></i>
             </li>
             <li class="nav-item">
-              <p class="text-light"><?= $applicantAttr->firstname ?> <?= $applicantAttr->lastname ?></p>
+              <p class="text-light"><?= $_SESSION['name'] ?></p>
             </li>
           </ul>
 
@@ -161,81 +161,157 @@ if ($_SESSION['role'] == 'applicant') {
 
     <div class="col-6 card__container" id="cardContainerApplicant">
 
-      <!-- card profile -->
-      <div class="card my-5">
-        <div class="card-body row">
-          <div class="col-9 ">
-            <h4 class=" "><?= $applicantAttr->firstname ?> <?= $applicantAttr->lastname ?></h4>
-            <h5 class="mb-4"><?= $_SESSION['email'] ?></h5>
-            <h6 class="">About me</h6>
-            <p class=" "><?= $biographyAttr->bio ?></p>
-          </div>
-          <div class="col-2">
-            <button class="btn btn-primary ml-3">Connect</button>
-          </div>
-          <div class="col-1"><i class="far fa-edit ml-3"></i></div>
-        </div>
-      </div>
+      <?php if ($_SESSION['role'] == 'applicant') { ?>
 
-      <!-- card skills -->
-      <div class="card my-5">
-        <div class="card-body row">
-          <div class="col-9">
-            <h5 class="mb-4">Skills</h5>
-            <div class="row">
+        <!--applicant card profile -->
+        <div class="card my-5">
+          <div class="card-body row">
+            <div class="col-9 ">
+              <h4 class=" "><?= $applicantAttr->firstname ?> <?= $applicantAttr->lastname ?></h4>
+              <h5 class="mb-4"><?= $_SESSION['email'] ?></h5>
+              <h6 class="">About me</h6>
+              <p class=" "><?= $biographyAttr->bio ?></p>
+            </div>
+            <div class="col-2">
+              <button class="btn btn-primary ml-3">Connect</button>
+            </div>
+            <div class="col-1"><i class="far fa-edit ml-3"></i></div>
+          </div>
+        </div>
+
+        <!--applicant card skills -->
+        <div class="card my-5">
+          <div class="card-body row">
+            <div class="col-9">
+              <h5 class="mb-4">Skills</h5>
+              <div class="row">
+                <?php
+                for ($i = 0; $i < count($skillsAttr->skills); $i++) {
+                ?>
+                  <span class="badge rounded-pill bg-primary ml-3 mb-2"><?= $skillsAttr->skills[$i] ?></span>
+                <?php
+                }
+                ?>
+              </div>
+            </div>
+            <div class="col-2"></div>
+            <div class="col-1"><i class="far fa-edit ml-3"></i></div>
+          </div>
+        </div>
+
+        <!--applicant card education -->
+        <div class="card my-5">
+          <div class="card-body row">
+            <div class="col-9">
+              <h5 class="mb-4">Education</h5>
               <?php
-              for ($i = 0; $i < count($skillsAttr->skills); $i++) {
+              for ($i = 0; $i < count($educationAttr->id); $i++) {
               ?>
-                <span class="badge rounded-pill bg-primary ml-3 mb-2"><?= $skillsAttr->skills[$i] ?></span>
+                <p><?= $educationAttr->certification[$i] ?> in <?= $educationAttr->course[$i] ?> - <?= $educationAttr->school[$i] ?>, <?= $educationAttr->graduateYear[$i] ?></p>
               <?php
               }
               ?>
             </div>
+            <div class="col-2"></div>
+            <div class="col-1"><i class="far fa-edit ml-3"></i></div>
+
           </div>
-          <div class="col-2"></div>
-          <div class="col-1"><i class="far fa-edit ml-3"></i></div>
         </div>
-      </div>
 
-      <!-- card education -->
-      <div class="card my-5">
-        <div class="card-body row">
-          <div class="col-9">
-            <h5 class="mb-4">Education</h5>
-            <?php
-            for ($i = 0; $i < count($educationAttr->id); $i++) {
-            ?>
-              <p><?= $educationAttr->certification[$i] ?> in <?= $educationAttr->course[$i] ?> - <?= $educationAttr->school[$i] ?>, <?= $educationAttr->graduateYear[$i] ?></p>
-            <?php
-            }
-            ?>
+        <!--applicant work experience -->
+        <div class="card my-5">
+          <div class="card-body row">
+            <div class="col-9">
+              <h5 class="mb-4">Experience</h5>
+              <?php
+              for ($i = 0; $i < count($educationAttr->id); $i++) {
+              ?>
+                <p><?= $experienceAttr->jobTitle[$i] ?> - <?= $experienceAttr->company[$i] ?>, <?= $experienceAttr->yearFrom[$i] ?> - <?= $experienceAttr->yearTo[$i] ?></p>
+              <?php
+              }
+              ?>
+            </div>
+            <div class="col-2"></div>
+            <div class="col-1"><i class="far fa-edit ml-3"></i></div>
+
           </div>
-          <div class="col-2"></div>
-          <div class="col-1"><i class="far fa-edit ml-3"></i></div>
-
         </div>
-      </div>
 
-      <!-- work experience -->
-      <div class="card my-5">
-        <div class="card-body row">
-          <div class="col-9">
-            <h5 class="mb-4">Experience</h5>
-            <?php
-            for ($i = 0; $i < count($educationAttr->id); $i++) {
-            ?>
-              <p><?= $experienceAttr->jobTitle[$i] ?> - <?= $experienceAttr->company[$i] ?>, <?= $experienceAttr->yearFrom[$i] ?> - <?= $experienceAttr->yearTo[$i] ?></p>
-            <?php
-            }
-            ?>
+      <?php } elseif ($_SESSION['role'] == 'employer') {
+        ///////////////////SHOW ALL JOB//////////////////////////
+
+        //job model initiated
+        $job = new Job();
+
+        // store job object in job view
+        $jobView = new JobView($job);
+
+        $model = new Model();
+        $view = new View();
+
+        $jobAttr = $view->showAllJobs($model, $job, $jobView);
+
+        $jobId = $jobAttr->id;
+        $jobTitle = $jobAttr->jobTitle;
+        $jobEmployerId = $jobAttr->employerId;
+        $jobLocation = $jobAttr->location;
+        $jobMinSalary = $jobAttr->minSalary;
+        $jobMaxSalary = $jobAttr->maxSalary;
+        $jobDescription = $jobAttr->description;
+        $jobSkills = $jobAttr->skills;
+        $jobType = $jobAttr->jobType;
+ 
+      ?>
+
+        <!--employer card profile -->
+        <div class="card my-5">
+          <div class="card-body row">
+            <div class="col-9 ">
+              <h4 class=" "><?= $employerAttr->companyName ?></h4>
+              <h5 class="mb-4"><?= $_SESSION['email'] ?></h5>
+              <h6 class="">About me</h6>
+              <p class=" "><?= $biographyAttr->bio ?></p>
+            </div>
+            <div class="col-2">
+              <button class="btn btn-primary ml-3">Connect</button>
+            </div>
+            <div class="col-1"><i class="far fa-edit ml-3"></i></div>
           </div>
-          <div class="col-2"></div>
-          <div class="col-1"><i class="far fa-edit ml-3"></i></div>
-
         </div>
-      </div>
+
+        <!--employer card jobs -->
+        <div class="card my-5">
+          <div class="card-body row">
+            <?php for ($i = 0; $i < count($jobId); $i++) { ?>
+              <div class="card mt-5" style="width: 18rem;">
+                <div class="card-body">
+                  <h6 class="card-title"><?=$jobTitle[$i]?></h6>
+                  <h6 class="card-title"><?=$jobType[$i]?></h6>
+                  <h6 class="card-title">$<?=$jobMinSalary[$i]?> - $<?=$jobMaxSalary[$i]?></h6>
+                  <div class="card-text mb-4" style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis;">
+                    <?= $jobDescription[$i] ?> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis, voluptas.
+                  </div>
+                  <div class="my-4">
+                    <h6 class="card-title">Skills</h6>
+                    <div style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis;">
+                      <?php
+                      for ($j = 0; $j < count($jobSkills[$i]); $j++) {
+                          echo '<span class="badge rounded-pill bg-primary mr-2">' . $jobSkills[$i][$j] . '</span>';
+                      };
+                      ?>
+                    </div>
+                  </div>
+
+                  <a href="viewjob.php?id=<?=$jobId[$i]?>" class="btn btn-primary">View Job</a>
+                </div>
+              </div>
+            <?php  } ?>
+
+          </div>
+        </div>
+
+      <?php } ?>
     </div>
-
 
 
   </div>

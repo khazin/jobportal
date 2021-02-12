@@ -21,6 +21,7 @@ $jobMinSalary = $jobAttr->minSalary;
 $jobMaxSalary = $jobAttr->maxSalary;
 $jobDescription = $jobAttr->description;
 $jobSkills = $jobAttr->skills;
+$jobType = $jobAttr->jobType;
 
 
 ?>

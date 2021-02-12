@@ -232,6 +232,38 @@ function validateBiography() {
     }
   }
 
+  //validate post new job
+function validatePostJob() {
+  const jobTitle = document.getElementById("jobTitle").value;
+  const location = document.getElementById("location").value;
+  const minSalary = document.getElementById("minSalary").value;
+  const maxSalary = document.getElementById("maxSalary").value;
+  const description = document.getElementById("description").value;
+  // const jobType = document.getElementByNames("jobType").value;
+  
+  var validateEmptyJobTitleField = validateEmptyTextField(jobTitle, "job title");
+  var validateEmptyLocationField = validateEmptyTextField(location, "location");
+  var validateEmptyMinSalaryField = validateEmptyTextField(minSalary, "minimum salary");
+  var validateEmptyMaxSalaryField = validateEmptyTextField(maxSalary, "maximum salary");
+  var validateEmptyDescriptionField = validateEmptyTextField(description, "description");
+  // var validateEmptyJobTypeField = validateEmptyTextField(jobType, "job type");
+
+  let validateResultArr = [
+    validateEmptyJobTitleField,
+    validateEmptyLocationField,
+    validateEmptyMinSalaryField,
+    validateEmptyMaxSalaryField,
+    validateEmptyDescriptionField
+    // validateEmptyJobTypeField
+];
+
+if (validateResultArr.includes(false) != true) {
+  return true;
+} else {
+  return false;
+}
+}
+
 //add pills
 function addPills(selectedValue, pills, count, idName, node) {
   for (i = 0; i < pills.length; i++) {
@@ -428,4 +460,9 @@ function addExperiences() {
   } else {
     return false;
   }
+}
+
+function changeSliderValue(node) {
+  var slider = node.value;
+  node.nextElementSibling.innerHTML = '$ ' + slider;
 }

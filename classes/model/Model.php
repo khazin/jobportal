@@ -488,10 +488,11 @@ class Model extends DB
         $minSalary = $job->getJobMinSalary();
         $maxSalary = $job->getJobMaxSalary();
         $description = $job->getJobDescription();
-        $skills = json_encode($job->getJobSkills());
+        $skills = implode(',', $job->getJobSkills());
+        $jobType = $job->getJobType();
 
         $stmt = "CALL procPostJob('$employerId','$jobTitle','$location',
-        '$minSalary','$maxSalary','$description','$skills');";
+        '$minSalary','$maxSalary','$description','$skills','$jobType');";
         // echo $stmt;
         $this->insertData($stmt);
     }
@@ -508,12 +509,11 @@ class Model extends DB
         $maxSalary = [];
         $description = [];
         $skills = [];
+        $jobType = [];
 
 
         if (mysqli_num_rows($this->result) > 0) {
             while ($this->row = mysqli_fetch_assoc($this->result)) {
-                //  $job->setAllJobs($this->row);
-                // print_r($this->result->num_rows);
                 array_push($jobId, $this->row['job_id']);
                 array_push($jobTitle, $this->row['job_title']);
                 array_push($employerId, $this->row['employer_id']);
@@ -521,14 +521,40 @@ class Model extends DB
                 array_push($minSalary, $this->row['min_salary']);
                 array_push($maxSalary, $this->row['max_salary']);
                 array_push($description, $this->row['job_description']);
-                array_push($skills, $this->row['skills']);
+                array_push($skills, explode(",", $this->row['skills']));
+                array_push($jobType, $this->row['job_type']);
             }
             $allJobs = [
                 $jobId, $jobTitle, $employerId, $location,
-                $minSalary, $maxSalary, $description, $skills
+                $minSalary, $maxSalary, $description, $skills, $jobType
             ];
 
             $job->setAllJobs($allJobs);
+        }
+    }
+
+    public function showJob($job)
+    {
+        $jobId = $job->getJobId();
+
+        $stmt = "SELECT * FROM jobs WHERE `job_id` = '$jobId'";
+
+        $this->retrieveData($stmt);
+     
+
+        if (mysqli_num_rows($this->result) > 0) {
+            while ($this->row = mysqli_fetch_assoc($this->result)) {
+                $job->setJobId($this->row['job_id']);
+                $job->setJobTitle($this->row['job_title']);
+                $job->setJobEmployerId($this->row['employer_id']);
+                $job->setJobLocation($this->row['location']);
+                $job->setJobMinSalary($this->row['min_salary']);
+                $job->setJobMaxSalary($this->row['max_salary']);
+                $job->setJobDescription($this->row['job_description']);
+                $job->setJobSkills(explode(",",$this->row['skills']));
+                $job->setJobType($this->row['job_type']);
+
+            }
         }
     }
 }

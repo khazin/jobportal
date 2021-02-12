@@ -52,6 +52,12 @@ class JobController
         $this->job->setJobSkills($skills);
     }
 
+    
+    public function setJobType($jobType)
+    {
+        $this->job->setJobType($jobType);
+    }
+    
     public function setJob($jobArr, $id)//remember to put type declaration in arguments
     {
         $this->job->setJob($jobArr, $id);
