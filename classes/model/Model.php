@@ -29,26 +29,18 @@ class Model extends DB
     }
     public function retrieveData($stmt)
     {
-
-        //connect to db and get data
-        $this->sql = $stmt;
-        $this->connection();
-        $this->result = mysqli_query($this->connection, $this->sql);
+        try {
+            //connect to db and get data
+            $this->sql = $stmt;
+            $this->connection();
+            $this->result = mysqli_query($this->connection, $this->sql);
+            if ($this->result != false) {
+                return true;
+            }
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+        }
     }
-
-    function arrToStr($arr)
-    {
-        $str = implode(" ", $arr);
-        $str = str_replace(' ', ',', $str);
-        return $str;
-    }
-
-    function strToArr($str)
-    {
-        $arr = explode(" ", $str);
-        return $arr;
-    }
-
 
     public function registerApplicant($modelArr)
     {
@@ -624,10 +616,42 @@ class Model extends DB
                 $jobId, $jobTitle, $employerId, $location,
                 $minSalary, $maxSalary, $description, $skills, $jobType
             ];
-            // print_r($skills);
             $job->setAllJobs($allJobs);
             $employer->setEmployerCompanyName(implode(',',$companyName));
             $employer->setEmployerCompanyType(implode(',',$companyType));
+        }
+    }
+
+    public function applyJob($modelArr)
+    {
+        $job = $modelArr[0];
+        $applicant = $modelArr[1];
+
+        $jobId = $job->getJobId();
+        $applicantId = $applicant->getApplicantId();
+
+        $stmt = "CALL procApplyJob($jobId, $applicantId)";
+
+        $this->insertData($stmt);
+    }
+
+    public function checkAppliedJob($modelArr)
+    {
+        $job = $modelArr[0];
+        $applicant = $modelArr[1];
+
+        $jobId = $job->getJobId();
+        $applicantId = $applicant->getApplicantId();
+
+        $stmt = "SELECT * FROM `jobs_apply` 
+        WHERE `job_id` = '$jobId' AND `applicant_id` = '$applicantId'";
+        echo $stmt;
+        $this->retrieveData($stmt);
+
+        if (mysqli_num_rows($this->result) > 0) {
+            return true;       
+        } else {
+            return false;
         }
 
     }

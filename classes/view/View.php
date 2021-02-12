@@ -148,4 +148,14 @@ class View
         echo "showing searched  job";
         echo "<br>";
     }
+
+    public function checkAppliedJob($model, $modelArr)
+    {
+        echo "View initiated. retrieving job applied data";
+        echo "<br>";
+
+       
+        return $model->checkAppliedJob($modelArr);
+
+    }
 }

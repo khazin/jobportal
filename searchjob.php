@@ -189,7 +189,7 @@ if (isset($_POST['search'])) {
 
                             <h6 class="card-title">Salary range</h6>
                             <p class="card-text">$<?=$minSalaryArr[$i]?> - $<?=$maxSalaryArr[$i]?></p>
-                            <a href="viewjob.php?id=<?=$jobIdArr[$i]?>" class="btn btn-primary">View Job</a>
+                            <a href="viewjob.php?id=<?=$jobIdArr[$i]?>&company=<?=$companyNameArr[$i]?>" class="btn btn-primary">View Job</a>
                         </div>
                     </div>
                 <?php } ?>

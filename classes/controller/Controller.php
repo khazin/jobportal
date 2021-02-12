@@ -1,5 +1,4 @@
 <?php
-// session_start();
 class Controller
 {
 
@@ -54,8 +53,14 @@ class Controller
     public function postJob($model, $job)
     {
         $model->postJob($job);
-
         echo 'job created';
+        echo '<br>';
+    }
+
+    public function applyJob($model, $modelArr)
+    {
+        $model->applyJob($modelArr);
+        echo 'job applied';
         echo '<br>';
     }
 }

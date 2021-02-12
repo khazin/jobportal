@@ -31,6 +31,46 @@ if (isset($_GET['id'])) {
     $jobSkills = $jobAttr->skills;
     $jobType = $jobAttr->jobType;
 }
+
+$message = 'Do you want to apply for this job?';
+
+
+ ///////////////////CHECK APPLY JOB//////////////////////////
+
+    //job model initiated
+    $job = new Job();
+    //applicant model initiated
+    $applicant = new Applicants();
+    $modelArr=[$job,$applicant];
+    
+    // store job object in job controller
+    $jobController = new JobController($job);
+    // store applicant object in applicant controller
+    $applicantController = new ApplicantsController($applicant);
+
+        
+    // store job object in job View
+    $jobView = new JobView($job);
+    // store applicant object in applicant View
+    $applicantView = new ApplicantsView($applicant);
+    $viewArr=[$jobView,$applicantView];
+
+    //set job data
+    $jobController->setJobId($jobId);
+    //set applicant data
+    $applicantController->setapplicantId($_SESSION['user_id']);
+
+    $model = new Model();
+    $view = new View();
+
+    $result = $view->checkAppliedJob($model, $modelArr);
+        
+    if ($result == true) {
+        $message = 'You have applied for this job';
+        header("Location: searchjob.php");
+    }
+    
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,33 +124,16 @@ if (isset($_GET['id'])) {
     </header>
 
     <div class="container col-12 d-flex  justify-content-center bg-success">
-
         <div class="container mt-5 col-9 bg-light row">
-
             <div class="col-12 bg-secondary">
                 <div class="card mt-5">
                     <div class="card-body">
-                        <h6 class="card-title"><?= $companyName ?></h6>
-                        <h6 class="card-title"><?= $jobLocation ?></h6>
-                        <h6 class="card-title"><?= $jobType ?></h6>
-                        <h6 class="card-title"><?= $jobTitle ?></h6>
-                        <div class="card-text mb-4">
-                            <?= $jobDescription ?> Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, nesciunt?
-                        </div>
-                        <h6 class="card-title">Skills</h6>
-                        <div>
-                            <span class="badge rounded-pill bg-primary">HTML</span>
-                            <span class="badge rounded-pill bg-primary">CSS</span>
-                        </div>
-
-                        <h6 class="card-title">Salary range</h6>
-                        <p class="card-text">$<?= $jobMinSalary ?> - $<?= $jobMaxSalary ?></p>
-                        <?php if ($_SESSION['role'] == 'applicant') {
-                            ?>
-                        <a href="applyjob.php?id=<?=$jobId?>&company=<?=$companyName?>" class="btn btn-primary">Apply</a>
-                            
-                            <?php
-                        }?>
+                        <h3><?=$message?></h3>
+                        <div class="card-title">Job title: <?=$jobTitle?></div>
+                        <div class="card-title">Company: <?=$companyName?></div>
+                        <div class="card-title">Location: <?=$jobLocation?></div>
+                        <div class="card-title">salary: $<?=$jobMinSalary?> - $<?=$jobMaxSalary?></div>
+                        <form method="post"><button type="submit" class="btn btn-primary" name="apply" <?php if($result == true) echo 'disabled'?>>Yes</button></form>
                     </div>
                 </div>
             </div>
@@ -118,3 +141,29 @@ if (isset($_GET['id'])) {
     </div>
 </body>
 </html>
+<?php
+
+if ( isset($_POST['apply'])) {
+    ///////////////////APPLY JOB//////////////////////////
+
+    //job model initiated
+    $job = new Job();
+    //applicant model initiated
+    $applicant = new Applicants();
+    $modelArr=[$job,$applicant];
+    
+    // store job object in job controller
+    $jobController = new JobController($job);
+    // store applicant object in applicant controller
+    $applicantController = new ApplicantsController($applicant);
+
+    //set job data
+    $jobController->setJobId($jobId);
+    //set applicant data
+    $applicantController->setapplicantId($_SESSION['user_id']);
+
+    $model = new Model();
+    $controller = new Controller();
+    $controller->applyJob($model, $modelArr);
+}
+?>
