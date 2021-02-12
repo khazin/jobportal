@@ -11,21 +11,48 @@ if (isset($_POST['search'])) {
     $minSalary = $_POST['minSalary'];
     $maxSalary = $_POST['maxSalary'];
 
-    $jobArr = [
-        $jobTitle, $jobLocation, $companyType, $skillsArr,
-        $jobType, $minSalary, $maxSalary
-    ];
     //job model initiated
     $job = new Job();
+    //Employer model initiated
+    $employer = new Employer();
 
+    $modelArr = [$job, $employer];
     // store job object in job Controller
     $jobController = new JobController($job);
+    $employerController = new EmployerController($employer);
 
-    $jobController
+    $jobController->setJobTitle($jobTitle);
+    $jobController->setJobLocation($jobLocation);
+    $jobController->setJobSkills($skillsArr);
+    $jobController->setJobType(implode(',', $jobType));
+    $jobController->setJobMinSalary($minSalary);
+    $jobController->setJobMaxSalary($maxSalary);
+    $employerController->setEmployerCompanyType($companyType);
 
     // store job object in job view
     $jobView = new JobView($job);
+    // store employer object in employer view
+    $employerView = new EmployerView($employer);
 
+    $viewArr = [$jobView, $employerView];
+
+    $model = new Model();
+    $view = new View();
+
+    $searchJobAttr = $view->searchJob($model, $modelArr, $viewArr);
+
+    $jobAttr = $searchJobAttr->jobAttr;
+    $jobIdArr = $jobAttr->id;
+    $jobTitleArr = $jobAttr->jobTitle;
+    $employerIdArr = $jobAttr->employerId;
+    $locationArr = $jobAttr->location;
+    $minSalaryArr = $jobAttr->minSalary;
+    $maxSalaryArr = $jobAttr->maxSalary;
+    $descriptionArr = $jobAttr->description;
+    $skillsArr = $jobAttr->skills;
+    $jobTypeArr = $jobAttr->jobType;
+    $companyNameArr = $searchJobAttr->companyName;
+    $companyTypeArr = $searchJobAttr->companyType;
 }
 ?>
 <!DOCTYPE html>
@@ -70,7 +97,7 @@ if (isset($_POST['search'])) {
                             <i class="far fa-user bg-light"></i>
                         </li>
                         <li class="nav-item">
-                            <p class="text-light"><?=$_SESSION['name']?></p>
+                            <p class="text-light"><?= $_SESSION['name'] ?></p>
                         </li>
                     </ul>
 
@@ -87,7 +114,7 @@ if (isset($_POST['search'])) {
         <div class="container mt-5 col-12 bg-light row">
 
             <div class=" col-2  d-flex flex-column ">
-                <form action="post" class="form mt-5">
+                <form method="post" class="form mt-5">
                     <input type="text" placeholder="Job" class="form-control mb-3" id="jobTitle" name="jobTitle">
                     <input type="text" placeholder="Location" class="form-control mb-3" id="jobLocation" name="jobLocation">
                     <input type="text" placeholder="specialisation" class="form-control mb-3" id="companyType" name="companyType">
@@ -114,15 +141,15 @@ if (isset($_POST['search'])) {
                     <div class="mt-3">
                         <h6>Types of employment</h6>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="full time" id="" name="jobType">
+                            <input class="form-check-input" type="checkbox" value="full time" id="" name="jobType[]">
                             <label class="form-check-label" for="">Full-time</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="part time" id="parTime" name="jobType">
+                            <input class="form-check-input" type="checkbox" value="part time" id="parTime" name="jobType[]">
                             <label class="form-check-label" for="parTime">Part-time</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="remote" id="" name="jobType">
+                            <input class="form-check-input" type="checkbox" value="remote" id="" name="jobType[]">
                             <label class="form-check-label" for="">Remote</label>
                         </div>
                     </div>
@@ -134,63 +161,38 @@ if (isset($_POST['search'])) {
                         <label class="form-check-label" for="">Maximum salary</label>
                         <input type="range" min="1" max="10000" value="5000" class="slider" id="maxSalary" name="maxSalary" onchange="return changeSliderValue(this)">
                         <p id="maxSalaryValue">$5000</p>
-                       
+
                     </div>
                     <input type="submit" class="btn btn-primary mt-5" name="search" onclick="">
 
                 </form>
             </div>
             <div class=" col-10  bg-secondary">
-                <div class="card mt-5" style="width: 18rem;">
-                    <div class="card-body">
-                        <h6 class="card-title">ABC pte ltd</h6>
-                        <h6 class="card-title">Singapore, Singapore</h6>
-                        <h6 class="card-title">Experience - fresh graduate</h6>
-                        <h6 class="card-title">Web Developer</h6>
-                        <div class="card-text mb-4" style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis;">
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint, sit corporis odit provident vitae maiores debitis nemo
-                            libero tempore perferendis minima fugiat architecto facere impedit, laudantium officiis consequuntur adipisci perspiciatis..
-                        </div>
-                        <h6 class="card-title">Skills</h6>
-                        <div style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis;">
-                            <span class="badge rounded-pill bg-primary">HTML</span>
-                            <span class="badge rounded-pill bg-primary">CSS</span>
-                            <span class="badge rounded-pill bg-primary">CSS</span>
-                            <span class="badge rounded-pill bg-primary">CSS</span>
-                            <span class="badge rounded-pill bg-primary">CSS</span>
-                            <span class="badge rounded-pill bg-primary">CSS</span>
-                            <span class="badge rounded-pill bg-primary">CSS</span>
-                        </div>
+                <?php for ($i = 0; $i < count($jobIdArr); $i++) { ?>
+                    <div class="card mt-5" style="width: 18rem;">
+                        <div class="card-body">
+                            <h6 class="card-title"><?= $companyNameArr[$i] ?></h6>
+                            <h6 class="card-title"><?= $locationArr[$i] ?></h6>
+                            <h6 class="card-title"><?= $companyTypeArr[$i] ?></h6>
+                            <h6 class="card-title"><?= $jobTitleArr[$i] ?></h6>
+                            <div class="card-text mb-4" style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis;">
+                                <?= $descriptionArr[$i] ?>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint, sit corporis odit provident vitae maiores debitis nemo
+                            </div>
+                            <h6 class="card-title">Skills</h6>
+                            <div style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis;">
+                                <?php
+                                for ($j = 0; $j < count($skillsArr[$i]); $j++) {
+                                    echo '<span class="badge rounded-pill bg-primary mr-2">' . $skillsArr[$i][$j] . '</span>';
+                                };
+                                ?>
+                            </div>
 
-                        <h6 class="card-title">Salary range</h6>
-                        <p class="card-text">$1000-$1200</p>
-                        <a href="#" class="btn btn-primary">View Job</a>
-                    </div>
-                </div>
-                <div class="card mt-5" style="width: 18rem;">
-                    <div class="card-body">
-                        <h6 class="card-title">ABC pte ltd</h6>
-                        <h6 class="card-title">Web Developer</h6>
-                        <div class="card-text mb-4" style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis;">
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint, sit corporis odit provident vitae maiores debitis nemo
-                            libero tempore perferendis minima fugiat architecto facere impedit, laudantium officiis consequuntur adipisci perspiciatis..
+                            <h6 class="card-title">Salary range</h6>
+                            <p class="card-text">$<?=$minSalaryArr[$i]?> - $<?=$maxSalaryArr[$i]?></p>
+                            <a href="viewjob.php?id=<?=$jobIdArr[$i]?>" class="btn btn-primary">View Job</a>
                         </div>
-                        <h6 class="card-title">Skills</h6>
-                        <div style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis;">
-                            <span class="badge rounded-pill bg-primary">HTML</span>
-                            <span class="badge rounded-pill bg-primary">CSS</span>
-                            <span class="badge rounded-pill bg-primary">CSS</span>
-                            <span class="badge rounded-pill bg-primary">CSS</span>
-                            <span class="badge rounded-pill bg-primary">CSS</span>
-                            <span class="badge rounded-pill bg-primary">CSS</span>
-                            <span class="badge rounded-pill bg-primary">CSS</span>
-                        </div>
-
-                        <h6 class="card-title">Salary range</h6>
-                        <p class="card-text">$1000-$1200</p>
-                        <a href="#" class="btn btn-primary">View Job</a>
                     </div>
-                </div>
+                <?php } ?>
             </div>
         </div>
     </div>

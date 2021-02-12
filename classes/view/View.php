@@ -117,7 +117,7 @@ class View
         $model->showAllJobs($job);
         return $jobView->getAllJobs();
 
-        echo "user logged in";
+        echo "showing all jobs";
         echo "<br>";
     }
 
@@ -128,7 +128,24 @@ class View
         $model->showJob($job);
         return $jobView->getJob();
 
-        echo "user logged in";
+        echo "showing selected job";
+        echo "<br>";
+    }
+
+    public function searchJob($model,$modelArr,$viewArr){
+        echo "View initiated. retrieving job data";
+        echo "<br>";
+        $jobView = $viewArr[0];
+        $employerView = $viewArr[1];
+        $model->searchJob($modelArr);
+        
+        $searchJobObj = new stdClass();
+        $searchJobObj->jobAttr = $jobView->getAllJobs();
+        $searchJobObj->companyName = explode(',',$employerView->getEmployerCompanyName());
+        $searchJobObj->companyType = explode(',',$employerView->getEmployerCompanyType());
+
+        return $searchJobObj;
+        echo "showing searched  job";
         echo "<br>";
     }
 }
