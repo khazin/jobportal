@@ -655,4 +655,33 @@ class Model extends DB
         }
 
     }
+
+    public function connectUser($connection){
+
+        $userRequestId = $connection->getUserRequestId();
+        $userReceiveId = $connection->getUserReceiveId();
+
+        $stmt = "CALL procConnectUser($userRequestId, $userReceiveId)";
+
+        $this->insertData($stmt);
+    }
+
+    public function checkConnectUser($connection)
+    {
+        
+        $userRequestId = $connection->getUserRequestId();
+        $userReceiveId = $connection->getUserReceiveId();
+
+        $stmt = "SELECT * FROM `connection` 
+        WHERE `user_request_id` = '$userRequestId' AND 
+        `user_receive_id` = '$userReceiveId'";
+        echo $stmt;
+        $this->retrieveData($stmt);
+
+        if (mysqli_num_rows($this->result) > 0) {
+            return true;       
+        } else {
+            return false;
+        }
+    }
 }

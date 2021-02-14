@@ -3,7 +3,7 @@
 
 <?php
 if (isset($_GET['id'])) {
-    
+
   $userId = $_GET['id'];
   // initialise applicants model
   $applicant = new Applicants();
@@ -57,23 +57,54 @@ if (isset($_GET['id'])) {
 
   $applicantProfObj = $view->showApplicantProfile($model, $modelArr, $viewArr);
 
-    $applicantAttr = $applicantProfObj->applicantAttr;
+  $applicantAttr = $applicantProfObj->applicantAttr;
   $biographyAttr = $applicantProfObj->biographyAttr;
   $skillsAttr = $applicantProfObj->skillsAttr;
   $educationAttr = $applicantProfObj->educationAttr;
   $experienceAttr = $applicantProfObj->experienceAttr;
-
-  var_dump($applicantAttr);
-  echo '<br>';
-  var_dump($biographyAttr);
-  echo '<br>';
-  var_dump($skillsAttr);
-  echo '<br>';
-  var_dump($educationAttr);
-  echo '<br>';
-  var_dump($experienceAttr);
 }
 
+if (isset($_POST['connect'])) {
+  $userRequestId = $_SESSION['user_id'];
+  $userReceiveId = $_GET['id'];
+
+
+  //connection model initiated
+  $connection = new Connection();
+
+  // store connection object in connection controller
+  $connectionController = new ConnectionController($connection);
+
+  //set connection
+  $connectionController->setConnection($userRequestId, $userReceiveId);
+
+  $model = new Model();
+  $controller = new Controller();
+
+  $controller->connectUser($model, $connection);
+}
+
+/////////////////CHECK IF USER IS CONNECTED/////////////////////
+$userRequestId = $_SESSION['user_id'];
+$userReceiveId = $_GET['id'];
+
+
+//connection model initiated
+$connection = new Connection();
+
+// store connection object in connection controller
+$connectionController = new ConnectionController($connection);
+
+// store connection object in connection View
+$connectionView = new ConnectionView($connection);
+
+//set connection
+$connectionController->setConnection($userRequestId, $userReceiveId);
+
+$model = new Model();
+$view = new View();
+
+$result = $view->checkConnectUser($model, $connection, $connectionView);
 ?>
 
 <!DOCTYPE html>
@@ -90,6 +121,7 @@ if (isset($_GET['id'])) {
 
 <body>
   <header>
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
       <div class="container ">
         <a class="navbar-brand col-2" href="index.php">JOB PORTAL</a>
@@ -117,6 +149,7 @@ if (isset($_GET['id'])) {
           <ul class="navbar-nav">
             <li class="nav-item">
               <i class="far fa-user bg-light"></i>
+
             </li>
             <li class="nav-item">
               <p class="text-light"><?= $applicantAttr->firstname ?> <?= $applicantAttr->lastname ?></p>
@@ -145,7 +178,19 @@ if (isset($_GET['id'])) {
             <p class=" "><?= $biographyAttr->bio ?></p>
           </div>
           <div class="col-2">
-            <button class="btn btn-primary ml-3">Connect</button>
+            <form method="post">
+              <?php if (isset($_GET['id'])) { ?>
+                <?php if ($result == true) { ?>
+                  <button type="submit" class="btn btn-primary ml-3 mb-2" name="message">Message</button>
+                  <!-- <button type="submit" class="btn btn-primary ml-3" name="unfollow">Unfollow</button> -->
+
+                <?php } else { ?>
+                  <button type="submit" class="btn btn-primary ml-3" name="connect">Follow</button>
+
+              <?php }
+              } ?>
+
+            </form>
           </div>
           <div class="col-1"><i class="far fa-edit ml-3"></i></div>
         </div>

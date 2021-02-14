@@ -173,7 +173,6 @@ if ($_SESSION['role'] == 'applicant') {
               <p class=" "><?= $biographyAttr->bio ?></p>
             </div>
             <div class="col-2">
-              <button class="btn btn-primary ml-3">Connect</button>
             </div>
             <div class="col-1"><i class="far fa-edit ml-3"></i></div>
           </div>

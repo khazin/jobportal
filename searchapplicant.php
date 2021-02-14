@@ -1,4 +1,7 @@
-<?php include './includes/ClassAutoloader.php'; ?>
+<?php 
+session_start();
+include './includes/ClassAutoloader.php'; 
+?>
 
 <?php
 if (isset($_POST['search'])) {
@@ -108,7 +111,7 @@ if (isset($_POST['search'])) {
                             <i class="far fa-user bg-light"></i>
                         </li>
                         <li class="nav-item">
-                            <p class="text-light">Firstname Lastname</p>
+                            <p class="text-light"><?=$_SESSION['name']?></p>
                         </li>
                     </ul>
 

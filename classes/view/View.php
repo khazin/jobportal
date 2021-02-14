@@ -153,9 +153,15 @@ class View
     {
         echo "View initiated. retrieving job applied data";
         echo "<br>";
-
-       
+      
         return $model->checkAppliedJob($modelArr);
-
     }
+    public function checkConnectUser($model, $connection,$connectionView)
+    {
+        echo "View initiated. retrieving check connection data";
+        echo "<br>";
+
+        return $model->checkConnectUser($connection);
+    }
+
 }

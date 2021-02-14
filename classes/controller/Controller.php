@@ -63,4 +63,11 @@ class Controller
         echo 'job applied';
         echo '<br>';
     }
+
+    public function connectUser($model, $connection)
+    {
+        $model->connectUser($connection);
+        echo 'user connected';
+        echo '<br>';
+    }
 }

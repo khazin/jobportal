@@ -30,6 +30,7 @@ include './classes/model/Biography.php';
 include './classes/model/Skills.php';
 include './classes/model/Education.php';
 include './classes/model/Experience.php';
+include './classes/model/Connection.php';
 include './classes/model/Job.php';
 
 //view
@@ -42,6 +43,7 @@ include './classes/view/BiographyView.php';
 include './classes/view/SkillsView.php';
 include './classes/view/EducationView.php';
 include './classes/view/ExperienceView.php';
+include './classes/view/ConnectionView.php';
 include './classes/view/JobView.php';
 
 //controller
@@ -54,4 +56,5 @@ include './classes/controller/SkillsController.php';
 include './classes/controller/EducationController.php';
 include './classes/controller/ExperienceController.php';
 include './classes/controller/JobController.php';
+include './classes/controller/ConnectionController.php';
 include './classes/controller/Controller.php';
