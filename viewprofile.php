@@ -173,7 +173,7 @@ $result = $view->checkConnectUser($model, $connection, $connectionView);
         <div class="card-body row">
           <div class="col-9 ">
             <h4 class=" "><?= $applicantAttr->firstname ?> <?= $applicantAttr->lastname ?></h4>
-            <h5 class="mb-4"><?= $_SESSION['email'] ?></h5>
+            <h5 class="mb-4"><?= $_SESSION['email'] //must not use session ?></h5> 
             <h6 class="">About me</h6>
             <p class=" "><?= $biographyAttr->bio ?></p>
           </div>
@@ -181,7 +181,7 @@ $result = $view->checkConnectUser($model, $connection, $connectionView);
             <form method="post">
               <?php if (isset($_GET['id'])) { ?>
                 <?php if ($result == true) { ?>
-                  <button type="submit" class="btn btn-primary ml-3 mb-2" name="message">Message</button>
+                  <a href="sendmessage.php?id=<?=$_GET['id']?>" class="btn btn-primary ml-3 mb-2">Message</a>
                   <!-- <button type="submit" class="btn btn-primary ml-3" name="unfollow">Unfollow</button> -->
 
                 <?php } else { ?>

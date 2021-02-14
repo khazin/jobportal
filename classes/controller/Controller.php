@@ -70,4 +70,11 @@ class Controller
         echo 'user connected';
         echo '<br>';
     }
+
+    public function sendMessage($model, $message)
+    {
+        $model->sendMessage($message);
+        echo 'message sent';
+        echo '<br>';
+    }
 }

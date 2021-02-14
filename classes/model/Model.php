@@ -37,7 +37,7 @@ class Model extends DB
             if ($this->result != false) {
                 return true;
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             echo $e->getMessage();
         }
     }
@@ -683,5 +683,18 @@ class Model extends DB
         } else {
             return false;
         }
+    }
+
+    public function sendMessage($message)
+    {
+       
+        $msgSenderId = $message->getMsgSenderId();
+        $msgReceiverId = $message->getMsgReceiverId();
+        $msg = $message->getMsg();
+
+        $stmt = "CALL procSendMessage($msgSenderId, $msgReceiverId, '$msg')";
+
+        $this->insertData($stmt);
+
     }
 }
