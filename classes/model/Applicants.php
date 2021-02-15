@@ -13,7 +13,7 @@ class Applicants
     private String $country;
     private String $city;
 
-    private array $allApplicants;
+    private Object $allApplicants;
 
     public function __construct()
     {
@@ -167,7 +167,7 @@ class Applicants
         return $applicantAttr;
     }
 
-    public function setAllApplicants($allApplicants)
+    public function setAllApplicants(Object $allApplicants)
     {
         $this->allApplicants = $allApplicants;
         echo "setAllApplicants data is set";
@@ -176,17 +176,6 @@ class Applicants
 
     public function getAllApplicants()
     {
-        $applicantsAttr = new stdClass();
-        $applicantsAttr->id = $this->allApplicants[0];
-        $applicantsAttr->firstname = $this->allApplicants[1];
-        $applicantsAttr->lastname = $this->allApplicants[2];
-        $applicantsAttr->gender = $this->allApplicants[3];
-        $applicantsAttr->dob = $this->allApplicants[4];
-        $applicantsAttr->jobTitle = $this->allApplicants[5];
-        $applicantsAttr->company = $this->allApplicants[6];
-        $applicantsAttr->country = $this->allApplicants[7];
-        $applicantsAttr->city = $this->allApplicants[7];
-
-        return $applicantsAttr;
+        return $this->allApplicants;
     }
 }

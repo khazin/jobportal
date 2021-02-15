@@ -164,4 +164,20 @@ class View
         return $model->checkConnectUser($connection);
     }
 
+    public function getMsgSender($model, $modelArr,$viewArr)
+    {
+        echo "View initiated. retrieving check connection data";
+        echo "<br>";
+        $messageView = $viewArr[0];
+        $applicantsView = $viewArr[1];
+        $model->getMsgSender($modelArr);
+        $applicantsObj = $applicantsView->getAllApplicants();
+        $messageObj = $messageView->getAllMessages();
+
+        $msgSenderAttr = new stdClass();
+        $msgSenderAttr->applicantsObj = $applicantsObj;
+        $msgSenderAttr->messageObj = $messageObj;
+        return $msgSenderAttr;
+    }
+
 }

@@ -7,6 +7,7 @@ class Message
     private int $msgReceiverId;
     private String $msg;
  
+    private Object $allMessages;
 
     public function __construct()
     {
@@ -74,5 +75,18 @@ class Message
 
         // echo "getting Message attributes";
         // echo "<br>";
+    }
+
+    public function setAllMessages(Object $allMessages)
+    {
+        $this->allMessages = $allMessages;
+
+        echo "all Message attribute is set";
+        echo "<br>";
+    }
+
+    public function getAllMessages()
+    {
+        return $this->allMessages;
     }
 }

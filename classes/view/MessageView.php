@@ -30,4 +30,10 @@ class MessageView
     {
         return $this->message->getMessage();
     }
+
+    
+    public function getAllMessages()
+    {
+        return $this->message->getAllMessages();
+    }
 }

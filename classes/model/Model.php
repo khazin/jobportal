@@ -413,10 +413,20 @@ class Model extends DB
                 array_push($skillsArr, explode(",", $this->row['skills_arr']));
                 array_push($bioArr, $this->row['bio_arr']);
             }
-            $applicantsArr = [$applicantId,$firstname,$lastname,$gender,
-            $dob,$jobTitle,$company,$country, $city];
+  
+            $allApplicants = new stdClass();
+            $allApplicants->applicantId = $applicantId;
+            $allApplicants->firstname = $firstname;
+            $allApplicants->lastname = $lastname;
+            $allApplicants->gender = $gender;
+            $allApplicants->dob = $dob;
+            $allApplicants->jobTitle = $jobTitle;
+            $allApplicants->company = $company;
+            $allApplicants->country = $country;
+            $allApplicants->city = $city;
+
             $biographysArr = [[], $bioArr];
-            $applicant->setAllApplicants($applicantsArr);
+            $applicant->setAllApplicants($allApplicants);
             $skills->setSkillsSkills($skillsArr);
             $biography->setAllBiographys($biographysArr);
          
@@ -696,5 +706,59 @@ class Model extends DB
 
         $this->insertData($stmt);
 
+    }
+
+    
+    public function getMsgSender($modelArr)
+    {
+       
+        $message = $modelArr[0];
+        $applicant = $modelArr[1];
+
+        $msgReceiverId = $message->getMsgReceiverId();
+
+
+        $stmt = "SELECT  `firstname`, `lastname`, `job_title`, `company`, 
+        message.msg , message.msg_sender_id , message.msg_id
+        from message
+        join applicant on `applicant_id` = message.msg_sender_id
+        Where message.msg_receiver_id = $msgReceiverId";
+
+        $this->retrieveData($stmt);
+
+        $firstname = [];
+        $lastname = [];
+        $jobTitle = [];
+        $company = [];
+        $msgId = [];
+        $msgSenderId = [];
+        $msg = [];
+
+        if (mysqli_num_rows($this->result) > 0) {
+            while ($this->row = mysqli_fetch_assoc($this->result)) {
+
+                array_push($firstname, $this->row['firstname']);
+                array_push($lastname, $this->row['lastname']);
+                array_push($jobTitle, $this->row['firstname']);
+                array_push($company, $this->row['job_title']);
+                array_push($msgId, $this->row['msg_id']);
+                array_push($msgSenderId, $this->row['msg_sender_id']);
+                array_push($msg, $this->row['msg']);       
+            }
+
+            $allApplicants = new stdClass();
+            $allMessages = new stdClass();
+            $allApplicants->firstname = $firstname;
+            $allApplicants->lastname = $lastname;
+            $allApplicants->jobTitle = $jobTitle;
+            $allApplicants->company = $company;
+            $allMessages->msgId = $msgId;
+            $allMessages->msgSenderId = $msgSenderId;
+            $allMessages->msg = $msg;
+
+            $applicant->setAllApplicants($allApplicants);
+            $message->setAllMessages($allMessages);
+     
+        }
     }
 }

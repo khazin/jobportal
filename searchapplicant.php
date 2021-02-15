@@ -57,7 +57,7 @@ if (isset($_POST['search'])) {
     $skillsObj = $searchApplicantsAttr->skillsObj;
     $biographysObj = $searchApplicantsAttr->biographysObj;
 
-    $applicantIdArr = $applicantsObj->id;
+    $applicantIdArr = $applicantsObj->applicantId;
     $firstnameArr = $applicantsObj->firstname;
     $lastnameArr = $applicantsObj->lastname;
     $genderArr = $applicantsObj->gender;

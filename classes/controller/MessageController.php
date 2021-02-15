@@ -23,18 +23,14 @@ class MessageController
     public function setMsg($msg) {
         $this->message->setMsg($msg);
     }
-    
-    public function setMessage($msgSenderId, $msgReceiverId, $setMsg){ //remember to put type declaration in arguments
-     
-       $this->message->setMessage($msgSenderId, $msgReceiverId, $setMsg);
 
-        echo "Message attribute is set";
-        echo "<br>";
-
+    public function setMessage($msgSenderId, $msgReceiverId, $setMsg)
+    { //remember to put type declaration in arguments
+        $this->message->setMessage($msgSenderId, $msgReceiverId, $setMsg);
     }
 
-    
-    
-
-
+    public function setAllMessages(Object $allMessages)
+    {
+        $this->message->setMessage($allMessages);
+    }
 }
