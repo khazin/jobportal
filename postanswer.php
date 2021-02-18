@@ -90,15 +90,15 @@ if (isset($_POST['send'])) {
         <!-- SEND MESSAGE FORM -->
         <form method="post" action="" class="form col-6">
             <div class="card mt-5" style="width: 38rem;">
-                <h5 class="mt-3 card-title text-center">Send Message</h5>
+                <h5 class="mt-3 card-title text-center">Post Answer</h5>
                 <div class="card-body ">
-
-                    <div class="col-12 form__post-job" id="formSendMessage">
+                <div class="card-subtitle">Show qustion here Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut eos minima quod iste ipsam expedita soluta ullam nostrum explicabo consequuntur perspiciatis aliquid, neque maiores labore quae. Temporibus saepe necessitatibus laborum!</div>
+                    <div class="col-12 form__post-job" id="formPostAnswer">
                         <div class="mb-3">
-                            <label for="message" class="form-label">Message</label>
-                            <textarea class="form-control" name="message" id="message"></textarea>
+                            <label for="answer" class="form-label">Answer</label>
+                            <textarea class="form-control" name="answer" id="answer"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary" name="send">Send</button>
+                        <button type="submit" class="btn btn-primary" name="post">Post</button>
                     </div>
                 </div>
             </div>

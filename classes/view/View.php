@@ -180,4 +180,22 @@ class View
         return $msgSenderAttr;
     }
 
+    public function showQuestions(Object $model,Object $modelObj,Object $viewObj) 
+    {
+        echo "View initiated. retrieving forum data";
+        echo "<br>";
+        $forumQuestionView = $viewObj->forumQuestionView;
+        $applicantView = $viewObj->applicantView;
+
+        $model->showQuestions($modelObj);
+
+        $applicantsObj = $applicantView->getAllApplicants();
+        $forumQuestionObj = $forumQuestionView->getAllforumQuestion();
+
+        $forumQuestionAttr = new stdClass();
+        $forumQuestionAttr->applicantsObj = $applicantsObj;
+        $forumQuestionAttr->forumQuestionObj = $forumQuestionObj;
+        return $forumQuestionAttr;
+    }
+
 }

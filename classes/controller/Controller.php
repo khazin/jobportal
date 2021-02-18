@@ -77,4 +77,12 @@ class Controller
         echo 'message sent';
         echo '<br>';
     }
+
+    
+    public function postQuestion($model, $forumQuestion)
+    {
+        $model->postQuestion($forumQuestion);
+        echo 'question posted';
+        echo '<br>';
+    }
 }

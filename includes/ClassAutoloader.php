@@ -33,6 +33,8 @@ include './classes/model/Experience.php';
 include './classes/model/Job.php';
 include './classes/model/Connection.php';
 include './classes/model/Message.php';
+include './classes/model/ForumQuestion.php';
+include './classes/model/ForumAnswer.php';
 
 //view
 include './classes/view/ViewInterface.php';
@@ -46,6 +48,8 @@ include './classes/view/EducationView.php';
 include './classes/view/ExperienceView.php';
 include './classes/view/ConnectionView.php';
 include './classes/view/JobView.php';
+include './classes/view/ForumQuestionView.php';
+include './classes/view/ForumAnswerView.php';
 include './classes/view/MessageView.php';
 
 //controller
@@ -60,4 +64,6 @@ include './classes/controller/ExperienceController.php';
 include './classes/controller/JobController.php';
 include './classes/controller/ConnectionController.php';
 include './classes/controller/MessageController.php';
+include './classes/controller/ForumQuestionController.php';
+include './classes/controller/ForumAnswerController.php';
 include './classes/controller/Controller.php';

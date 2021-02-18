@@ -4,27 +4,26 @@ ob_start();
 ?>
 
 <?php
-if (isset($_POST['send'])) {
-    /////////////////SEND MESSAGE/////////////////////
-    $msgSenderId = $_SESSION['user_id'];
-    $msgReceiverId = $_GET['id'];
-    $msg = $_POST['message'];
-
+if (isset($_POST['post'])) {
+    /////////////////POST QUESTION/////////////////////
+    $questionUserId = $_GET['id'];
+    $question = $_POST['question'];
 
     //connection model initiated
-    $message = new Message();
+    $forumQuestion = new forumQuestion();
 
-    // store message object in message controller
-    $messageController = new MessageController($message);
+    // store forumQuestion object in forumQuestion controller
+    $forumQuestionController = new forumQuestionController($forumQuestion);
 
 
-    //set message
-    $messageController->setMessage($msgSenderId, $msgReceiverId, $msg);
+    //set forumQuestion
+    $forumQuestionController->setQuestionUserId($questionUserId);
+    $forumQuestionController->setQuestion($question);
 
     $model = new Model();
     $controller = new Controller();
 
-    $controller->sendMessage($model, $message);
+    $controller->postQuestion($model, $forumQuestion);
 }
 
 
@@ -90,15 +89,15 @@ if (isset($_POST['send'])) {
         <!-- SEND MESSAGE FORM -->
         <form method="post" action="" class="form col-6">
             <div class="card mt-5" style="width: 38rem;">
-                <h5 class="mt-3 card-title text-center">Send Message</h5>
+                <h5 class="mt-3 card-title text-center">Post Question</h5>
                 <div class="card-body ">
 
-                    <div class="col-12 form__post-job" id="formSendMessage">
+                    <div class="col-12 form__post-job" id="formPostQuestion">
                         <div class="mb-3">
-                            <label for="message" class="form-label">Message</label>
-                            <textarea class="form-control" name="message" id="message"></textarea>
+                            <label for="question" class="form-label">Question</label>
+                            <textarea class="form-control" name="question" id="question"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary" name="send">Send</button>
+                        <button type="submit" class="btn btn-primary" name="post">Post</button>
                     </div>
                 </div>
             </div>

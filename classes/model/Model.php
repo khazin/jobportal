@@ -761,4 +761,65 @@ class Model extends DB
      
         }
     }
+
+    public function postQuestion($forumQuestion) 
+    {
+        $questionUserId = $forumQuestion->getQuestionUserId();
+        $question = $forumQuestion->getQuestion();
+
+        $stmt = "CALL procPostQuestion($questionUserId,'$question')";
+        
+        $this->insertData($stmt);
+
+    }
+
+    public function showQuestions(Object $modelObj)
+    {
+
+        $forumQuestion = $modelObj->forumQuestion;
+        $applicant = $modelObj->applicant;
+
+        $stmt = "SELECT `forum_id`,`question`,`question_user_id`, `question_vote`,
+        applicant.firstname as `firstname`, applicant.lastname as `lastname` 
+        from `forum_question` join `applicant` on `applicant_id` = forum_question.question_user_id";
+
+        $this->retrieveData($stmt);
+
+        
+        $forumIdArr = [];
+        $questionArr = [];
+        $questionUserIdArr = [];
+        $questionVoteArr = [];
+        $firstnameArr = [];
+        $lastnameArr = [];
+
+        if (mysqli_num_rows($this->result) > 0) {
+            while ($this->row = mysqli_fetch_assoc($this->result)) {
+
+                array_push($forumIdArr, $this->row['forum_id']);
+                array_push($questionArr, $this->row['question']);
+                array_push($questionUserIdArr, $this->row['question_user_id']);
+                array_push($questionVoteArr, $this->row['question_vote']);
+                array_push($firstnameArr, $this->row['firstname']);
+                array_push($lastnameArr, $this->row['lastname']);
+
+
+            }
+
+            $allApplicants = new stdClass();
+            $allForums = new stdClass();
+
+            $allApplicants->firstnameArr = $firstnameArr;
+            $allApplicants->lastnameArr = $lastnameArr;
+            $allForums->forumIdArr = $forumIdArr;
+            $allForums->questionArr = $questionArr;
+            $allForums->questionUserIdArr = $questionUserIdArr;
+            $allForums->questionVoteArr = $questionVoteArr;
+
+            $applicant->setAllApplicants($allApplicants);
+            $forumQuestion->setAllforumQuestion($allForums);
+        }
+
+    }
+
 }
