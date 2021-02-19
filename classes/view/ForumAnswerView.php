@@ -26,6 +26,11 @@ class ForumAnswerView
         return $this->forumAnswer->getAnswer();
     }
 
+    public function getAnswerUserId()
+    {
+        return $this->forumAnswer->getAnswerUserId();
+    }
+
     public function getAnswerVote()
     {
         return $this->forumAnswer->getAnswerVote();

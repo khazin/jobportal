@@ -23,7 +23,7 @@ $viewObj->applicantView = $applicantView;
 $model = new Model();
 $view = new View();
 
-$forumAttr = $view->showQuestions($model, $modelObj, $viewObj);
+$forumAttr = $view->showAllQuestions($model, $modelObj, $viewObj);
 
 $firstnameArr = $forumAttr->applicantsObj->firstnameArr;
 $lastnameArr = $forumAttr->applicantsObj->lastnameArr;
@@ -107,8 +107,9 @@ $questionVoteArr = $forumAttr->forumQuestionObj->questionVoteArr;
                         </div>
                         <div class="col-10">
                             <h6 class=" "><?=$firstnameArr[$i]?> <?=$lastnameArr[$i]?></h6>
-                            <h5 class="mb-4"><?=$questionArr[$i]?></h5>
-                            <!-- <p class="white-space: nowrap; width: 50px;overflow: hidden;text-overflow: ellipsis;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi libero dicta dolore optio autem. Aliquam sapiente veniam quia aspernatur ipsam temporibus ut, quaerat repellat distinctio quisquam autem perferendis, placeat cum.</p> -->
+                            <!-- <h5 class="mb-4"<?//=$questionArr[$i]?></h5> -->
+                            <p class="white-space: nowrap; width: 50px;overflow: hidden;text-overflow: ellipsis;">
+                            <?=$questionArr[$i]?></p>
                         </div>
                     </a>
                 </div>

@@ -21,6 +21,11 @@ class ForumAnswerController
         $this->forumAnswer->setQuestionId($questionId);
     }
 
+    public function setAnswerUserId($answerUserId)
+    {
+        $this->forumAnswer->setAnswerUserId($answerUserId);
+    }
+
     public function setAnswer($answer)
     {
         $this->forumAnswer->setAnswer($answer);

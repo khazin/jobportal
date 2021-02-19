@@ -180,14 +180,14 @@ class View
         return $msgSenderAttr;
     }
 
-    public function showQuestions(Object $model,Object $modelObj,Object $viewObj) 
+    public function showAllQuestions(Object $model,Object $modelObj,Object $viewObj) 
     {
         echo "View initiated. retrieving forum data";
         echo "<br>";
         $forumQuestionView = $viewObj->forumQuestionView;
         $applicantView = $viewObj->applicantView;
 
-        $model->showQuestions($modelObj);
+        $model->showAllQuestions($modelObj);
 
         $applicantsObj = $applicantView->getAllApplicants();
         $forumQuestionObj = $forumQuestionView->getAllforumQuestion();
@@ -196,6 +196,44 @@ class View
         $forumQuestionAttr->applicantsObj = $applicantsObj;
         $forumQuestionAttr->forumQuestionObj = $forumQuestionObj;
         return $forumQuestionAttr;
+    }
+
+    public function showQuestion(Object $model,Object $modelObj,Object $viewObj) 
+    {
+        echo "View initiated. retrieving forum data";
+        echo "<br>";
+        $forumQuestionView = $viewObj->forumQuestionView;
+        $applicantView = $viewObj->applicantView;
+
+        $model->showQuestion($modelObj);
+
+        $firstname = $applicantView->getApplicantFirstname();
+        $lastname = $applicantView->getApplicantLastname();
+        $forumQuestionObj = $forumQuestionView->getforumQuestion();
+
+        $forumQuestionAttr = new stdClass();
+        $forumQuestionAttr->applicantsObj->firstname = $firstname;
+        $forumQuestionAttr->applicantsObj->lastname = $lastname;
+        $forumQuestionAttr->forumQuestionObj = $forumQuestionObj;
+        return $forumQuestionAttr;
+    }
+
+    public function showAllAnswers(Object $model,Object $modelObj,Object $viewObj) 
+    {
+        echo "View initiated. retrieving forum data";
+        echo "<br>";
+        $forumAnswerView = $viewObj->forumAnswerView;
+        $applicantView = $viewObj->applicantView;
+
+        $model->showAllAnswers($modelObj);
+
+        $applicantsObj = $applicantView->getAllApplicants();
+        $forumAnswerObj = $forumAnswerView->getAllforumAnswer();
+
+        $forumAnswerAttr = new stdClass();
+        $forumAnswerAttr->applicantsObj = $applicantsObj;
+        $forumAnswerAttr->forumAnswerObj = $forumAnswerObj;
+        return $forumAnswerAttr;
     }
 
 }

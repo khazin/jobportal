@@ -770,10 +770,9 @@ class Model extends DB
         $stmt = "CALL procPostQuestion($questionUserId,'$question')";
         
         $this->insertData($stmt);
-
     }
 
-    public function showQuestions(Object $modelObj)
+    public function showAllQuestions(Object $modelObj)
     {
 
         $forumQuestion = $modelObj->forumQuestion;
@@ -784,7 +783,6 @@ class Model extends DB
         from `forum_question` join `applicant` on `applicant_id` = forum_question.question_user_id";
 
         $this->retrieveData($stmt);
-
         
         $forumIdArr = [];
         $questionArr = [];
@@ -802,8 +800,6 @@ class Model extends DB
                 array_push($questionVoteArr, $this->row['question_vote']);
                 array_push($firstnameArr, $this->row['firstname']);
                 array_push($lastnameArr, $this->row['lastname']);
-
-
             }
 
             $allApplicants = new stdClass();
@@ -819,7 +815,95 @@ class Model extends DB
             $applicant->setAllApplicants($allApplicants);
             $forumQuestion->setAllforumQuestion($allForums);
         }
-
     }
 
+    public function showQuestion(Object $modelObj)
+    {
+
+        $forumQuestion = $modelObj->forumQuestion;
+        $applicant = $modelObj->applicant;
+
+        $forumId = $forumQuestion->getForumId();
+        
+        $stmt = "SELECT `forum_id`,`question`,`question_user_id`, `question_vote`,
+        applicant.firstname as `firstname`, applicant.lastname as `lastname` 
+        from `forum_question` join `applicant` on `applicant_id` = forum_question.question_user_id
+        WHERE `forum_id` = $forumId";
+
+
+        $this->retrieveData($stmt);
+
+
+        if (mysqli_num_rows($this->result) > 0) {
+            while ($this->row = mysqli_fetch_assoc($this->result)) {
+                $applicant->setApplicantFirstname($this->row['firstname']);
+                $applicant->setApplicantLastname($this->row['lastname']);
+                $forumQuestion->setForumId($this->row['forum_id']);
+                $forumQuestion->setQuestion($this->row['question']);
+                $forumQuestion->setQuestionUserId($this->row['question_user_id']);
+                $forumQuestion->setQuestionVote($this->row['question_vote']);
+            }
+        }
+    }
+
+    public function showAllAnswers(Object $modelObj)
+    {
+
+        $forumAnswer = $modelObj->forumAnswer;
+        $applicant = $modelObj->applicant;
+
+        $stmt = "SELECT `answer_id`,`question_id`,`answer_user_id`, `answer`,`answer_vote`,
+        applicant.firstname AS `firstname`, applicant.lastname AS `lastname` 
+        FROM `forum_question` 
+        JOIN `forum_answer` ON forum_answer.question_id = forum_question.forum_id
+        JOIN `applicant` ON `applicant_id` = forum_answer.answer_user_id";
+
+        $this->retrieveData($stmt);
+        
+        $answerIdArr = [];
+        $questionIdArr = [];
+        $answerUserIdArr = [];
+        $answerArr = [];
+        $answerVoteArr = [];
+        $firstnameArr = [];
+        $lastnameArr = [];
+
+        if (mysqli_num_rows($this->result) > 0) {
+            while ($this->row = mysqli_fetch_assoc($this->result)) {
+
+                array_push($answerIdArr, $this->row['answer_id']);
+                array_push($questionIdArr, $this->row['question_id']);
+                array_push($answerUserIdArr, $this->row['answer_user_id']);
+                array_push($answerArr, $this->row['answer']);
+                array_push($answerVoteArr, $this->row['answer_vote']);
+                array_push($firstnameArr, $this->row['firstname']);
+                array_push($lastnameArr, $this->row['lastname']);
+            }
+
+            $allApplicants = new stdClass();
+            $allForumAnswers = new stdClass();
+
+            $allApplicants->firstnameArr = $firstnameArr;
+            $allApplicants->lastnameArr = $lastnameArr;
+            $allForumAnswers->answerIdArr = $answerIdArr;
+            $allForumAnswers->questionIdArr = $questionIdArr;
+            $allForumAnswers->answerUserIdArr = $answerUserIdArr;
+            $allForumAnswers->answerArr = $answerArr;
+            $allForumAnswers->answerVoteArr = $answerVoteArr;
+
+            $applicant->setAllApplicants($allApplicants);
+            $forumAnswer->setAllforumAnswer($allForumAnswers);
+        }
+    }
+
+    public function postAnswer($forumAnswer) 
+    {
+        $answerUserId = $forumAnswer->getAnswerUserId();
+        $answer = $forumAnswer->getAnswer();
+        $questionId = $forumAnswer->getQuestionId();
+
+        $stmt = "CALL procPostAnswer($answerUserId,'$answer', $questionId)";
+        
+        $this->insertData($stmt);
+    }
 }

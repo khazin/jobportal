@@ -4,7 +4,8 @@ class ForumAnswer
 {
 
     private int $answerId;
-    private Array $questionId;
+    private int $questionId;
+    private int $answerUserId;
     private String $answer;
     private int $answerVote;
  
@@ -31,13 +32,25 @@ class ForumAnswer
     public function setQuestionId($questionId)
     {
         $this->questionId = $questionId;
-        echo 'forumQuestion questionId is set';
+        echo 'forumanswer questionId is set';
         echo '<br>';
     }
 
     public function getQuestionId()
     {
         return $this->questionId;
+    }
+
+    public function setAnswerUserId($answerUserId)
+    {
+        $this->answerUserId = $answerUserId;
+        echo 'forumanswer answerUserId is set';
+        echo '<br>';
+    }
+
+    public function getAnswerUserId()
+    {
+        return $this->answerUserId;
     }
 
     public function setAnswer($answer)
@@ -56,7 +69,7 @@ class ForumAnswer
     public function setAnswerVote($answerVote)
     {
         $this->answerVote = $answerVote;
-        echo 'forumQuestion answerVoteReceiverId is set';
+        echo 'forumanswer answerVoteReceiverId is set';
         echo '<br>';
     }
 
@@ -70,6 +83,7 @@ class ForumAnswer
 
         $this->setAnswerId($forumAnswerObj->answerId);
         $this->setQuestionId($forumAnswerObj->questionId);
+        $this->setAnswerUserId($forumAnswerObj->answerUserId);
         $this->setAnswer($forumAnswerObj->answer);
         $this->setAnswerVote($forumAnswerObj->answerVote);
    
@@ -83,6 +97,7 @@ class ForumAnswer
         $forumAnswerObj = new stdClass();
         $forumAnswerObj->answerId = $this->getAnswerId();
         $forumAnswerObj->questionId = $this->getQuestionId();
+        $forumAnswerObj->answerUserId = $this->getAnswerUserId();
         $forumAnswerObj->answer = $this->getAnswer();
         $forumAnswerObj->answerVote = $this->getAnswerVote();
     

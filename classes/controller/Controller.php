@@ -85,4 +85,10 @@ class Controller
         echo 'question posted';
         echo '<br>';
     }
+    public function postAnswer($model, $forumAnswer)
+    {
+        $model->postAnswer($forumAnswer);
+        echo 'answer posted';
+        echo '<br>';
+    }
 }
