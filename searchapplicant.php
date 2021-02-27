@@ -1,19 +1,27 @@
-<?php 
+<?php
 session_start();
-include './includes/ClassAutoloader.php'; 
+include './includes/ClassAutoloader.php';
 ?>
 
 <?php
 if (isset($_POST['search'])) {
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
-    $gender = $_POST['gender'];
+    if (!$_POST['gender']) {
+        $gender = 'undefined';
+    } else {
+        $gender = $_POST['gender'];
+    }
     $city = $_POST['city'];
     $country = $_POST['country'];
     $jobTitle = $_POST['jobTitle'];
     $company = $_POST['company'];
+    if ($_POST['skillsArr'] == null) {
+        $_POST['skillsArr'] = [];
+    }
     $skillsArr = $_POST['skillsArr'];
-
+    
+    print_r($_POST);
     $applicantArr = [
         $firstname, $lastname, $gender, $birthday = '',
         $country, $city, $jobTitle, $company
@@ -42,8 +50,8 @@ if (isset($_POST['search'])) {
     $applicantsView = new ApplicantsView($applicant);
     // store skills object in skills view
     $skillsView = new skillsView($skills);
-        // store biography object in biography view
-        $biographyView = new biographyView($biography);
+    // store biography object in biography view
+    $biographyView = new biographyView($biography);
 
     $model = new Model();
     $view = new View();
@@ -81,47 +89,7 @@ if (isset($_POST['search'])) {
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-            <div class="container ">
-                <a class="navbar-brand col-2" href="index.php">JOB PORTAL</a>
-
-                <div class="collapse navbar-collapse col-8 d-flex justify-content-around">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Search users</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Find jobs</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Find company</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Post</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-2 mt-3 d-flex justify-content-around">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <i class="far fa-user bg-light"></i>
-                        </li>
-                        <li class="nav-item">
-                            <p class="text-light"><?=$_SESSION['name']?></p>
-                        </li>
-                    </ul>
-
-
-                </div>
-            </div>
-        </nav>
-        </div>
-        <script src="https://unpkg.com/@popperjs/core@2.4.0/dist/umd/popper.min.js"></script>
-    </header>
+    <?php include 'includes/header2.php'; ?>
 
     <div class="container col-12 d-flex  justify-content-center bg-success">
 
@@ -167,8 +135,8 @@ if (isset($_POST['search'])) {
                             <h6 class="card-title"><?= $cityArr[$i] . ", " . $countryArr[$i] ?></h6>
                             <h6 class="card-title"><?= $jobTitleArr[$i] . " at " . $lastnameArr[$i] ?></h6>
                             <div class="card-text mb-4" style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis;">
-                             <?=$bioArr[$i]?>
-                             </div>
+                                <?= $bioArr[$i] ?>
+                            </div>
                             <div class="my-4">
                                 <h6 class="card-title">Skills</h6>
                                 <div style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis;">
@@ -180,7 +148,7 @@ if (isset($_POST['search'])) {
                                 </div>
                             </div>
 
-                            <a href="viewprofile.php?id=<?=$applicantIdArr[$i]?>" class="btn btn-primary">View Profile</a>
+                            <a href="viewprofile.php?id=<?= $applicantIdArr[$i] ?>" class="btn btn-primary">View Profile</a>
                         </div>
                     </div>
                 <?php

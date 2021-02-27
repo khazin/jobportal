@@ -1,5 +1,51 @@
-<?php include './includes/ClassAutoloader.php'; ?>
+<?php
+error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
+ include './includes/ClassAutoloader.php';
 
+if (isset($_POST['login'])) {
+  ///////////////////LOGIN//////////////////////////
+
+  $user = new Users();
+
+  // store user object in user controller
+  $userController = new UsersController($user);
+
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+
+  $userController->setUserEmail($email);
+  $userController->setUserPassword($password);
+
+  // store user object in user view
+  $userView = new UsersView($user);
+
+  $model = new Model();
+  $view = new View();
+
+  $userObj = $view->login($model, $user, $userView);
+  // var_dump($userObj);
+  if ($userObj == false) {
+    $message = 'Your email or password is invalid';
+  }
+
+  session_start();
+  $_SESSION['user_id'] = $userObj->userId;
+  $_SESSION['email'] = $userObj->userEmail;
+  $_SESSION['password'] = $userObj->userPassword;
+  $_SESSION['role'] = $userObj->userRole;
+  $_SESSION['first_login'] = $userObj->userFirstLogin;
+
+  if ($_SESSION['first_login'] == 1) {
+    header('Location: home.php');
+  } else {
+    if ($_SESSION['role'] == 'applicant') {
+      header('Location: createapplicantprofile.php');
+    } elseif ($_SESSION['role'] == 'employer') {
+      header('Location: createemployerprofile.php');
+    }
+  }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,6 +64,7 @@
         <h5 class="mt-3 card-title text-center">Login</h5>
         <div class="card-body">
           <h6 class="card-subtitle mb-2 text-muted text-center">Login into your account</h6>
+          <h6 class="text-center text-danger"><?=$message?> </h6>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Email address</label>
             <input type="email" class="form-control" id="email" name="email">
@@ -38,46 +85,3 @@
 <script src="js/script.js"></script>
 
 </html>
-
-<?php
-if (isset($_POST['login'])) {
-  ///////////////////LOGIN//////////////////////////
-
-  // store user id
-  $user = new Users();
-
-  // store user object in user controller
-  $userController = new UsersController($user);
-
-  $email = $_POST['email'];
-  $password = $_POST['password'];
-
-  $userController->setUserEmail($email);
-  $userController->setUserPassword($password);
-
-  // store user object in user view
-  $userView = new UsersView($user);
-
-  $model = new Model();
-  $view = new View();
-
-  $userObj = $view->login($model, $user, $userView);
-  // var_dump($userObj);
-
-  session_start();
-  $_SESSION['user_id'] = $userObj->userId;
-  $_SESSION['email'] = $userObj->userEmail;
-  $_SESSION['password'] = $userObj->userPassword;
-  $_SESSION['role'] = $userObj->userRole;
-  $_SESSION['first_login'] = $userObj->userFirstLogin;
-  var_dump($_SESSION);
-  if ($_SESSION['first_login'] == 1) {
-    header('Location: home.php');
-  } else {
-    if ($_SESSION['role'] == 'applicant') {
-      header('Location: createapplicantprofile.php');
-    } elseif ($_SESSION['role'] == 'employer') {
-      header('Location: createemployerprofile.php');
-    }
-  }
-}

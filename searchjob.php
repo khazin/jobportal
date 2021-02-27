@@ -1,4 +1,5 @@
-<?php session_start(); ?>
+<?php session_start();
+error_reporting(E_ALL & ~E_NOTICE); ?>
 <?php include './includes/ClassAutoloader.php'; ?>
 
 <?php
@@ -6,7 +7,13 @@ if (isset($_POST['search'])) {
     $jobTitle = $_POST['jobTitle'];
     $jobLocation = $_POST['jobLocation'];
     $companyType = $_POST['companyType'];
+    if ($_POST['skillsArr'] == null) {
+        $_POST['skillsArr'] = [];
+    }
     $skillsArr = $_POST['skillsArr'];
+    if ($_POST['jobType'] == null) {
+        $_POST['jobType'] = [];
+    }
     $jobType = $_POST['jobType'];
     $minSalary = $_POST['minSalary'];
     $maxSalary = $_POST['maxSalary'];
@@ -67,47 +74,7 @@ if (isset($_POST['search'])) {
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-            <div class="container ">
-                <a class="navbar-brand col-2" href="index.php">JOB PORTAL</a>
-
-                <div class="collapse navbar-collapse col-8 d-flex justify-content-around">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Search users</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Find jobs</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Find company</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Post</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-2 mt-3 d-flex justify-content-around">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <i class="far fa-user bg-light"></i>
-                        </li>
-                        <li class="nav-item">
-                            <p class="text-light"><?= $_SESSION['name'] ?></p>
-                        </li>
-                    </ul>
-
-
-                </div>
-            </div>
-        </nav>
-        </div>
-        <script src="https://unpkg.com/@popperjs/core@2.4.0/dist/umd/popper.min.js"></script>
-    </header>
+<?php include 'includes/header2.php'; ?>
 
     <div class="container col-12 d-flex  justify-content-center bg-success">
 
@@ -156,10 +123,12 @@ if (isset($_POST['search'])) {
                     <div class="mt-3">
                         <h6>Salary range</h6>
                         <label class="form-check-label" for="">Minimum salary</label>
-                        <input type="range" min="1" max="10000" value="1700" class="slider" id="minSalary" name="minSalary" onchange="return changeSliderValue(this)">
+                        <input type="range" min="1" max="10000" value="1700" class="slider" id="minSalary" 
+                        name="minSalary" onchange="return changeSliderValue(this)">
                         <p id="minSalaryValue">$1700</p>
                         <label class="form-check-label" for="">Maximum salary</label>
-                        <input type="range" min="1" max="10000" value="5000" class="slider" id="maxSalary" name="maxSalary" onchange="return changeSliderValue(this)">
+                        <input type="range" min="1" max="10000" value="5000" class="slider" id="maxSalary" 
+                        name="maxSalary" onchange="return changeSliderValue(this)">
                         <p id="maxSalaryValue">$5000</p>
 
                     </div>

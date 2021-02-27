@@ -1,4 +1,6 @@
-<?php include './includes/ClassAutoloader.php'; ?>
+<?php 
+ob_start();
+include './includes/ClassAutoloader.php'; ?>
 
 
 <!DOCTYPE html>
@@ -20,8 +22,8 @@
 
          <div class="card mt-5" style="width: 38rem;">
             <nav class="nav nav-pills nav-fill navbar__register" id="registerNavbar">
-               <a class="nav-link active" href="#" onclick="return nextForm(formEmployer,formApplicant)">For IT Profesionals</a>
-               <a class="nav-link" href="#" onclick="return nextForm(formApplicant,formEmployer)">For employer</a>
+               <button class="nav-link active" type="button" onclick="return nextForm(formEmployer,formApplicant)">For IT Profesionals</button>
+               <button class="nav-link" type="button" onclick="return nextForm(formApplicant,formEmployer)">For employer</button>
             </nav>
             <h5 class="mt-3 card-title text-center">Register</h5>
 
@@ -130,18 +132,7 @@
 
 
       </form>
-      <form action="" method="post" class="form col-6 card__form-login" id="formToLogin">
-         <div class="card " style="width: 18rem;">
-            <div class="card-body col-12 d-flex flex-column align-items-center">
-               <h5 class="card-title">Proceed to login?</h5>
-               <h6 class="card-subtitle mb-2 text-muted">yes or no?</h6>
-               <div class="d-flex col-12 ">
-                  <button type="submit" class="btn btn-primary col-6" id="" value="" onclick="">Yes</button>
-                  <button type="button" class="btn btn-secondary col-6" id="" value="" onclick="">No</button>
-               </div>
-            </div>
-         </div>
-      </form>
+   
    </div>
 
 
@@ -199,6 +190,8 @@ if (isset($_POST['register'])) {
 
       $controller = new Controller();
       $controller->registerApplicant($model, $modelArr);
+      header("Location: registersuccess.php?email=$email&role=$role");
+
    } elseif ($role == 'employer') {
 
       ///////////////////////REGISTER EMPLOYER//////////////////////////
@@ -223,6 +216,8 @@ if (isset($_POST['register'])) {
       $modelArr = [$user, $employer];
 
       $controller = new Controller();
-      $controller->registerEmployer($model, $modelArr);
+      $controller->registerEmployer($model, $modelArr);   
+      header("Location: registersuccess.php?email=$email&role=$role");
+
    };
 }

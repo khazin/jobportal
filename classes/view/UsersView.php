@@ -38,7 +38,7 @@ class UsersView
     }
 
     public function getUser()
-    { //remember to put type declaration in arguments
+    { 
         return $this->user->getUser();
     }
 }

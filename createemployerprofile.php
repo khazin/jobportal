@@ -18,47 +18,7 @@ ob_start();
 </head>
 
 <body>
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-      <div class="container ">
-        <a class="navbar-brand col-2" href="index.php">JOB PORTAL</a>
-
-        <div class="collapse navbar-collapse col-8 d-flex justify-content-around">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Search users</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Find jobs</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Find company</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Post</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-2 mt-3 d-flex justify-content-around">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <i class="far fa-user bg-light"></i>
-            </li>
-            <li class="nav-item">
-              <p class="text-light">Firstname Lastname</p>
-            </li>
-          </ul>
-
-
-        </div>
-      </div>
-    </nav>
-    </div>
-    <script src="https://unpkg.com/@popperjs/core@2.4.0/dist/umd/popper.min.js"></script>
-  </header>
+ <?php include 'includes/header.php' ?>
 
   <div class="container col-12 d-flex flex-column align-items-center bg-success">
 
@@ -74,7 +34,7 @@ ob_start();
               <label for="bio" class="form-label">About Me</label>
               <textarea class="form-control" name="bio" id="bio" cols="30" rows="10"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary"  onclick="" name="create">Confirm</button>
+            <button type="submit" class="btn btn-primary"  onclick="return validateBiography()" name="create">Confirm</button>
 
           </div>
       

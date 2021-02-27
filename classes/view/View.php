@@ -10,18 +10,18 @@ class View
 
     public function login($model, $user, $userView)
     { //remember to put type declaration
-        echo "View initiated. retrieving user data";
-        echo "<br>";
-
-
         if ($model->login($user) == true) {
             return $userView->getUser();
-            echo "user logged in";
-            echo "<br>";
-
         } else {
-            echo "Your email or password is wrong";
-            echo "<br>";
+            return false;
+        };
+    }
+
+    public function login2($model, $user, $userView)
+    { //remember to put type declaration
+        if ($model->login2($user) == true) {
+            return $userView->getUser();
+        } else {
             return false;
         };
     }

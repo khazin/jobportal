@@ -1,4 +1,5 @@
-<?php session_start(); ?>
+<?php session_start(); 
+?>
 <?php include './includes/ClassAutoloader.php'; ?>
 <?php
 if (isset($_GET['id'])) {
@@ -44,44 +45,7 @@ if (isset($_GET['id'])) {
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-            <div class="container ">
-                <a class="navbar-brand col-2" href="index.php">JOB PORTAL</a>
-                <div class="collapse navbar-collapse col-8 d-flex justify-content-around">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Search users</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Find jobs</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Find company</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Post</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-2 mt-3 d-flex justify-content-around">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <i class="far fa-user bg-light"></i>
-                        </li>
-                        <li class="nav-item">
-                            <p class="text-light"><?= $_SESSION['name'] ?></p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        </div>
-        <script src="https://unpkg.com/@popperjs/core@2.4.0/dist/umd/popper.min.js"></script>
-    </header>
+    <?php include 'includes/header2.php'; ?>
 
     <div class="container col-12 d-flex  justify-content-center bg-success">
 
@@ -106,15 +70,16 @@ if (isset($_GET['id'])) {
                         <h6 class="card-title">Salary range</h6>
                         <p class="card-text">$<?= $jobMinSalary ?> - $<?= $jobMaxSalary ?></p>
                         <?php if ($_SESSION['role'] == 'applicant') {
-                            ?>
-                        <a href="applyjob.php?id=<?=$jobId?>&company=<?=$companyName?>" class="btn btn-primary">Apply</a>
-                            
-                            <?php
-                        }?>
+                        ?>
+                            <a href="applyjob.php?id=<?= $jobId ?>&company=<?= $companyName ?>" class="btn btn-primary">Apply</a>
+
+                        <?php
+                        } ?>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </body>
+
 </html>

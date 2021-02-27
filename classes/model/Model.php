@@ -124,6 +124,31 @@ class Model extends DB
         }
     }
 
+    public function login2($user)
+    {
+        $email = $user->getUserEmail();
+
+        $stmt = "SELECT * FROM user WHERE `email` = '$email'";
+        $this->retrieveData($stmt);
+
+        if (mysqli_num_rows($this->result) > 0) {
+            while ($this->row = mysqli_fetch_assoc($this->result)) {
+
+                // if (password_verify($this->password, $this->row['password'])) {
+
+                $user->setUserId($this->row['user_id']);
+                $user->setUserEmail($this->row['email']);
+                $user->setUserPassword($this->row['password']);
+                $user->setUserRole($this->row['role']);
+                $user->setUserFirstLogin($this->row['first_login']);
+                // }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function createApplicantProfile($modelArr)
     { //remember to put type declaration
         $biography = $modelArr[0];
@@ -178,7 +203,6 @@ class Model extends DB
 
         $stmt = "CALL procCreateEmployer(
             '$biographyId','$biographyBio');";
-        // echo $stmt;
         $this->insertData($stmt);
     }
 
@@ -191,7 +215,6 @@ class Model extends DB
         $biographyId = $biography->getBiographyId();
 
         $stmt1 = "SELECT * FROM employer WHERE `employer_id` = '$employerId'";
-        // echo "$stmt";
         $this->retrieveData($stmt1);
 
         if (mysqli_num_rows($this->result) > 0) {
@@ -202,7 +225,6 @@ class Model extends DB
                 $employer->setEmployerCompanyType($this->row['company_type']);
                 $employer->setEmployerCompanyContact($this->row['company_contact']);
                 $employer->setEmployerCompanyAdmin($this->row['company_admin']);
-                // var_dump($this->result);
             }
         }
 
@@ -215,7 +237,6 @@ class Model extends DB
 
                 $biography->setBiographyId($this->row['biography_id']);
                 $biography->setBiographyBio($this->row['bio']);
-                // var_dump($this->result);
             }
         }
 
@@ -235,11 +256,7 @@ class Model extends DB
         $skillsId = $skills->getSkillsId();
         $educationUserId = $education->getEducationUserId();
         $experiencUserId = $experience->getExperienceUserId();
-        // echo $applicantId;
-        // echo $biographyId;
-        // echo $skillsId;
-        // echo $educationUserId;
-        // echo $experiencUserId;
+    
 
         // get applicant statement
         $stmt1 = "SELECT * FROM applicant WHERE `applicant_id` = '$applicantId'";

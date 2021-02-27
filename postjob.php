@@ -3,37 +3,6 @@ session_start();
 ob_start();
 ?>
 
-<?php
-if (isset($_POST['post'])) {
-
-///////////////////POST JOB//////////////////////////
-// job model initiated
- $job = new Job();
-
- // store job object in job controller
- $jobController = new JobController($job);
-
-  //set job data
-  $employerId = $_SESSION['user_id']; // employer id take from session id
-  $jobTitle = $_POST['jobTitle'];
-  $location = $_POST['location'];
-  $minSalary = $_POST['minSalary'];
-  $maxSalary = $_POST['maxSalary'];
-  $description = $_POST['description'];
-  $skillsArr = $_POST['skillsArr'];
-  $jobType = $_POST['jobType'];
-  $jobArr = [$jobTitle,$employerId,$location,$minSalary,
-            $maxSalary,$description,$skillsArr, $jobType];
-  $jobController->setJob($jobArr, $id = 0);
-
-    $model = new Model();
-    $controller = new Controller();
-
- $controller->postJob($model, $job);
-}
-
-
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -48,56 +17,14 @@ if (isset($_POST['post'])) {
 </head>
 
 <body>
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-      <div class="container ">
-        <a class="navbar-brand col-2" href="index.php">JOB PORTAL</a>
-
-        <div class="collapse navbar-collapse col-8 d-flex justify-content-around">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Search users</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Find jobs</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Find company</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Post</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-2 mt-3 d-flex justify-content-around">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <i class="far fa-user bg-light"></i>
-            </li>
-            <li class="nav-item">
-              <p class="text-light">Firstname Lastname</p>
-            </li>
-          </ul>
-
-
-        </div>
-      </div>
-    </nav>
-    </div>
-    <script src="https://unpkg.com/@popperjs/core@2.4.0/dist/umd/popper.min.js"></script>
-  </header>
-
+  <?php include 'includes/header2.php'; ?>
   <div class="container col-12 d-flex flex-column align-items-center bg-success">
 
-    <!-- CREATE PROFILE FORM -->
+    <!-- post job form -->
     <form method="post" action="" class="form col-6">
       <div class="card mt-5" style="width: 38rem;">
         <h5 class="mt-3 card-title text-center">Post new job</h5>
         <div class="card-body ">
-          <!-- post job form -->
           <div class="col-12 form__post-job" id="formPostJob">
             <div class="mb-3">
               <label for="jobTitle" class="form-label">Job Title</label>
@@ -106,11 +33,11 @@ if (isset($_POST['post'])) {
               <input type="text" class="form-control" name="location" id="location">
               <label for="minSalary" class="form-label">minSalary</label>
               <input type="number" class="form-control" name="minSalary" id="minSalary">
-              <label for="maxSalary" class="form-label">maxSalary year</label>
+              <label for="maxSalary" class="form-label">maxSalary</label>
               <input type="number" class="form-control" name="maxSalary" id="maxSalary">
               <label for="description" class="form-label">Job Description</label>
               <textarea type="text" class="form-control" name="description" id="description"></textarea>
-              <div class="my-2"> <span class="mr-2">Job Type:</span> 
+              <div class="my-2"> <span class="mr-2">Job Type:</span>
                 <label for="fullTime" class="form-label">Full Time</label>
                 <input type="radio" class="mr-2" id="fullTime" name="jobType" value="full time">
                 <label for="partTime" class="form-label">Part Time</label>
@@ -121,8 +48,8 @@ if (isset($_POST['post'])) {
               <label for="skill" class="form-label">Skills</label>
 
               <div class="d-flex">
-              <input type="text" class="form-control col-11" name="skills" id="skill" list='skills'>
-              <button type="button" class="btn btn-secondary  col-1" onclick="return addSkills();"><i class="fas fa-plus"></i></button>
+                <input type="text" class="form-control col-11" name="skills" id="skill" list='skills'>
+                <button type="button" class="btn btn-secondary  col-1" onclick="return addSkills();"><i class="fas fa-plus"></i></button>
               </div>
               <datalist id="skills">
                 <option value="HTML">
@@ -133,7 +60,7 @@ if (isset($_POST['post'])) {
               </datalist>
               <h6>Skills</h6>
               <div class="row container__skills" id="skillsContainer">
-              <!-- skills badge appended here -->
+                <!-- skills badge appended here -->
               </div>
             </div>
             <button type="submit" class="btn btn-primary" onclick="return validatePostJob();" name="post">Post</button>
@@ -154,3 +81,38 @@ if (isset($_POST['post'])) {
 
 
 </html>
+
+
+<?php
+if (isset($_POST['post'])) {
+
+  ///////////////////POST JOB//////////////////////////
+  // job model initiated
+  $job = new Job();
+
+  // store job object in job controller
+  $jobController = new JobController($job);
+
+  //set job data
+  $employerId = $_SESSION['user_id']; // employer id take from session id
+  $jobTitle = $_POST['jobTitle'];
+  $location = $_POST['location'];
+  $minSalary = $_POST['minSalary'];
+  $maxSalary = $_POST['maxSalary'];
+  $description = $_POST['description'];
+  $skillsArr = $_POST['skillsArr'];
+  $jobType = $_POST['jobType'];
+  $jobArr = [
+    $jobTitle, $employerId, $location, $minSalary,
+    $maxSalary, $description, $skillsArr, $jobType
+  ];
+  $jobController->setJob($jobArr, $id = 0);
+
+  $model = new Model();
+  $controller = new Controller();
+
+  $controller->postJob($model, $job);
+}
+
+
+?>

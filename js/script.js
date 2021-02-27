@@ -81,6 +81,24 @@ function validateEmail(emailValue) {
   return false;
 }
 
+function validateGender(male, female) {
+  if (male.checked != true && female.checked != true) {
+    alert("Please choose a gender");
+    return false;
+  }
+  return true;
+}
+function validateJobType(fullTime, partTime, remote) {
+  if (fullTime.checked != true 
+    && partTime.checked != true
+    && remote.checked != true) {
+    alert("Please choose a job type");
+    return false;
+  }
+  return true;
+}
+
+
 //validate register credentials form
 function validateCredentials() {
   const email = document.getElementById("email").value;
@@ -118,18 +136,17 @@ function validateCredentials() {
 function validateApplicant() {
   const firstname = document.getElementById("firstname").value;
   const lastname = document.getElementById("lastname").value;
-  // const gender = document.getElementByNames('gender').value;
+  const male = document.getElementsByName('gender')[0];
+  const female = document.getElementsByName('gender')[1];
   const birthday = document.getElementById("birthday").value;
   const country = document.getElementById("country").value;
   const city = document.getElementById("city").value;
   const job = document.getElementById("job").value;
   const company = document.getElementById("company").value;
 
-  var validateEmptyFirstnameField = validateEmptyTextField(
-    firstname,
-    "Firstname"
-  );
+  var validateEmptyFirstnameField = validateEmptyTextField(firstname,"Firstname");
   var validateEmptyLastnameField = validateEmptyTextField(lastname, "Lastname");
+  var validateEmptyGenderButton = validateGender(male, female);
   var validateEmptyBirthdayField = validateEmptyTextField(birthday, "Birthday");
   var validateEmptyCountryField = validateEmptyTextField(country, "Country");
   var validateEmptyCityField = validateEmptyTextField(city, "City");
@@ -139,6 +156,7 @@ function validateApplicant() {
   let validateResultArr = [
     validateEmptyFirstnameField,
     validateEmptyLastnameField,
+    validateEmptyGenderButton,
     validateEmptyBirthdayField,
     validateEmptyCountryField,
     validateEmptyCityField,
@@ -239,30 +257,79 @@ function validatePostJob() {
   const minSalary = document.getElementById("minSalary").value;
   const maxSalary = document.getElementById("maxSalary").value;
   const description = document.getElementById("description").value;
-  // const jobType = document.getElementByNames("jobType").value;
-  
-  var validateEmptyJobTitleField = validateEmptyTextField(jobTitle, "job title");
+  const fullTime = document.getElementsByName("jobType")[0];
+  const partTime = document.getElementsByName("jobType")[1];
+  const remote = document.getElementsByName("jobType")[2];
+
+ 
+  var validateEmptyJobTitleField = validateEmptyTextField(
+    jobTitle,
+    "job title"
+  );
   var validateEmptyLocationField = validateEmptyTextField(location, "location");
-  var validateEmptyMinSalaryField = validateEmptyTextField(minSalary, "minimum salary");
-  var validateEmptyMaxSalaryField = validateEmptyTextField(maxSalary, "maximum salary");
-  var validateEmptyDescriptionField = validateEmptyTextField(description, "description");
-  // var validateEmptyJobTypeField = validateEmptyTextField(jobType, "job type");
+  var validateEmptyMinSalaryField = validateEmptyTextField(
+    minSalary,
+    "minimum salary"
+  );
+  var validateEmptyMaxSalaryField = validateEmptyTextField(
+    maxSalary,
+    "maximum salary"
+  );
+
+  var validateEmptyDescriptionField = validateEmptyTextField(
+    description,
+    "description"
+  );
+  var validateEmptyJobType = validateJobType(fullTime, partTime, remote);
 
   let validateResultArr = [
     validateEmptyJobTitleField,
     validateEmptyLocationField,
     validateEmptyMinSalaryField,
     validateEmptyMaxSalaryField,
-    validateEmptyDescriptionField
-    // validateEmptyJobTypeField
-];
+    validateEmptyDescriptionField,
+    validateEmptyJobType
+  ];
 
-if (validateResultArr.includes(false) != true) {
-  return true;
-} else {
-  return false;
+  if (validateResultArr.includes(false) != true) {
+    return true;
+  } else {
+    return false;
+  }
 }
-}
+
+  //validate search job
+  function validateSearchJob() {
+    const jobTitle = document.getElementById("jobTitle").value;
+    const location = document.getElementById("location").value;
+    const minSalary = document.getElementById("minSalary").value;
+    const maxSalary = document.getElementById("maxSalary").value;
+    const description = document.getElementById("description").value;
+    // const jobType = document.getElementByNames("jobType").value;
+    
+    var validateEmptyJobTitleField = validateEmptyTextField(jobTitle, "job title");
+    var validateEmptyLocationField = validateEmptyTextField(location, "location");
+    var validateEmptyMinSalaryField = validateEmptyTextField(minSalary, "minimum salary");
+    var validateEmptyMaxSalaryField = validateEmptyTextField(maxSalary, "maximum salary");
+    var validateEmptyDescriptionField = validateEmptyTextField(description, "description");
+    // var validateEmptyJobTypeField = validateEmptyTextField(jobType, "job type");
+  
+    let validateResultArr = [
+      validateEmptyJobTitleField,
+      validateEmptyLocationField,
+      validateEmptyMinSalaryField,
+      validateEmptyMaxSalaryField,
+      validateEmptyDescriptionField
+      // validateEmptyJobTypeField
+  ];
+  
+  if (validateResultArr.includes(false) != true) {
+    return true;
+  } else {
+    return false;
+  }
+  }
+
 
 //add pills
 function addPills(selectedValue, pills, count, idName, node) {
