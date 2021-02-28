@@ -1,6 +1,7 @@
-<?php 
-ob_start();
-include './includes/ClassAutoloader.php'; ?>
+<?php
+include './includes/settings.php';
+include './includes/ClassAutoloader.php';
+?>
 
 
 <!DOCTYPE html>
@@ -17,7 +18,7 @@ include './includes/ClassAutoloader.php'; ?>
 
 <body>
    <?php include 'includes/header.php'; ?>
-   <div class="container col-12 bg-success d-flex flex-column align-items-center" style="height:100vh">
+   <div class="container col-12 bg-light d-flex flex-column align-items-center" style="height:100vh">
       <form action="" method="post" class="form col-6 d-flex flex-column align-items-center" id="formRegister">
 
          <div class="card mt-5" style="width: 38rem;">
@@ -28,7 +29,7 @@ include './includes/ClassAutoloader.php'; ?>
             <h5 class="mt-3 card-title text-center">Register</h5>
 
             <!-- form 1 applicant particulars-->
-            <div class="col-12 form__applicant" id="formApplicant">
+            <div class="card-body col-12 form__applicant" id="formApplicant">
                <h6 class="card-subtitle mb-2 text-muted text-center">Fill in your particulars</h6>
                <div class="d-flex justify-content-between">
                   <div class="mb-3">
@@ -132,7 +133,7 @@ include './includes/ClassAutoloader.php'; ?>
 
 
       </form>
-   
+
    </div>
 
 
@@ -140,6 +141,7 @@ include './includes/ClassAutoloader.php'; ?>
 
 <script src="library/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="js/script.js"></script>
+
 
 </html>
 
@@ -191,7 +193,6 @@ if (isset($_POST['register'])) {
       $controller = new Controller();
       $controller->registerApplicant($model, $modelArr);
       header("Location: registersuccess.php?email=$email&role=$role");
-
    } elseif ($role == 'employer') {
 
       ///////////////////////REGISTER EMPLOYER//////////////////////////
@@ -216,8 +217,13 @@ if (isset($_POST['register'])) {
       $modelArr = [$user, $employer];
 
       $controller = new Controller();
-      $controller->registerEmployer($model, $modelArr);   
-      header("Location: registersuccess.php?email=$email&role=$role");
 
+      if ($controller->registerEmployer($model, $modelArr) == false) {
+         echo '<script>
+       alert("This email has been used. Please choose another email address.");
+      </script>';
+      } else {
+         header("Location: registersuccess.php?email=$email&role=$role");
+      }
    };
 }

@@ -9,6 +9,11 @@ const formEducation = document.getElementById("formEducation");
 const formExperience = document.getElementById("formExperience");
 const registerNavbar = document.getElementById("registerNavbar");
 
+function preventD(element) {
+  $(element).submit(function (e) {
+    e.preventDefault();
+  });
+}
 var role = "";
 
 function nextForm(form1, form2) {

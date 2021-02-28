@@ -34,11 +34,24 @@ class View
         $employerView = $viewArr[0];
         $biographyView = $viewArr[1];
 
-        $model->showEmployerProfile($modelArr);
+        $result = $model->showEmployerProfile($modelArr);
 
         $employerProfObj = new stdClass();
-        $employerProfObj->employerAttr = $employerView->getEmployer();
-        $employerProfObj->biographyAttr = $biographyView->getBiography();
+        
+        
+        if ($result->employerRes == true) {
+            $employerProfObj->employerAttr = $employerView->getEmployer();
+        } else {
+            $employerProfObj->employerAttr = null;
+        }
+        
+        if ($result->biographyRes == true) {
+            $employerProfObj->biographyAttr = $biographyView->getBiography();
+        } else {
+            $employerProfObj->biographyAttr = null;
+        }
+        
+        
         return $employerProfObj;
 
         
@@ -58,14 +71,38 @@ class View
         $educationView = $viewArr[3];
         $experienceView = $viewArr[4];
 
-        $model->showApplicantProfile($modelArr);
-
+        $result = $model->showApplicantProfile($modelArr);
         $applicantProfObj = new stdClass();
-        $applicantProfObj->applicantAttr = $applicantView->getApplicant();
-        $applicantProfObj->biographyAttr = $biographyView->getBiography();
-        $applicantProfObj->skillsAttr = $skillsView->getSkills();
-        $applicantProfObj->educationAttr = $educationView->getEducation();
-        $applicantProfObj->experienceAttr = $experienceView->getExperience();
+
+        if ($result->applicantRes == true) {
+            $applicantProfObj->applicantAttr = $applicantView->getApplicant();
+        } else {
+            $applicantProfObj->applicantAttr = null;
+        }
+
+        if ($result->biographyRes == true) {
+            $applicantProfObj->biographyAttr = $biographyView->getBiography();
+        } else {
+            $applicantProfObj->biographyAttr = null;
+        }
+
+        if ($result->skillsRes == true) {
+            $applicantProfObj->skillsAttr = $skillsView->getSkills();
+        } else {
+            $applicantProfObj->skillsAttr = null;
+        }
+
+        if ($result->educationRes == true) {
+            $applicantProfObj->educationAttr = $educationView->getEducation();
+        } else {
+            $applicantProfObj->educationAttr = null;
+        }
+
+        if ($result->experienceRes == true) {
+            $applicantProfObj->experienceAttr = $experienceView->getExperience();
+        } else {
+            $applicantProfObj->experienceAttr = null;
+        }
         return $applicantProfObj;
  
         echo "applicant profile is shown";
@@ -114,8 +151,12 @@ class View
     {
         echo "View initiated. retrieving job data";
         echo "<br>";
-        $model->showAllJobs($job);
-        return $jobView->getAllJobs();
+        if ($model->showAllJobs($job) == true) {
+            return $jobView->getAllJobs();
+        } else {
+            return null;
+        }
+        ;
 
         echo "showing all jobs";
         echo "<br>";
@@ -187,11 +228,16 @@ class View
         $forumQuestionView = $viewObj->forumQuestionView;
         $applicantView = $viewObj->applicantView;
 
-        $model->showAllQuestions($modelObj);
+        $result = $model->showAllQuestions($modelObj);
 
-        $applicantsObj = $applicantView->getAllApplicants();
-        $forumQuestionObj = $forumQuestionView->getAllforumQuestion();
-
+        if ($result == true) {
+            $applicantsObj = $applicantView->getAllApplicants();
+            $forumQuestionObj = $forumQuestionView->getAllforumQuestion();
+        } else {
+            $applicantsObj = null;
+            $forumQuestionObj = null;
+        }
+       
         $forumQuestionAttr = new stdClass();
         $forumQuestionAttr->applicantsObj = $applicantsObj;
         $forumQuestionAttr->forumQuestionObj = $forumQuestionObj;
@@ -225,10 +271,16 @@ class View
         $forumAnswerView = $viewObj->forumAnswerView;
         $applicantView = $viewObj->applicantView;
 
-        $model->showAllAnswers($modelObj);
+        $result = $model->showAllAnswers($modelObj);
 
-        $applicantsObj = $applicantView->getAllApplicants();
-        $forumAnswerObj = $forumAnswerView->getAllforumAnswer();
+        if ($result == true) {
+            $applicantsObj = $applicantView->getAllApplicants();
+            $forumAnswerObj = $forumAnswerView->getAllforumAnswer();
+        } else {
+            $applicantsObj = null;
+            $forumAnswerObj = null;
+        }
+       
 
         $forumAnswerAttr = new stdClass();
         $forumAnswerAttr->applicantsObj = $applicantsObj;

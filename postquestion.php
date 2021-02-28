@@ -1,6 +1,7 @@
-<?php include './includes/ClassAutoloader.php';
+<?php
 session_start();
-ob_start();
+include './includes/ClassAutoloader.php';
+include './includes/settings.php';
 ?>
 
 <?php
@@ -23,7 +24,14 @@ if (isset($_POST['post'])) {
     $model = new Model();
     $controller = new Controller();
 
-    $controller->postQuestion($model, $forumQuestion);
+    if ($controller->postQuestion($model, $forumQuestion) == true) {
+        echo '<script>
+            alert("You have posted a question.");
+            setTimeout(function(){
+                window.location.href = "forum.php";
+             }, 100);
+        </script>';
+    }
 }
 
 
@@ -42,48 +50,7 @@ if (isset($_POST['post'])) {
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-            <div class="container ">
-                <a class="navbar-brand col-2" href="index.php">JOB PORTAL</a>
-
-                <div class="collapse navbar-collapse col-8 d-flex justify-content-around">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Search users</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Find jobs</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Find company</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Post</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-2 mt-3 d-flex justify-content-around">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <i class="far fa-user bg-light"></i>
-                        </li>
-                        <li class="nav-item">
-                            <p class="text-light">Firstname Lastname</p>
-                        </li>
-                    </ul>
-
-
-                </div>
-            </div>
-        </nav>
-        </div>
-        <script src="https://unpkg.com/@popperjs/core@2.4.0/dist/umd/popper.min.js"></script>
-    </header>
-
+    <?php include './includes/settings.php' ?>
     <div class="container col-12 d-flex flex-column align-items-center bg-success">
 
         <!-- SEND MESSAGE FORM -->

@@ -1,5 +1,8 @@
 <?php session_start(); ?>
-<?php include './includes/ClassAutoloader.php'; ?>
+<?php
+include './includes/ClassAutoloader.php';
+include './includes/settings.php';
+?>
 <?php
 
 if (isset($_GET['id'])) {
@@ -42,7 +45,7 @@ if (isset($_GET['id'])) {
   $model = new Model();
   $view = new View();
 
-  
+
   ////////SHOW QUESTION//////////
   $forumAttr = $view->showQuestion($model, $modelObj, $viewObj);
 
@@ -78,7 +81,16 @@ if (isset($_POST['post'])) {
   $forumAnswerController->setAnswerUserId($_SESSION['user_id']);
 
   $controller = new Controller();
-  $controller->postAnswer($model,$forumAnswer);
+  if ($controller->postAnswer($model, $forumAnswer) == true) {
+  ?>
+    <script>
+      alert("You have posted an answer.");
+      setTimeout(function() {
+        window.location.href = "viewanswers.php?id=<?=$_GET['id']?>";
+      }, 100);
+    </script>
+<?php
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -93,7 +105,7 @@ if (isset($_POST['post'])) {
 </head>
 
 <body>
-<?php include 'includes/header2.php'; ?>
+  <?php include 'includes/header2.php'; ?>
 
 
   <div class="container col-12 d-flex flex-column justify-content-start bg-success">
@@ -102,7 +114,7 @@ if (isset($_POST['post'])) {
       <div class="card my-5">
         <div class="card-body row container">
           <div class="col-2 d-flex flex-column justify-content-center  align-items-end">
-            <i class="fas fa-chevron-up"><?=$questionVote?></i>
+            <i class="fas fa-chevron-up"><?= $questionVote ?></i>
             <i class="far fa-comment-alt">2</i>
           </div>
           <div class="col-10">
@@ -132,19 +144,19 @@ if (isset($_POST['post'])) {
           </div>
         </div>
 
-        <?php for ($i=0; $i < count($answerIdArr); $i++) {  ?>
-        <div class="card-body row container">
-          <div class="col-3 pl-4 d-flex flex-column justify-content-center align-items-end">
-            <i class="fas fa-chevron-up"><?=$answerVoteArr[$i]?></i>
+        <?php for ($i = 0; $i < count($answerIdArr); $i++) {  ?>
+          <div class="card-body row container">
+            <div class="col-3 pl-4 d-flex flex-column justify-content-center align-items-end">
+              <i class="fas fa-chevron-up"><?= $answerVoteArr[$i] ?></i>
+            </div>
+            <div class="col-9">
+              <h6 class=" "><?= $firstnameArr[$i] ?> <?= $lastnameArr[$i] ?></h6>
+              <p class="white-space: nowrap; width: 50px;overflow: hidden;text-overflow: ellipsis;">
+                <?= $answerArr[$i] ?></p>
+              <hr>
+            </div>
           </div>
-          <div class="col-9">
-            <h6 class=" "><?=$firstnameArr[$i]?> <?=$lastnameArr[$i]?></h6>
-            <p class="white-space: nowrap; width: 50px;overflow: hidden;text-overflow: ellipsis;">
-            <?=$answerArr[$i]?></p>
-            <hr>
-          </div>
-        </div>
-        <?php }?>
+        <?php } ?>
       </div>
     </div>
   </div>

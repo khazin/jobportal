@@ -1,5 +1,8 @@
 <?php session_start(); ?>
-<?php include './includes/ClassAutoloader.php'; ?>
+<?php
+include './includes/settings.php';
+include './includes/ClassAutoloader.php';
+?>
 <?php
 
 //forumQuestion model initiated
@@ -31,6 +34,8 @@ $forumIdArr = $forumAttr->forumQuestionObj->forumIdArr;
 $questionArr = $forumAttr->forumQuestionObj->questionArr;
 $questionUserIdArr = $forumAttr->forumQuestionObj->questionUserIdArr;
 $questionVoteArr = $forumAttr->forumQuestionObj->questionVoteArr;
+
+// print_r($forumAttr);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,31 +49,37 @@ $questionVoteArr = $forumAttr->forumQuestionObj->questionVoteArr;
 </head>
 
 <body>
-<?php include 'includes/header2.php'; ?>
+    <?php include 'includes/header2.php'; ?>
 
 
     <div class="container col-12 d-flex flex-column justify-content-start bg-success">
 
         <div class="container col-6 ">
+            <?php if (count($forumIdArr) > 0) { ?>
+                <!-- card profile -->
+                <?php for ($i = 0; $i < count($forumIdArr); $i++) { ?>
+                    <div class="card my-5">
+                        <a href="viewanswers.php?id=<?= $forumIdArr[$i] ?>" class="card-body row container">
+                            <div class="col-2 d-flex flex-column justify-content-center">
+                                <i class="fas fa-chevron-up">2</i>
+                                <i class="far fa-eye">2</i>
+                                <i class="far fa-comment-alt">2</i>
+                            </div>
+                            <div class="col-10">
+                                <h6 class=" "><?= $firstnameArr[$i] ?> <?= $lastnameArr[$i] ?></h6>
+                                <!-- <h5 class="mb-4"<?//=$questionArr[$i]?></h5> -->
+                                <p class="white-space: nowrap; width: 50px;overflow: hidden;text-overflow: ellipsis;">
+                                    <?= $questionArr[$i] ?></p>
+                            </div>
+                        </a>
+                    </div>
+                <?php   }  ?>
+            <?php  } else {
+                ?>
+                <h6>There are no questions posted. click <a href="postquestion.php?id=<?=$_SESSION['user_id']?>">here</a> to post the first question!</h6>
+                <?php
+            } ?>
 
-            <!-- card profile -->
-            <?php for ($i = 0; $i < count($forumIdArr); $i++) { ?>
-                <div class="card my-5">
-                    <a href="viewanswers.php?id=<?=$forumIdArr[$i]?>" class="card-body row container">
-                        <div class="col-2 d-flex flex-column justify-content-center">
-                            <i class="fas fa-chevron-up">2</i>
-                            <i class="far fa-eye">2</i>
-                            <i class="far fa-comment-alt">2</i>
-                        </div>
-                        <div class="col-10">
-                            <h6 class=" "><?=$firstnameArr[$i]?> <?=$lastnameArr[$i]?></h6>
-                            <!-- <h5 class="mb-4"<?//=$questionArr[$i]?></h5> -->
-                            <p class="white-space: nowrap; width: 50px;overflow: hidden;text-overflow: ellipsis;">
-                            <?=$questionArr[$i]?></p>
-                        </div>
-                    </a>
-                </div>
-            <?php   }  ?>
         </div>
     </div>
 </body>

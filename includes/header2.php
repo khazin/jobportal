@@ -22,6 +22,9 @@
             <li class="nav-item">
               <a class="nav-link" href="forum.php">Forum</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="postquestion.php?id=<?=$_SESSION['user_id']?>">Post a question</a>
+            </li>
           <?php
           } elseif ($_SESSION['role'] == 'employer') {
           ?>

@@ -88,14 +88,20 @@ class Model extends DB
         $companyContact = $employer->getEmployerCompanyContact();
         $companyAdmin = $employer->getEmployerCompanyAdmin();
 
-        // print_r($employer);
+        $stmt = "SELECT * FROM jobportal.user WHERE email = '$email'";
 
-        $stmt = "CALL procRegisterEmployer(
-            '$id','$companyName', '$companyType','$companyContact', 
-            '$companyAdmin', '$email','$password');";
-
-
-        $this->insertData($stmt);
+        $this->retrieveData($stmt);
+        
+        if (mysqli_num_rows($this->result) > 0) {
+            return false;
+        } else {
+            $stmt = "CALL procRegisterEmployer(
+                '$id','$companyName', '$companyType','$companyContact', 
+                '$companyAdmin', '$email','$password');";
+    
+            $this->insertData($stmt);
+            return true;
+        }
     }
 
     public function login($user)
@@ -213,6 +219,8 @@ class Model extends DB
 
         $employerId = $employer->getEmployerId();
         $biographyId = $biography->getBiographyId();
+        
+        $resultObj = new stdClass();
 
         $stmt1 = "SELECT * FROM employer WHERE `employer_id` = '$employerId'";
         $this->retrieveData($stmt1);
@@ -226,6 +234,9 @@ class Model extends DB
                 $employer->setEmployerCompanyContact($this->row['company_contact']);
                 $employer->setEmployerCompanyAdmin($this->row['company_admin']);
             }
+            $resultObj->employerRes = true;
+        } else {
+            $resultObj->employerRes = false;
         }
 
         $stmt2 = "SELECT * FROM biography WHERE `biography_id` = '$biographyId'";
@@ -238,6 +249,9 @@ class Model extends DB
                 $biography->setBiographyId($this->row['biography_id']);
                 $biography->setBiographyBio($this->row['bio']);
             }
+            $resultObj->biographyRes = true;
+        } else {
+            $resultObj->biographyRes = false;
         }
 
         //set value of retireve data
@@ -257,6 +271,7 @@ class Model extends DB
         $educationUserId = $education->getEducationUserId();
         $experiencUserId = $experience->getExperienceUserId();
     
+        $resultObj = new stdClass();
 
         // get applicant statement
         $stmt1 = "SELECT * FROM applicant WHERE `applicant_id` = '$applicantId'";
@@ -276,8 +291,10 @@ class Model extends DB
                 $applicant->setApplicantCountry($this->row['country']);
                 $applicant->setApplicantCity($this->row['city']);
 
-                // var_dump($this->result);
             }
+            $resultObj->applicantRes = true;
+        } else {
+            $resultObj->applicantRes = false;
         }
 
         // get biography statement
@@ -290,11 +307,12 @@ class Model extends DB
             while ($this->row = mysqli_fetch_assoc($this->result)) {
 
                 $biography->setBiographyId($this->row['biography_id']);
-                // echo $this->row['biography_id'];
 
                 $biography->setBiographyBio($this->row['bio']);
-                // var_dump($this->result);
             }
+            $resultObj->biographyRes = true;
+        } else {
+            $resultObj->biographyRes = false;
         }
 
 
@@ -308,8 +326,10 @@ class Model extends DB
 
                 $skills->setSkillsId($this->row['skills_id']);
                 $skills->setSkillsSkills(explode(",", $this->row['skills_arr']));
-                // var_dump($this->result);
             }
+            $resultObj->skillsRes = true;
+        } else {
+            $resultObj->skillsRes = false;
         }
 
         // get education statement
@@ -335,6 +355,11 @@ class Model extends DB
             $education->setEducationSchool($educationSchool);
             $education->setEducationCourse($educationCourse);
             $education->setEducationGraduateYear($educationgraduateYear);
+           
+            $resultObj->educationRes = true;
+        
+        }  else {
+            $resultObj->educationRes = false;
         }
 
         // get experience statement
@@ -361,7 +386,12 @@ class Model extends DB
             $experience->setExperienceCompany($experienceCompany);
             $experience->setExperienceYearFrom($experienceYearFrom);
             $experience->setExperienceYearTo($experienceYearTo);
+       
+            $resultObj->experienceRes = true;
+        } else {
+            $resultObj->experienceRes = false;
         }
+        return $resultObj;
     }
 
     public function searchApplicant($modelArr)
@@ -513,7 +543,10 @@ class Model extends DB
         $stmt = "CALL procPostJob('$employerId','$jobTitle','$location',
         '$minSalary','$maxSalary','$description','$skills','$jobType');";
         // echo $stmt;
-        $this->insertData($stmt);
+        if ($this->insertData($stmt) == true) {
+            return true;
+        }
+        
     }
 
     public function showAllJobs($job)
@@ -549,6 +582,9 @@ class Model extends DB
             ];
 
             $job->setAllJobs($allJobs);
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -721,7 +757,12 @@ class Model extends DB
 
         $stmt = "CALL procSendMessage($msgSenderId, $msgReceiverId, '$msg')";
 
-        $this->insertData($stmt);
+        if ($this->insertData($stmt) == true) {
+            return true;
+        } else {
+            return false;
+        }
+        
 
     }
 
@@ -786,7 +827,12 @@ class Model extends DB
 
         $stmt = "CALL procPostQuestion($questionUserId,'$question')";
         
-        $this->insertData($stmt);
+        if ($this->insertData($stmt) == true) {
+            return true;
+        } else {
+            return false;
+        }
+        
     }
 
     public function showAllQuestions(Object $modelObj)
@@ -831,6 +877,10 @@ class Model extends DB
 
             $applicant->setAllApplicants($allApplicants);
             $forumQuestion->setAllforumQuestion($allForums);
+
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -910,6 +960,9 @@ class Model extends DB
 
             $applicant->setAllApplicants($allApplicants);
             $forumAnswer->setAllforumAnswer($allForumAnswers);
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -921,6 +974,11 @@ class Model extends DB
 
         $stmt = "CALL procPostAnswer($answerUserId,'$answer', $questionId)";
         
-        $this->insertData($stmt);
+        if ($this->insertData($stmt) == true) {
+            return true;
+        } else {
+            return false;
+        }
+        
     }
 }

@@ -1,6 +1,7 @@
 <?php
 session_start();
 include './includes/ClassAutoloader.php';
+include './includes/settings.php';
 ?>
 
 <?php

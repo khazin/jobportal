@@ -1,4 +1,5 @@
 <?php
+session_start();
 include './includes/settings.php';
 include './includes/ClassAutoloader.php';
 ?>
@@ -21,12 +22,12 @@ include './includes/ClassAutoloader.php';
    <div class="container col-12 bg-light d-flex flex-column align-items-center" style="height:100vh">
       <form action="" method="post" class="form col-6 d-flex flex-column align-items-center" id="formRegister">
          <div class="card mt-5" style="width: 38rem;">
-            <h6 class="mt-3 card-title text-center">You have succesfully register!</h6>
+            <h6 class="mt-3 card-title text-center">You have succesfully login!</h6>
             <h6 class="mt-3 card-title text-center text-muted">Would you like to create your profile now or proceed to login?</h6>
             <div class="card-body col-12 d-flex flex-column align-items-center">
                <div class="d-flex col-12 ">
                   <button type="submit" class="btn btn-primary col-6" id="" name="profile">Create profile</button>
-                  <button type="submit" class="btn btn-success col-6" id="" name="login">Login</button>
+                  <button type="submit" class="btn btn-success col-6" id="" name="login">To home page</button>
                </div>
             </div>
       </form> 
@@ -40,41 +41,18 @@ include './includes/ClassAutoloader.php';
 
 <?php
 
-if (isset($_GET['email'])) {
-
-   $user = new Users();
-   // store user object in user controller
-   $userController = new UsersController($user);
-
-   $email = $_GET['email'];
-
-   $userController->setUserEmail($email);
-
-   // store user object in user view
-   $userView = new UsersView($user);
-
-   $model = new Model();
-   $view = new View();
-
-   $userObj = $view->login2($model, $user, $userView);
-
-   session_start();
-   $_SESSION['user_id'] = $userObj->userId;
-   $_SESSION['email'] = $userObj->userEmail;
-   $_SESSION['password'] = $userObj->userPassword;
-   $_SESSION['role'] = $userObj->userRole;
-   $_SESSION['first_login'] = $userObj->userFirstLogin;
-}
-
 if (isset($_POST['login'])) {
-  
+    echo '<script>
+    alert("You have succesfully login!");
+   </script>';
+
    header('Location: home.php');
 }
 
 if (isset($_POST['profile'])) {
-   if ($_GET['role'] == 'applicant') {
-      header('Location: createapplicantprofile.php');
-   } elseif ($_GET['role'] == 'employer') {
-      header('Location: createemployerprofile.php');
-   };
+    if ($_SESSION['role'] == 'applicant') {
+        header('Location: createapplicantprofile.php');
+      } elseif ($_SESSION['role'] == 'employer') {
+        header('Location: createemployerprofile.php');
+      }
 }

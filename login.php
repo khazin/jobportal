@@ -1,6 +1,6 @@
 <?php
-error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
  include './includes/ClassAutoloader.php';
+ include './includes/settings.php';
 
 if (isset($_POST['login'])) {
   ///////////////////LOGIN//////////////////////////
@@ -23,25 +23,28 @@ if (isset($_POST['login'])) {
   $view = new View();
 
   $userObj = $view->login($model, $user, $userView);
-  // var_dump($userObj);
+
   if ($userObj == false) {
     $message = 'Your email or password is invalid';
-  }
 
-  session_start();
-  $_SESSION['user_id'] = $userObj->userId;
-  $_SESSION['email'] = $userObj->userEmail;
-  $_SESSION['password'] = $userObj->userPassword;
-  $_SESSION['role'] = $userObj->userRole;
-  $_SESSION['first_login'] = $userObj->userFirstLogin;
-
-  if ($_SESSION['first_login'] == 1) {
-    header('Location: home.php');
   } else {
-    if ($_SESSION['role'] == 'applicant') {
-      header('Location: createapplicantprofile.php');
-    } elseif ($_SESSION['role'] == 'employer') {
-      header('Location: createemployerprofile.php');
+    session_start();
+    $_SESSION['user_id'] = $userObj->userId;
+    $_SESSION['email'] = $userObj->userEmail;
+    $_SESSION['password'] = $userObj->userPassword;
+    $_SESSION['role'] = $userObj->userRole;
+    $_SESSION['first_login'] = $userObj->userFirstLogin;
+
+    if ($_SESSION['first_login'] == 1) {
+      echo '
+      <script>
+      alert("You have succesfully logged in!");
+      setTimeout(function() {
+        window.location.href = "home.php";
+      }, 100)
+    </script>';
+    } elseif ($_SESSION['first_login'] == 0) {
+      header('Location: loginsuccess.php');
     }
   }
 }
@@ -58,7 +61,7 @@ if (isset($_POST['login'])) {
 
 <body>
   <?php include 'includes/header.php'; ?>
-  <div class="container col-12 d-flex align-items-center bg-success d-inline-flex justify-content-center  " style="height:100vh">
+  <div class="container col-12 d-flex align-items-center bg-light d-inline-flex justify-content-center  " style="height:100vh">
     <form action="" method="post" class="form col-6">
       <div class="card mt-5" style="width: 38rem;">
         <h5 class="mt-3 card-title text-center">Login</h5>

@@ -6,14 +6,12 @@
                <div class="collapse navbar-collapse col-3">
                   <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
                      <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="register.php">Register</a>
+                        <a class="nav-link text-light" aria-current="page" href="register.php">Register</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="login.php">Login</a>
+                        <a class="nav-link text-light" href="login.php">Login</a>
                      </li>
-                     <li class="">
-                        <button class="btn btn-success">For company</button>
-                     </li>
+                 
                   </ul>
                </div>
             </div>

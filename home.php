@@ -1,5 +1,9 @@
 <?php session_start(); ?>
-<?php include './includes/ClassAutoloader.php'; ?>
+<?php 
+include './includes/ClassAutoloader.php';
+include './includes/settings.php';
+
+?>
 
 <?php
 if ($_SESSION['role'] == 'applicant') {

@@ -18,7 +18,7 @@ class Controller
         echo "controller initiated. registering user and employer data";
         echo "<br>";
 
-        $model->registerEmployer($modelArr);
+        return $model->registerEmployer($modelArr);
 
         echo "user registered";
         echo "<br>";
@@ -52,7 +52,7 @@ class Controller
     }
     public function postJob($model, $job)
     {
-        $model->postJob($job);
+        return $model->postJob($job);
         echo 'job created';
         echo '<br>';
     }
@@ -73,7 +73,7 @@ class Controller
 
     public function sendMessage($model, $message)
     {
-        $model->sendMessage($message);
+        return $model->sendMessage($message);
         echo 'message sent';
         echo '<br>';
     }
@@ -81,13 +81,13 @@ class Controller
     
     public function postQuestion($model, $forumQuestion)
     {
-        $model->postQuestion($forumQuestion);
+        return $model->postQuestion($forumQuestion);
         echo 'question posted';
         echo '<br>';
     }
     public function postAnswer($model, $forumAnswer)
     {
-        $model->postAnswer($forumAnswer);
+        return $model->postAnswer($forumAnswer);
         echo 'answer posted';
         echo '<br>';
     }

@@ -111,7 +111,12 @@ if (isset($_POST['post'])) {
   $model = new Model();
   $controller = new Controller();
 
-  $controller->postJob($model, $job);
+  if ($controller->postJob($model, $job) == true) {
+    echo '<script>
+    alert("You have posted a new job.");
+   </script>';    
+  }
+  
 }
 
 
