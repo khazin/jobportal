@@ -111,22 +111,22 @@ function validateCredentials() {
   const confirmPassword = document.getElementById("confirmPassword").value;
 
   var validateEmptyEmailField = validateEmptyTextField(email, "Email");
+  var validateEmailFieldLength = validateLengthTextField(email, "Email",6,50);
   var validateEmailFormat = validateEmail(email);
   var validateEmptyPasswordField = validateEmptyTextField(password, "Password");
-  var validateEmptyConfirmPasswordField = validateEmptyTextField(
-    confirmPassword,
-    "Confirm Password"
-  );
-  var validatePasswordMatched = validateConfirmPassword(
-    password,
-    confirmPassword
-  );
+  var validatePasswordFieldLength = validateLengthTextField(password, "Password",8,50);
+  var validateEmptyConfirmPasswordField = validateEmptyTextField(confirmPassword,"Confirm Password");
+  var validateConfirmPasswordFieldLength = validateLengthTextField(confirmPassword,"Confirm Password",8,50);
+  var validatePasswordMatched = validateConfirmPassword(password,confirmPassword);
 
   let validateResultArr = [
     validateEmptyEmailField,
+    validateEmailFieldLength,
     validateEmailFormat,
     validateEmptyPasswordField,
+    validatePasswordFieldLength,
     validateEmptyConfirmPasswordField,
+    validateConfirmPasswordFieldLength,
     validatePasswordMatched,
   ];
 
@@ -150,23 +150,35 @@ function validateApplicant() {
   const company = document.getElementById("company").value;
 
   var validateEmptyFirstnameField = validateEmptyTextField(firstname,"Firstname");
+  var validateFirstnameFieldLength = validateLengthTextField(firstname,"Firstname", 2, 20);
   var validateEmptyLastnameField = validateEmptyTextField(lastname, "Lastname");
+  var validateLastnameFieldLength = validateLengthTextField(lastname, "Lastname", 2, 20);
   var validateEmptyGenderButton = validateGender(male, female);
   var validateEmptyBirthdayField = validateEmptyTextField(birthday, "Birthday");
   var validateEmptyCountryField = validateEmptyTextField(country, "Country");
+  var validateCountryFieldLength = validateLengthTextField(country, "Country", 2, 20);
   var validateEmptyCityField = validateEmptyTextField(city, "City");
+  var validateCityFieldLength = validateLengthTextField(city, "City", 2, 20);
   var validateEmptyJobField = validateEmptyTextField(job, "Job");
+  var validateJobFieldLength = validateLengthTextField(job, "Job", 2, 20);
   var validateEmptyCompanyField = validateEmptyTextField(company, "Company");
+  var validateCompanyFieldLength = validateLengthTextField(company, "Company", 2, 20);
 
   let validateResultArr = [
     validateEmptyFirstnameField,
+    validateFirstnameFieldLength,
     validateEmptyLastnameField,
+    validateLastnameFieldLength,
     validateEmptyGenderButton,
     validateEmptyBirthdayField,
     validateEmptyCountryField,
+    validateCountryFieldLength,
     validateEmptyCityField,
+    validateCityFieldLength,
     validateEmptyJobField,
+    validateJobFieldLength,
     validateEmptyCompanyField,
+    validateCompanyFieldLength
   ];
 
   if (validateResultArr.includes(false) != true) {
@@ -182,29 +194,26 @@ function validateEmployer() {
   const companyType = document.getElementById("companyType").value;
   const companyContact = document.getElementById("companyContact").value;
   const companyAdmin = document.getElementById("companyAdmin").value;
-
-  var validateEmptyCompanyNameField = validateEmptyTextField(
-    companyName,
-    "Company name"
-  );
-  var validateEmptyCompanyTypeField = validateEmptyTextField(
-    companyType,
-    "Company type"
-  );
-  var validateEmptyCompanyContactField = validateEmptyTextField(
-    companyContact,
-    "Company Contact"
-  );
-  var validateEmptyCompanyAdminField = validateEmptyTextField(
-    companyAdmin,
-    "Company admin"
-  );
+  
+  var validateEmptyCompanyNameField = validateEmptyTextField(companyName,"Company name");
+  var validateCompanyNameFieldLength = validateLengthTextField(companyName,"Company name",2,20);
+  
+  var validateEmptyCompanyTypeField = validateEmptyTextField(companyType,"Company type");
+  var validateCompanyTypeFieldLength = validateLengthTextField(companyType,"Company type",2,20);
+  var validateEmptyCompanyContactField = validateEmptyTextField(companyContact,"Company Contact");
+  var validateCompanyContactFieldLength = validateLengthTextField(companyContact,"Company Contact",2,20);
+  var validateEmptyCompanyAdminField = validateEmptyTextField(companyAdmin,"Company admin");
+  var validateCompanyAdminFieldLength = validateLengthTextField(companyAdmin,"Company admin",2,20);
 
   let validateResultArr = [
     validateEmptyCompanyNameField,
+    validateCompanyNameFieldLength,
     validateEmptyCompanyTypeField,
+    validateCompanyTypeFieldLength,
     validateEmptyCompanyContactField,
+    validateCompanyContactFieldLength,
     validateEmptyCompanyAdminField,
+    validateCompanyAdminFieldLength,
   ];
 
   if (validateResultArr.includes(false) != true) {
@@ -220,13 +229,18 @@ function validateLogin() {
   const password = document.getElementById("password").value;
 
   var validateEmptyEmailField = validateEmptyTextField(email, "Email");
+  var validateEmailFieldLength = validateLengthTextField(email, "Email",6,50);
+  var validateEmptyEmailField = validateEmptyTextField(email, "Email");
   var validateEmailFormat = validateEmail(email);
   var validateEmptyPasswordField = validateEmptyTextField(password, "Password");
+  var validatePasswordFieldLength = validateLengthTextField(password, "Password",8,50);
 
   let validateResultArr = [
     validateEmptyEmailField,
+    validateEmailFieldLength,
     validateEmailFormat,
-    validateEmptyPasswordField,
+    validateEmptyPasswordField
+    // ,validatePasswordFieldLength,
   ];
 
   if (validateResultArr.includes(false) != true) {
@@ -242,9 +256,11 @@ function validateBiography() {
     const bio = document.getElementById("bio").value;
   
     var validateEmptyBioField = validateEmptyTextField(bio, "Bio");
+    var validateBioFieldLength = validateLengthTextField(bio, "Bio",10, 500);
   
     let validateResultArr = [
-        validateEmptyBioField
+        validateEmptyBioField,
+        validateBioFieldLength
     ];
   
     if (validateResultArr.includes(false) != true) {
@@ -267,24 +283,12 @@ function validatePostJob() {
   const remote = document.getElementsByName("jobType")[2];
 
  
-  var validateEmptyJobTitleField = validateEmptyTextField(
-    jobTitle,
-    "job title"
-  );
+  var validateEmptyJobTitleField = validateEmptyTextField(jobTitle,"job title");
   var validateEmptyLocationField = validateEmptyTextField(location, "location");
-  var validateEmptyMinSalaryField = validateEmptyTextField(
-    minSalary,
-    "minimum salary"
-  );
-  var validateEmptyMaxSalaryField = validateEmptyTextField(
-    maxSalary,
-    "maximum salary"
-  );
+  var validateEmptyMinSalaryField = validateEmptyTextField(minSalary,"minimum salary");
+  var validateEmptyMaxSalaryField = validateEmptyTextField(maxSalary,"maximum salary");
 
-  var validateEmptyDescriptionField = validateEmptyTextField(
-    description,
-    "description"
-  );
+  var validateEmptyDescriptionField = validateEmptyTextField(description,"description");
   var validateEmptyJobType = validateJobType(fullTime, partTime, remote);
 
   let validateResultArr = [
@@ -395,23 +399,28 @@ function addEducations() {
   var school = document.getElementById("school").value;
   var course = document.getElementById("course").value;
   var graduateYear = document.getElementById("graduateYear").value;
+  
+  var validateEmptycertificationield = validateEmptyTextField(certification,"certification");
+  var validatecertificationieldLength = validateLengthTextField(certification,"certification",2,15);
 
-  var validateEmptycertificationield = validateEmptyTextField(
-    certification,
-    "certification"
-  );
   var validateEmptyschoolField = validateEmptyTextField(school, "school");
+  var validateschoolFieldLength = validateLengthTextField(school, "school",2,30);
+
   var validateEmptycourseField = validateEmptyTextField(course, "course");
-  var validateEmptygraduateYearField = validateEmptyTextField(
-    graduateYear,
-    "graduateYear"
-  );
+  var validatecourseFieldLength = validateLengthTextField(course, "course",2,30);
+
+  var validateEmptygraduateYearField = validateEmptyTextField(graduateYear,"graduateYear");
+  var validategraduateYearFieldLength = validateLengthTextField(graduateYear,"graduateYear",4,4);
 
   let validateResultArr = [
     validateEmptycertificationield,
+    validatecertificationieldLength,
     validateEmptyschoolField,
+    validateschoolFieldLength,
     validateEmptycourseField,
+    validatecourseFieldLength,
     validateEmptygraduateYearField,
+    validategraduateYearFieldLength,
   ];
 
   if (validateResultArr.includes(false) != true) {
@@ -471,18 +480,26 @@ function addExperiences() {
   var endYear = document.getElementById("endYear").value;
 
   var validateEmptyJobTitleField = validateEmptyTextField(jobTitle, "jobTitle");
+  var validateJobTitleFieldLength = validateLengthTextField(jobTitle, "jobTitle",2,30);
+
   var validateEmptyCompanyField = validateEmptyTextField(company, "company");
-  var validateEmptyStartYearField = validateEmptyTextField(
-    startYear,
-    "startYear"
-  );
+  var validateCompanyFieldLength = validateLengthTextField(company, "company",2,30);
+
+  var validateEmptyStartYearField = validateEmptyTextField(startYear,"startYear");
+  var validateStartYearFieldLength = validateLengthTextField(startYear,"startYear",4,4);
+
   var validateEmptyEndYearField = validateEmptyTextField(endYear, "endYear");
+  var validateEndYearFieldLength = validateLengthTextField(endYear, "endYear",4,4);
 
   let validateResultArr = [
     validateEmptyJobTitleField,
+    validateJobTitleFieldLength,
     validateEmptyCompanyField,
+    validateCompanyFieldLength,
     validateEmptyStartYearField,
+    validateStartYearFieldLength,
     validateEmptyEndYearField,
+    validateEndYearFieldLength,
   ];
 
   if (validateResultArr.includes(false) != true) {

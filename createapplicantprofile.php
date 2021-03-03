@@ -54,7 +54,7 @@ include 'includes/settings.php';
               <h6>Skills</h6>
               <div class="row container__skills" id="skillsContainer">
 
-                <span class="badge rounded-pill bg-primary ml-3 pills">Windows Server<i class="fas fa-times ml-1 btn-icon__remove" onclick="removePill(this)"></i></span>
+                <!-- <span class="badge rounded-pill bg-primary ml-3 pills">Windows Server<i class="fas fa-times ml-1 btn-icon__remove" onclick="removePill(this)"></i></span> -->
               </div>
             </div>
             <button type="button" class="btn btn-secondary" onclick="return addSkills();">Add</button>
