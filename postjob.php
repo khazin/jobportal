@@ -18,7 +18,7 @@ ob_start();
 
 <body>
   <?php include 'includes/header2.php'; ?>
-  <div class="container col-12 d-flex flex-column align-items-center bg-success">
+  <div class="container col-12 d-flex flex-column align-items-center bg-light">
 
     <!-- post job form -->
     <form method="post" action="" class="form col-6">
@@ -35,6 +35,17 @@ ob_start();
               <input type="number" class="form-control" name="minSalary" id="minSalary">
               <label for="maxSalary" class="form-label">maxSalary</label>
               <input type="number" class="form-control" name="maxSalary" id="maxSalary">
+
+              <label for="experience" class="form-label">Experience Level</label>
+              <div class="input-group ">
+                        <input type="text" class="form-control mb-3" placeholder="Experience" id="experience" name="jobExperience" list='experiences'>
+                        <datalist id="experiences">
+                            <option value="entry level">
+                            <option value="junior">
+                            <option value="senior">
+                        </datalist>
+                    </div>
+
               <label for="description" class="form-label">Job Description</label>
               <textarea type="text" class="form-control" name="description" id="description"></textarea>
               <div class="my-2"> <span class="mr-2">Job Type:</span>
@@ -102,9 +113,11 @@ if (isset($_POST['post'])) {
   $description = $_POST['description'];
   $skillsArr = $_POST['skillsArr'];
   $jobType = $_POST['jobType'];
+  $jobExperience = $_POST['jobExperience'];
   $jobArr = [
-    $jobTitle, $employerId, $location, $minSalary,
-    $maxSalary, $description, $skillsArr, $jobType
+    $jobTitle, $employerId, $location, 
+    $minSalary,$maxSalary, $description, 
+    $skillsArr, $jobType,$jobExperience
   ];
   $jobController->setJob($jobArr, $id = 0);
 

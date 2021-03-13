@@ -57,9 +57,9 @@ include 'includes/settings.php';
                 <!-- <span class="badge rounded-pill bg-primary ml-3 pills">Windows Server<i class="fas fa-times ml-1 btn-icon__remove" onclick="removePill(this)"></i></span> -->
               </div>
             </div>
-            <button type="button" class="btn btn-secondary" onclick="return addSkills();">Add</button>
+            <button type="button" class="btn btn-danger" onclick="return nextForm(formSkills, formBiography)">Back</button>
             <button type="button" class="btn btn-primary" onclick="return nextForm(formSkills, formEducation)">Next</button>
-            <button type="button" class="btn btn-primary" onclick="return nextForm(formSkills, formBiography)">Back</button>
+            <button type="button" class="btn btn-success" onclick="return addSkills();">Add</button>
           </div>
           <!-- form 3 qualifications-->
           <div class="col-10 form__education" id="formEducation">
@@ -89,9 +89,9 @@ include 'includes/settings.php';
                 <input type="hidden" class="graduateYear" name="graduateYears[]" value=""> -->
               </div>
             </div>
-            <button type="button" class="btn btn-secondary" onclick="return addEducations()">Add</button>
+            <button type="button" class="btn btn-danger" onclick="return nextForm(formEducation, formSkills)">Back</button>
             <button type="button" class="btn btn-primary" onclick="return nextForm(formEducation, formExperience)">Next</button>
-            <button type="button" class="btn btn-primary" onclick="return nextForm(formEducation, formSkills)">Back</button>
+            <button type="button" class="btn btn-success" onclick="return addEducations()">Add</button>
           </div>
           <!-- form 4 job experience -->
           <div class="col-10 form__experience" id="formExperience">

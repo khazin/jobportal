@@ -1,5 +1,6 @@
 <?php session_start(); ?>
 <?php include './includes/ClassAutoloader.php'; ?>
+<?php include './includes/settings.php'; ?>
 
 
 <?php
@@ -62,7 +63,7 @@ if (isset($_POST['search'])) {
 <body>
     <?php include 'includes/header2.php'; ?>
 
-    <div class="container col-12 d-flex  justify-content-center bg-success">
+    <div class="container col-12 d-flex  justify-content-center bg-light">
 
         <div class="container mt-5 col-12 bg-light row">
 

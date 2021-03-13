@@ -57,6 +57,11 @@ class JobController
     {
         $this->job->setJobType($jobType);
     }
+
+    public function setJobExperience($jobExperience)
+    {
+        $this->job->setJobExperience($jobExperience);
+    }
     
     public function setJob($jobArr, $id)//remember to put type declaration in arguments
     {

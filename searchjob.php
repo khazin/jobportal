@@ -1,11 +1,13 @@
-<?php session_start();
-error_reporting(E_ALL & ~E_NOTICE); ?>
+<?php session_start();?>
 <?php include './includes/ClassAutoloader.php'; ?>
+<?php include './includes/settings.php'; ?>
 
 <?php
 if (isset($_POST['search'])) {
     $jobTitle = $_POST['jobTitle'];
     $jobLocation = $_POST['jobLocation'];
+    $jobExperience = $_POST['jobExperience'];
+    $companyName = $_POST['companyName'];
     $companyType = $_POST['companyType'];
     if ($_POST['skillsArr'] == null) {
         $_POST['skillsArr'] = [];
@@ -18,6 +20,7 @@ if (isset($_POST['search'])) {
     $minSalary = $_POST['minSalary'];
     $maxSalary = $_POST['maxSalary'];
 
+    print_r($_POST);
     //job model initiated
     $job = new Job();
     //Employer model initiated
@@ -31,10 +34,12 @@ if (isset($_POST['search'])) {
     $jobController->setJobTitle($jobTitle);
     $jobController->setJobLocation($jobLocation);
     $jobController->setJobSkills($skillsArr);
+    $jobController->setJobExperience($jobExperience);
     $jobController->setJobType(implode(',', $jobType));
     $jobController->setJobMinSalary($minSalary);
     $jobController->setJobMaxSalary($maxSalary);
     $employerController->setEmployerCompanyType($companyType);
+    $employerController->setEmployerCompanyName($companyName);
 
     // store job object in job view
     $jobView = new JobView($job);
@@ -58,6 +63,7 @@ if (isset($_POST['search'])) {
     $descriptionArr = $jobAttr->description;
     $skillsArr = $jobAttr->skills;
     $jobTypeArr = $jobAttr->jobType;
+    $jobExperienceArr = $jobAttr->jobExperience;
     $companyNameArr = $searchJobAttr->companyName;
     $companyTypeArr = $searchJobAttr->companyType;
 }
@@ -76,7 +82,7 @@ if (isset($_POST['search'])) {
 <body>
 <?php include 'includes/header2.php'; ?>
 
-    <div class="container col-12 d-flex  justify-content-center bg-success">
+    <div class="container col-12 d-flex  justify-content-center bg-light">
 
         <div class="container mt-5 col-12 bg-light row">
 
@@ -84,7 +90,16 @@ if (isset($_POST['search'])) {
                 <form method="post" class="form mt-5">
                     <input type="text" placeholder="Job" class="form-control mb-3" id="jobTitle" name="jobTitle">
                     <input type="text" placeholder="Location" class="form-control mb-3" id="jobLocation" name="jobLocation">
-                    <input type="text" placeholder="specialisation" class="form-control mb-3" id="companyType" name="companyType">
+                    <input type="text" placeholder="Specialisation" class="form-control mb-3" id="companyType" name="companyType">
+                    <input type="text" placeholder="Company" class="form-control mb-3" id="companyName" name="companyName">
+                    <div class="input-group ">
+                        <input type="text" class="form-control mb-3" placeholder="Experience" id="experience" name="jobExperience" list='experiences'>
+                        <datalist id="experiences">
+                            <option value="entry level">
+                            <option value="junior">
+                            <option value="senior">
+                        </datalist>
+                    </div>
                     <div class="input-group ">
                         <input type="text" class="form-control" placeholder="Skills" id="skill" name="skills" list='skills'>
                         <datalist id="skills">
@@ -96,7 +111,6 @@ if (isset($_POST['search'])) {
                         </datalist>
                         <div class="btn btn-outline-secondary" onclick="return addSkills();"><i class="fas fa-plus"></i></div>
                     </div>
-
                     <div class="mt-3">
                         <h6>Skills</h6>
                         <div class="row container__skills" id="skillsContainer">
@@ -140,10 +154,11 @@ if (isset($_POST['search'])) {
                 <?php for ($i = 0; $i < count($jobIdArr); $i++) { ?>
                     <div class="card mt-5" style="width: 18rem;">
                         <div class="card-body">
-                            <h6 class="card-title"><?= $companyNameArr[$i] ?></h6>
-                            <h6 class="card-title"><?= $locationArr[$i] ?></h6>
-                            <h6 class="card-title"><?= $companyTypeArr[$i] ?></h6>
+                            <h5 class="card-title"><?= $companyNameArr[$i] ?></h5>
                             <h6 class="card-title"><?= $jobTitleArr[$i] ?></h6>
+                            <h6 class="card-title"><?= $jobExperienceArr[$i] ?></h6>
+                            <h6 class="card-title"><?= $companyTypeArr[$i] ?></h6>
+                            <h6 class="card-title"><?= $locationArr[$i] ?></h6>
                             <div class="card-text mb-4" style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis;">
                                 <?= $descriptionArr[$i] ?>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint, sit corporis odit provident vitae maiores debitis nemo
                             </div>

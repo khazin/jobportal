@@ -12,6 +12,7 @@ class Job
     private String $description;
     private array $skills;
     private String $jobType;
+    private String $jobExperience;
 
     private array $allJobs;
 
@@ -129,6 +130,18 @@ class Job
     {
         return $this->jobType;
     }
+
+    public function setJobExperience($jobExperience)
+    {
+        $this->jobExperience = $jobExperience;
+        echo "Job jobExperience is set";
+        echo "<br>";
+    }
+
+    public function getJobExperience()
+    {
+        return $this->jobExperience;
+    }
     
     public function setJob($jobArr, $id)
     { //remember to put type declaration in arguments
@@ -142,6 +155,7 @@ class Job
         $this->setJobDescription($jobArr[5]);
         $this->setJobSkills($jobArr[6]);
         $this->setJobType($jobArr[7]);
+        $this->setJobExperience($jobArr[8]);
 
         echo "Job is set";
         echo "<br>";
@@ -161,6 +175,7 @@ class Job
         $jobAttr->description = $this->getJobDescription();
         $jobAttr->skills = $this->getJobSkills();
         $jobAttr->jobType = $this->getJobType();
+        $jobAttr->jobExperience = $this->getJobExperience();
 
         return $jobAttr;
         echo "getJob is run. returning data from DB";
@@ -185,6 +200,7 @@ class Job
         $jobAttr->description = $this->allJobs[6];
         $jobAttr->skills = $this->allJobs[7];
         $jobAttr->jobType = $this->allJobs[8];
+        $jobAttr->jobExperience = $this->allJobs[9];
 
         return $jobAttr;
     }

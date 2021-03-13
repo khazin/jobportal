@@ -1,8 +1,7 @@
-<?php session_start(); ?>
-<?php 
+<?php
+session_start();
 include './includes/ClassAutoloader.php';
 include './includes/settings.php';
-
 ?>
 
 <?php
@@ -102,6 +101,7 @@ if ($_SESSION['role'] == 'applicant') {
   $employerProfObj = $view->showEmployerProfile($model, $modelArr, $viewArr);
   $employerAttr = $employerProfObj->employerAttr;
   $biographyAttr = $employerProfObj->biographyAttr;
+  print_r($employerProfObj);
 
   $_SESSION['name'] = $employerAttr->companyName;
 }
@@ -119,9 +119,9 @@ if ($_SESSION['role'] == 'applicant') {
 </head>
 
 <body>
- <?php include 'includes/header2.php'; ?>
+  <?php include 'includes/header2.php'; ?>
 
-  <div class="container col-12 d-flex flex-column align-items-center bg-success">
+  <div class="container col-12 d-flex flex-column align-items-center bg-light">
 
     <div class="col-6 card__container" id="cardContainerApplicant">
 
@@ -223,7 +223,7 @@ if ($_SESSION['role'] == 'applicant') {
         $jobDescription = $jobAttr->description;
         $jobSkills = $jobAttr->skills;
         $jobType = $jobAttr->jobType;
- 
+
       ?>
 
         <!--employer card profile -->
@@ -236,7 +236,7 @@ if ($_SESSION['role'] == 'applicant') {
               <p class=" "><?= $biographyAttr->bio ?></p>
             </div>
             <div class="col-2">
-              <button class="btn btn-primary ml-3">Connect</button>
+              <!-- <button class="btn btn-primary ml-3">Connect</button> -->
             </div>
             <div class="col-1"><i class="far fa-edit ml-3"></i></div>
           </div>
@@ -245,12 +245,15 @@ if ($_SESSION['role'] == 'applicant') {
         <!--employer card jobs -->
         <div class="card my-5">
           <div class="card-body row">
+            <div class="col-9">
+              <h4 class=" ">Jobs posted</h4>
+            </div>
             <?php for ($i = 0; $i < count($jobId); $i++) { ?>
               <div class="card mt-5" style="width: 18rem;">
                 <div class="card-body">
-                  <h6 class="card-title"><?=$jobTitle[$i]?></h6>
-                  <h6 class="card-title"><?=$jobType[$i]?></h6>
-                  <h6 class="card-title">$<?=$jobMinSalary[$i]?> - $<?=$jobMaxSalary[$i]?></h6>
+                  <h6 class="card-title"><?= $jobTitle[$i] ?></h6>
+                  <h6 class="card-title"><?= $jobType[$i] ?></h6>
+                  <h6 class="card-title">$<?= $jobMinSalary[$i] ?> - $<?= $jobMaxSalary[$i] ?></h6>
                   <div class="card-text mb-4" style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis;">
                     <?= $jobDescription[$i] ?> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis, voluptas.
                   </div>
@@ -259,13 +262,13 @@ if ($_SESSION['role'] == 'applicant') {
                     <div style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis;">
                       <?php
                       for ($j = 0; $j < count($jobSkills[$i]); $j++) {
-                          echo '<span class="badge rounded-pill bg-primary mr-2">' . $jobSkills[$i][$j] . '</span>';
+                        echo '<span class="badge rounded-pill bg-primary mr-2">' . $jobSkills[$i][$j] . '</span>';
                       };
                       ?>
                     </div>
                   </div>
 
-                  <a href="viewjob.php?id=<?=$jobId[$i]?>" class="btn btn-primary">View Job</a>
+                  <a href="viewjob.php?id=<?= $jobId[$i] ?>&company=<?= $_SESSION['name'] ?>" class="btn btn-primary">View Job</a>
                 </div>
               </div>
             <?php  } ?>

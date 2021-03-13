@@ -254,7 +254,7 @@ class Model extends DB
             $resultObj->biographyRes = false;
         }
 
-        //set value of retireve data
+        return $resultObj;
     }
 
     public function showApplicantProfile($modelArr)
@@ -539,10 +539,11 @@ class Model extends DB
         $description = $job->getJobDescription();
         $skills = implode(',', $job->getJobSkills());
         $jobType = $job->getJobType();
+        $jobExperience = $job->getJobExperience();
 
         $stmt = "CALL procPostJob('$employerId','$jobTitle','$location',
-        '$minSalary','$maxSalary','$description','$skills','$jobType');";
-        // echo $stmt;
+        '$minSalary','$maxSalary','$description','$skills','$jobType', '$jobExperience');";
+
         if ($this->insertData($stmt) == true) {
             return true;
         }
@@ -608,6 +609,7 @@ class Model extends DB
                 $job->setJobDescription($this->row['job_description']);
                 $job->setJobSkills(explode(",",$this->row['skills']));
                 $job->setJobType($this->row['job_type']);
+                $job->setJobExperience($this->row['job_experience']);
 
             }
         }
@@ -621,19 +623,24 @@ class Model extends DB
         $jobTitle = $job->getJobTitle();
         $jobLocation = $job->getJobLocation();
         $skillsArr = $job->getJobSkills();
+        $jobExperience = $job->getJobExperience();
         $jobType = explode(',',$job->getJobType());
         $minSalary = $job->getJobMinSalary();
         $maxSalary = $job->getJobMaxSalary();
+        $companyName = $employer->getEmployerCompanyName();
         $companyType = $employer->getEmployerCompanyType();
 
         $stmt = "SELECT `job_id`, jobs.employer_id,  `job_title`, `location`, 
-        `min_salary`, `max_salary`, `job_description`, `skills`, `job_type`, 
+        `min_salary`, `max_salary`, `job_description`,
+        `skills`, `job_type`, `job_experience`,
         employer.company_type as company_type,
         employer.company_name as company_name
         from `jobs`
         join `employer` on jobs.employer_id = employer.employer_id 
         where `job_title` like '%$jobTitle%'
         or `location` like '%$jobLocation%'
+        or `job_experience` like '%$jobExperience%'
+        or `company_name` like '%$companyName%'
         or `company_type` like '%$companyType%'
         or `min_salary` >= $minSalary AND `max_salary` <= $maxSalary";
 
@@ -658,6 +665,7 @@ class Model extends DB
         $description = [];
         $skills = [];
         $jobType = [];
+        $jobExperience = [];
         $companyName = [];
         $companyType = [];
 
@@ -670,14 +678,16 @@ class Model extends DB
                 array_push($minSalary, $this->row['min_salary']);
                 array_push($maxSalary, $this->row['max_salary']);
                 array_push($description, $this->row['job_description']);
+                array_push($jobExperience, $this->row['job_experience']);
                 array_push($skills, explode(",", $this->row['skills']));
                 array_push($jobType, $this->row['job_type']);
                 array_push($companyName, $this->row['company_name']);
                 array_push($companyType, $this->row['company_type']);
             }
             $allJobs = [
-                $jobId, $jobTitle, $employerId, $location,
-                $minSalary, $maxSalary, $description, $skills, $jobType
+                $jobId, $jobTitle, $employerId, 
+                $location,$minSalary, $maxSalary, 
+                $description, $skills, $jobType,$jobExperience
             ];
             $job->setAllJobs($allJobs);
             $employer->setEmployerCompanyName(implode(',',$companyName));

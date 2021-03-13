@@ -1,4 +1,4 @@
-<?php session_start(); 
+<?php session_start();
 ?>
 <?php include './includes/ClassAutoloader.php'; ?>
 <?php
@@ -31,6 +31,7 @@ if (isset($_GET['id'])) {
     $jobDescription = $jobAttr->description;
     $jobSkills = $jobAttr->skills;
     $jobType = $jobAttr->jobType;
+    $jobExperience = $jobAttr->jobExperience;
 }
 ?>
 <!DOCTYPE html>
@@ -47,32 +48,36 @@ if (isset($_GET['id'])) {
 <body>
     <?php include 'includes/header2.php'; ?>
 
-    <div class="container col-12 d-flex  justify-content-center bg-success">
+    <div class="container col-12 d-flex  justify-content-center bg-light">
 
         <div class="container mt-5 col-9 bg-light row">
 
             <div class="col-12 bg-secondary">
                 <div class="card mt-5">
                     <div class="card-body">
-                        <h6 class="card-title"><?= $companyName ?></h6>
-                        <h6 class="card-title"><?= $jobLocation ?></h6>
-                        <h6 class="card-title"><?= $jobType ?></h6>
+                        <h5 class="card-title"><?= $companyName ?></h5>
                         <h6 class="card-title"><?= $jobTitle ?></h6>
+                        <h6 class="card-title"><?= $jobExperience ?></h6>
+                        <h6 class="card-title"><?= $jobType ?></h6>
+                        <h6 class="card-title"><?= $jobLocation ?></h6>
                         <div class="card-text mb-4">
                             <?= $jobDescription ?> Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, nesciunt?
                         </div>
                         <h6 class="card-title">Skills</h6>
                         <div>
-                            <span class="badge rounded-pill bg-primary">HTML</span>
-                            <span class="badge rounded-pill bg-primary">CSS</span>
+                            <?php
+                            for ($i = 0; $i < count($jobSkills); $i++) {
+                            ?>
+                                <span class="badge rounded-pill bg-primary"><?= $jobSkills[$i] ?></span>
+                            <?php
+                            }
+                            ?>
                         </div>
-
                         <h6 class="card-title">Salary range</h6>
                         <p class="card-text">$<?= $jobMinSalary ?> - $<?= $jobMaxSalary ?></p>
                         <?php if ($_SESSION['role'] == 'applicant') {
                         ?>
                             <a href="applyjob.php?id=<?= $jobId ?>&company=<?= $companyName ?>" class="btn btn-primary">Apply</a>
-
                         <?php
                         } ?>
                     </div>

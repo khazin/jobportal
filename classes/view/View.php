@@ -51,7 +51,6 @@ class View
             $employerProfObj->biographyAttr = null;
         }
         
-        
         return $employerProfObj;
 
         

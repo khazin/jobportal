@@ -11,21 +11,18 @@
 <body>
   <?php include 'includes/header.php'; ?>
 
-    <div class="container col-12 d-flex align-items-center bg-success" style="height:100vh">
+    <div class="container col-12 d-flex align-items-center bg-light" style="height:100vh">
     <form action="post" class="form col-6">
       <div class="mb-3 ">
-        <label for="" class="form-label">Search job</label>
+        <label for="" class="form-label">Job</label>
         <input type="text" class="form-control" id="" aria-describedby="">
       </div>
       <div class="mb-3">
-        <label for="" class="form-label">Search country</label>
+        <label for="" class="form-label">Country</label>
         <input type="text" class="form-control" id="">
       </div>
-      <div class="mb-3">
-        <label for="" class="form-label">Search job category</label>
-        <input type="text" class="form-control" id="">
-      </div>    
-      <button type="submit" class="btn btn-primary">Submit</button>
+       
+      <button type="submit" class="btn btn-primary">Search</button>
     </form> 
     </div>
 </body>

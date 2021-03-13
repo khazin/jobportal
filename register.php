@@ -126,8 +126,8 @@ include './includes/ClassAutoloader.php';
                   <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
                </div>
                <input type="hidden" name="role" id="role" value="">
-               <button type="button" class="btn btn-primary" id="formApplicantBackBtn" onclick="return toUserTegisterForm()">Back</button>
-               <button type="submit" class="btn btn-primary" id="formCredentialSubmitBtn" name="register" onclick="return validateCredentials()">Confirm</button>
+               <button type="button" class="btn btn-danger" id="formApplicantBackBtn" onclick="return toUserTegisterForm()">Back</button>
+               <button type="submit" class="btn btn-success" id="formCredentialSubmitBtn" name="register" onclick="return validateCredentials()">Confirm</button>
             </div>
          </div>
 

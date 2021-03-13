@@ -48,6 +48,11 @@ class JobView
     {
         return $this->job->getJobType();
     }
+
+    public function getJobExperience()
+    {
+        return $this->job->getJobExperience();
+    }
     public function getJob() {
         return $this->job->getJob();
     }
