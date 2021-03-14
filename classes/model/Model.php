@@ -695,6 +695,68 @@ class Model extends DB
         }
     }
 
+    public function searchJob2($modelArr)
+    {
+        $job = $modelArr[0];
+        $employer = $modelArr[1];
+
+        $jobTitle = $job->getJobTitle();
+        $jobLocation = $job->getJobLocation();
+
+        
+        $stmt = "SELECT `job_id`, jobs.employer_id,  `job_title`, `location`, 
+        `min_salary`, `max_salary`, `job_description`,
+        `skills`, `job_type`, `job_experience`,
+        employer.company_type as company_type,
+        employer.company_name as company_name
+        from `jobs`
+        join `employer` on jobs.employer_id = employer.employer_id 
+        where `job_title` like '%$jobTitle%'
+        or `location` like '%$jobLocation%'";
+
+           // echo $stmt;
+           $this->retrieveData($stmt);
+
+        
+           $jobId = [];
+           $jobTitle = [];
+           $employerId = [];
+           $location = [];
+           $minSalary = [];
+           $maxSalary = [];
+           $description = [];
+           $skills = [];
+           $jobType = [];
+           $jobExperience = [];
+           $companyName = [];
+           $companyType = [];
+
+           if (mysqli_num_rows($this->result) > 0) {
+            while ($this->row = mysqli_fetch_assoc($this->result)) {
+                array_push($jobId, $this->row['job_id']);
+                array_push($jobTitle, $this->row['job_title']);
+                array_push($employerId, $this->row['employer_id']);
+                array_push($location, $this->row['location']);
+                array_push($minSalary, $this->row['min_salary']);
+                array_push($maxSalary, $this->row['max_salary']);
+                array_push($description, $this->row['job_description']);
+                array_push($jobExperience, $this->row['job_experience']);
+                array_push($skills, explode(",", $this->row['skills']));
+                array_push($jobType, $this->row['job_type']);
+                array_push($companyName, $this->row['company_name']);
+                array_push($companyType, $this->row['company_type']);
+            }
+            $allJobs = [
+                $jobId, $jobTitle, $employerId, 
+                $location,$minSalary, $maxSalary, 
+                $description, $skills, $jobType,$jobExperience
+            ];
+            $job->setAllJobs($allJobs);
+            $employer->setEmployerCompanyName(implode(',',$companyName));
+            $employer->setEmployerCompanyType(implode(',',$companyType));
+        }
+    }
+
     public function applyJob($modelArr)
     {
         $job = $modelArr[0];

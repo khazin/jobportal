@@ -3,6 +3,51 @@
 <?php include './includes/settings.php'; ?>
 
 <?php
+if (isset($_GET['search'])) {
+
+    echo 'serachde';
+    $jobTitle = $_GET['jobTitle'];
+    $country = $_GET['country'];
+    
+     //job model initiated
+     $job = new Job();
+     //Employer model initiated
+     $employer = new Employer();
+ 
+     $modelArr = [$job, $employer];
+     // store job object in job Controller
+     $jobController = new JobController($job);
+     $employerController = new EmployerController($employer);
+ 
+     $jobController->setJobTitle($jobTitle);
+     $jobController->setJobLocation($country);
+ 
+     // store job object in job view
+     $jobView = new JobView($job);
+     // store employer object in employer view
+     $employerView = new EmployerView($employer);
+ 
+     $viewArr = [$jobView, $employerView];
+ 
+     $model = new Model();
+     $view = new View();
+ 
+     $searchJobAttr = $view->searchJob2($model, $modelArr, $viewArr);
+
+    $jobAttr = $searchJobAttr->jobAttr;
+    $jobIdArr = $jobAttr->id;
+    $jobTitleArr = $jobAttr->jobTitle;
+    $employerIdArr = $jobAttr->employerId;
+    $locationArr = $jobAttr->location;
+    $minSalaryArr = $jobAttr->minSalary;
+    $maxSalaryArr = $jobAttr->maxSalary;
+    $descriptionArr = $jobAttr->description;
+    $skillsArr = $jobAttr->skills;
+    $jobTypeArr = $jobAttr->jobType;
+    $jobExperienceArr = $jobAttr->jobExperience;
+    $companyNameArr = $searchJobAttr->companyName;
+    $companyTypeArr = $searchJobAttr->companyType;
+}
 if (isset($_POST['search'])) {
     $jobTitle = $_POST['jobTitle'];
     $jobLocation = $_POST['jobLocation'];
@@ -80,6 +125,7 @@ if (isset($_POST['search'])) {
 </head>
 
 <body>
+
 <?php include 'includes/header2.php'; ?>
 
     <div class="container col-12 d-flex  justify-content-center bg-light">

@@ -1,6 +1,6 @@
-<?php session_start();
-?>
+<?php session_start();?>
 <?php include './includes/ClassAutoloader.php'; ?>
+<?php include './includes/settings.php'; ?>
 <?php
 if (isset($_GET['id'])) {
     ///////////////////SHOW JOB//////////////////////////

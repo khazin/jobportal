@@ -12,13 +12,13 @@
             <a class="nav-link" href="searchapplicant.php">Search users</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="searchjob.php">Find jobs</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="searchcompany.php">Find company</a>
           </li>
           <?php if ($_SESSION['role'] == 'applicant') {
           ?>
+           <li class="nav-item">
+            <a class="nav-link" href="searchjob.php">Find jobs</a>
+          </li>
             <li class="nav-item">
               <a class="nav-link" href="forum.php">Forum</a>
             </li>
@@ -36,7 +36,9 @@
           }
 
           ?>
-
+<li class="nav-item">
+              <a class="nav-link" href="message.php?id=<?=$_SESSION['user_id']?>">View messages</a>
+            </li>
         </ul>
       </div>
       <div class="col-2 mt-3 d-flex justify-content-around">
@@ -44,12 +46,15 @@
           <li class="nav-item">
             <i class="far fa-user bg-light"></i>
           </li>
-          <li class="nav-item">
+          <li class="nav-item px-2">
             <p class="text-light"><?= $_SESSION['name'] ?></p>
           </li>
+          <li class="nav-item">
+          <form action="" method="post">
+          <a href="./logout.php" class="btn btn-sm btn-light" name="logout" onclick="return confirm('Do you want to logout?')">Log out</a>
+          </form>
+          </li>
         </ul>
-
-
       </div>
     </div>
   </nav>

@@ -12,18 +12,23 @@
   <?php include 'includes/header.php'; ?>
 
     <div class="container col-12 d-flex align-items-center bg-light" style="height:100vh">
-    <form action="post" class="form col-6">
+    <form method="get" action="searchjob.php" class="form col-6">
       <div class="mb-3 ">
         <label for="" class="form-label">Job</label>
-        <input type="text" class="form-control" id="" aria-describedby="">
+        <input type="text" class="form-control" name="jobTitle">
       </div>
       <div class="mb-3">
         <label for="" class="form-label">Country</label>
-        <input type="text" class="form-control" id="">
+        <input type="text" class="form-control" name="country">
       </div>
        
-      <button type="submit" class="btn btn-primary">Search</button>
+      <button type="submit" class="btn btn-primary" name="search" value="search">Search</button>
     </form> 
     </div>
 </body>
 </html>
+
+<?php
+
+
+?>

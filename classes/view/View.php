@@ -189,6 +189,23 @@ class View
         echo "<br>";
     }
 
+    public function searchJob2($model,$modelArr,$viewArr){
+        echo "View initiated. retrieving job data";
+        echo "<br>";
+        $jobView = $viewArr[0];
+        $employerView = $viewArr[1];
+        $model->searchJob2($modelArr);
+        
+        $searchJobObj = new stdClass();
+        $searchJobObj->jobAttr = $jobView->getAllJobs();
+        $searchJobObj->companyName = explode(',',$employerView->getEmployerCompanyName());
+        $searchJobObj->companyType = explode(',',$employerView->getEmployerCompanyType());
+
+        return $searchJobObj;
+        echo "showing searched  job";
+        echo "<br>";
+    }
+
     public function checkAppliedJob($model, $modelArr)
     {
         echo "View initiated. retrieving job applied data";
