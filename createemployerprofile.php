@@ -1,7 +1,5 @@
-<?php
-session_start();
-ob_start();
-?>
+<?php session_start();?>
+<?php include './includes/settings.php'; ?>
 <?php include './includes/ClassAutoloader.php'; ?>
 
 
@@ -20,7 +18,7 @@ ob_start();
 <body>
  <?php include 'includes/header.php' ?>
 
-  <div class="container col-12 d-flex flex-column align-items-center bg-success">
+  <div class="container col-12 d-flex flex-column align-items-center bg-light">
 
     <!-- CREATE PROFILE FORM -->
     <form method="post" action="" class="form col-6">

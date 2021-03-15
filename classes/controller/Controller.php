@@ -91,4 +91,18 @@ class Controller
         echo 'answer posted';
         echo '<br>';
     }
+
+    public function updateBiography($model, $biography)
+    {
+        return $model->updateBiography($biography);
+        echo 'biography updated';
+        echo '<br>';
+    }
+
+    public function updateSkills($model, $skills)
+    {
+        return $model->updateSkills($skills);
+        echo 'skills updated';
+        echo '<br>';
+    }
 }

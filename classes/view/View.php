@@ -304,4 +304,26 @@ class View
         return $forumAnswerAttr;
     }
 
+    public function showBiography($model, $biography, $biographyView)
+    {
+        echo "View initiated. retrieving Biography data";
+        echo "<br>";
+        $model->showBiography($biography);
+        return $biographyView->getBiography();
+
+        echo "showing selected Biography";
+        echo "<br>";
+    }
+
+    public function showSkills($model, $skills, $skillsView)
+    {
+        echo "View initiated. retrieving skills data";
+        echo "<br>";
+        $model->showSkills($skills);
+        return $skillsView->getSkills();
+
+        echo "showing selected skills";
+        echo "<br>";
+    }
+
 }

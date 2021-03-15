@@ -138,7 +138,7 @@ if ($_SESSION['role'] == 'applicant') {
             </div>
             <div class="col-2">
             </div>
-            <div class="col-1"><i class="far fa-edit ml-3"></i></div>
+            <a href="updatebio.php" class="col-1"><i class="far fa-edit ml-3"></i></a>
           </div>
         </div>
 
@@ -158,7 +158,7 @@ if ($_SESSION['role'] == 'applicant') {
               </div>
             </div>
             <div class="col-2"></div>
-            <div class="col-1"><i class="far fa-edit ml-3"></i></div>
+            <a href="updateskills.php" class="col-1"><i class="far fa-edit ml-3"></i></a>
           </div>
         </div>
 
@@ -238,7 +238,7 @@ if ($_SESSION['role'] == 'applicant') {
             <div class="col-2">
               <!-- <button class="btn btn-primary ml-3">Connect</button> -->
             </div>
-            <div class="col-1"><i class="far fa-edit ml-3"></i></div>
+            <a href="updatebio.php" class="col-1"><i class="far fa-edit ml-3"></i></a>
           </div>
         </div>
 

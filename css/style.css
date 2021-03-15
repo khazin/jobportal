@@ -10,6 +10,9 @@
 .form__skills {
   display: none; }
 
+.form__skills-edit {
+  display: initial; }
+
 .form__education {
   display: none; }
 

@@ -1051,6 +1051,71 @@ class Model extends DB
         } else {
             return false;
         }
-        
+    }
+
+    public function showBiography($biography)
+    {
+        $biographyId = $biography->getBiographyId();
+
+        $stmt = "SELECT * FROM biography WHERE `biography_id` = $biographyId";
+
+        $this->retrieveData($stmt);
+     
+
+        if (mysqli_num_rows($this->result) > 0) {
+            while ($this->row = mysqli_fetch_assoc($this->result)) {
+                $biography->setBiographyId($this->row['biography_id']);
+                $biography->setBiographyBio($this->row['bio']);
+            }
+        }
+    }
+
+    public function showSkills($skills)
+    {
+        $skillsId = $skills->getSkillsId();
+
+        $stmt = "SELECT * FROM skills WHERE `skills_id` = $skillsId";
+
+        $this->retrieveData($stmt);
+
+
+        if (mysqli_num_rows($this->result) > 0) {
+            while ($this->row = mysqli_fetch_assoc($this->result)) {
+                $skills->setSkillsId($this->row['skills_id']);
+                $skills->setSkillsSkills(explode(",", $this->row['skills_arr']));
+
+            }
+        }
+    }
+
+    public function updateBiography($biography) 
+    {
+        $biographyId = $biography->getBiographyId();
+        $biographyBio = $biography->getBiographyBio();
+
+
+        $stmt = "CALL procUpdateBio($biographyId,'$biographyBio')";
+        echo  $stmt;
+        if ($this->insertData($stmt) == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    
+    public function updateSkills($skills) 
+    {
+        $skillsId = $skills->getSkillsId();
+        $skillsSkills = implode(',', $skills->getSkillsSkills());
+
+
+        $stmt = "CALL procUpdateSkills($skillsId,'$skillsSkills')";
+        echo  $stmt;
+        if ($this->insertData($stmt) == true) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
