@@ -366,6 +366,13 @@ function removePill(e) {
   e.parentNode.remove();
 }
 
+// delete pills
+function deletePill(e) {
+//  console.log(e.parentNode.nextElementSibling);
+ e.parentNode.nextElementSibling.name = 'deleteId[]';
+  e.parentNode.remove();
+}
+
 //add skills pills
 function addSkills() {
   var list = document.createElement("span");

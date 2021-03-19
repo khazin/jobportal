@@ -7,12 +7,30 @@ class Model extends DB
         echo "Model initialised";
     }
 
+
+    public function deleteData($stmt) {
+        try {
+            //prepare statement
+            $this->sql = $stmt;
+            //connect to db
+            $this->connection();
+            if ($this->connection->query($this->sql) === TRUE) {
+                return true;
+                echo "Record deleted successfully";
+            } else {
+                echo "Error : " . $this->connection->error;
+                echo 'data not deleted';
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
     public function insertData($stmt)
     {
         try {
             //prepare statement
             $this->sql = $stmt;
-            // echo "$stmt";
             $this->connection();
             //send data to db
             if ($this->connection->query($this->sql) === TRUE) {
@@ -41,6 +59,8 @@ class Model extends DB
             echo $e->getMessage();
         }
     }
+
+ 
 
     public function registerApplicant($modelArr)
     {
@@ -1088,6 +1108,37 @@ class Model extends DB
         }
     }
 
+    public function showEducation($education)
+    {
+        $educationUserId = $education->getEducationUserId();
+
+        $stmt = "SELECT * FROM education WHERE `education_user_id` = $educationUserId";
+
+        $this->retrieveData($stmt);
+
+        $educationIdArr = [];
+        $educationUserIdArr = [];
+        $certificationArr = [];
+        $schoolArr = [];
+        $courseArr = [];
+        $graduateYearArr = [];
+
+        if (mysqli_num_rows($this->result) > 0) {
+            while ($this->row = mysqli_fetch_assoc($this->result)) {
+                array_push($educationIdArr, $this->row['education_id']);
+                // array_push($educationUserIdArr, $this->row['education_user_id']);
+                $educationUserId = $this->row['education_user_id'];
+                array_push($certificationArr, $this->row['certification']);
+                array_push($schoolArr, $this->row['school']);
+                array_push($courseArr, $this->row['course']);
+                array_push($graduateYearArr, $this->row['gradYear']);
+            }
+            $educationArr = [$educationUserId,$certificationArr,
+            $schoolArr,$courseArr,$graduateYearArr];
+            $education->setEducation($educationArr,$educationIdArr);
+        }
+    }
+
     public function updateBiography($biography) 
     {
         $biographyId = $biography->getBiographyId();
@@ -1112,6 +1163,40 @@ class Model extends DB
 
         $stmt = "CALL procUpdateSkills($skillsId,'$skillsSkills')";
         echo  $stmt;
+        if ($this->insertData($stmt) == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+        
+    public function updateEducation($education) 
+    {
+        $educationId = $education->getEducationId();
+
+
+        for ($i=0; $i < count($educationId); $i++) { 
+            $stmt = "DELETE FROM `jobportal`.`education` WHERE `education_id` = '$educationId[$i]'; ";
+            $this->deleteData($stmt);
+
+        }
+
+
+        $certification = $education->getEducationCertification();
+        $school = $education->getEducationSchool();
+        $course = $education->getEducationCourse();
+        $graduateYear = $education->getEducationGraduateYear();
+        $userId = $education->getEducationUserId();
+
+        for ($i = 0; $i < count($course); $i++) {
+            $stmt = "INSERT INTO `jobportal`.`education` (`education_user_id`, `course`, `certification`, `school`, `gradYear`) 
+            VALUES ('$userId', '$course[$i]', '$certification[$i]', '$school[$i]', '$graduateYear[$i]'); ";
+
+            $this->insertData($stmt);
+        }
+        echo  $stmt;
+
         if ($this->insertData($stmt) == true) {
             return true;
         } else {

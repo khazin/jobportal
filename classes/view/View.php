@@ -326,4 +326,15 @@ class View
         echo "<br>";
     }
 
+    public function showEducation($model, $education, $educationView)
+    {
+        echo "View initiated. retrieving education data";
+        echo "<br>";
+        $model->showEducation($education);
+        return $educationView->getEducation();
+
+        echo "showing selected education";
+        echo "<br>";
+    }
+
 }

@@ -105,4 +105,11 @@ class Controller
         echo 'skills updated';
         echo '<br>';
     }
+
+    public function updateEducation($model, $education)
+    {
+        return $model->updateEducation($education);
+        echo 'education updated';
+        echo '<br>';
+    }
 }

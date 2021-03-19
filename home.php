@@ -176,7 +176,7 @@ if ($_SESSION['role'] == 'applicant') {
               ?>
             </div>
             <div class="col-2"></div>
-            <div class="col-1"><i class="far fa-edit ml-3"></i></div>
+            <a href="updateeducation.php" class="col-1"><i class="far fa-edit ml-3"></i></a>
 
           </div>
         </div>
@@ -195,7 +195,7 @@ if ($_SESSION['role'] == 'applicant') {
               ?>
             </div>
             <div class="col-2"></div>
-            <div class="col-1"><i class="far fa-edit ml-3"></i></div>
+            <a href="updateexperience.php" class="col-1"><i class="far fa-edit ml-3"></i></a>
 
           </div>
         </div>

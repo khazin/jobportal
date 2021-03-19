@@ -16,8 +16,14 @@
 .form__education {
   display: none; }
 
+.form__education-edit {
+  display: initial; }
+
 .form__experience {
   display: none; }
+
+.form__experience-edit {
+  display: initial; }
 
 .card__form-login {
   display: none; }
