@@ -1,5 +1,5 @@
-<?php 
-session_start(); 
+<?php
+session_start();
 include 'includes/settings.php';
 ?>
 
@@ -32,40 +32,35 @@ $view = new View();
 $educationAttr = $view->showEducation($model, $education, $educationView);
 
 if (isset($_POST['update'])) {
-      ///////////////////UPDATE EDUCATION//////////////////////////
+  ///////////////////UPDATE EDUCATION//////////////////////////
 
-      $deleteIdArr = $_POST['deleteId'];
-      $certificationsArr = $_POST['certificationsArr'];
-      $schoolsArr = $_POST['schoolsArr'];
-      $coursesArr = $_POST['coursesArr'];
-      $graduateYearsArr = $_POST['graduateYearsArr'];
-      print_r($graduateYearsArr);
-    
-     
-      //initialise education model
-      $education = new Education();
-         
-      // store education object in education controller
-      $educationController = new EducationController($education);
+  $deleteIdArr = $_POST['deleteId'];
+  $certificationsArr = $_POST['certificationsArr'];
+  $schoolsArr = $_POST['schoolsArr'];
+  $coursesArr = $_POST['coursesArr'];
+  $graduateYearsArr = $_POST['graduateYearsArr'];
 
-  
-      $userId = $_SESSION['user_id']; // id take from session id
-      //set biography data
-  
-  
-      //set education data
-      $educationController->setEducationId($deleteIdArr);
-      $educationController->setEducationCertification($certificationsArr);
-      $educationController->setEducationSchool($schoolsArr);
-      $educationController->setEducationCourse($coursesArr);
-      $educationController->setEducationGraduateYear($graduateYearsArr);
-      $educationController->setEducationUserId($userId);
-   
-  
-      $model = new Model();
-  
-      $controller = new Controller();
-      $controller->updateEducation($model, $education);
+  //initialise education model
+  $education = new Education();
+
+  // store education object in education controller
+  $educationController = new EducationController($education);
+
+
+  $userId = $_SESSION['user_id']; // id take from session id
+
+  //set education data
+  $educationController->setEducationId($deleteIdArr);
+  $educationController->setEducationCertification($certificationsArr);
+  $educationController->setEducationSchool($schoolsArr);
+  $educationController->setEducationCourse($coursesArr);
+  $educationController->setEducationGraduateYear($graduateYearsArr);
+  $educationController->setEducationUserId($userId);
+
+  $model = new Model();
+
+  $controller = new Controller();
+  $controller->updateEducation($model, $education);
 }
 
 ?>
@@ -83,7 +78,7 @@ if (isset($_POST['update'])) {
 </head>
 
 <body>
-<?php include 'includes/header.php' ?>
+  <?php include 'includes/header.php' ?>
 
 
   <div class="container col-12 d-flex flex-column align-items-center bg-light">
@@ -93,8 +88,8 @@ if (isset($_POST['update'])) {
       <div class="card mt-5" style="width: 38rem;">
         <h5 class="mt-3 card-title text-center">Update Education</h5>
         <div class="card-body ">
-      
-   
+
+
           <!-- form 3 qualifications-->
           <div class="col-10 form__education-edit" id="formEducation">
             <h6 class="card-subtitle mb-2 text-muted text-center">What are your qualifications?</h6>
@@ -116,22 +111,19 @@ if (isset($_POST['update'])) {
               <input type="number" class="form-control" name="graduateYear" id="graduateYear">
               <h6>Education</h6>
               <div class="row container__educations" id="educationsContainer">
-                  <?php 
-                  for ($i=0; $i < count($educationAttr->id); $i++) { 
-                      ?>
-                <span class="badge rounded-pill bg-light ml-3 mb-2">Diploma in computer science - Nanyang Polytechnic, 2013<i class="fas fa-times ml-1 btn-icon__remove" onclick="deletePill(this)"></i></span>
-                <input type="hidden" class="educationId" name="" value="<?=$educationAttr->id[$i]?>">
-
-                      <?php
-                  }
-                  ?>
-
+                <?php
+                for ($i = 0; $i < count($educationAttr->id); $i++) {
+                ?>
+                  <span class="badge rounded-pill bg-light ml-3 mb-2"><?= $educationAttr->certification[$i] ?> in <?= $educationAttr->course[$i] ?> - <?= $educationAttr->school[$i] ?>, <?= $educationAttr->graduateYear[$i] ?><i class="fas fa-times ml-1 btn-icon__remove" onclick="deletePill(this)"></i></span>
+                  <input type="hidden" class="educationId" name="" value="<?= $educationAttr->id[$i] ?>">
+                <?php
+                }
+                ?>
               </div>
             </div>
             <button type="submit" class="btn btn-primary" name="update">Update</button>
             <button type="button" class="btn btn-success" onclick="return addEducations()">Add</button>
           </div>
-     
         </div>
       </div>
 
@@ -142,4 +134,5 @@ if (isset($_POST['update'])) {
   <script src="js/script.js"></script>
   <script src="library/node_modules/jquery/dist/jquery.min.js"></script>
 </body>
+
 </html>

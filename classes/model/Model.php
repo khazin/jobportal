@@ -1126,7 +1126,6 @@ class Model extends DB
         if (mysqli_num_rows($this->result) > 0) {
             while ($this->row = mysqli_fetch_assoc($this->result)) {
                 array_push($educationIdArr, $this->row['education_id']);
-                // array_push($educationUserIdArr, $this->row['education_user_id']);
                 $educationUserId = $this->row['education_user_id'];
                 array_push($certificationArr, $this->row['certification']);
                 array_push($schoolArr, $this->row['school']);
@@ -1136,6 +1135,36 @@ class Model extends DB
             $educationArr = [$educationUserId,$certificationArr,
             $schoolArr,$courseArr,$graduateYearArr];
             $education->setEducation($educationArr,$educationIdArr);
+        }
+    }
+
+    public function showExperience($experience)
+    {
+        $experienceUserId = $experience->getExperienceUserId();
+
+        $stmt = "SELECT * FROM experience WHERE `experience_user_id` = $experienceUserId";
+
+        $this->retrieveData($stmt);
+
+        $experienceIdArr = [];
+        $experienceUserId = [];
+        $jobTitleArr = [];
+        $companyArr = [];
+        $yearFromArr = [];
+        $yearToArr = [];
+      
+        if (mysqli_num_rows($this->result) > 0) {
+            while ($this->row = mysqli_fetch_assoc($this->result)) {
+                array_push($experienceIdArr, $this->row['experience_id']);
+                $experienceUserId = $this->row['experience_user_id'];
+                array_push($jobTitleArr, $this->row['job_title']);
+                array_push($companyArr, $this->row['company']);
+                array_push($yearFromArr, $this->row['year_from']);
+                array_push($yearToArr, $this->row['year_to']);
+            }
+            $experienceArr = [$experienceUserId,$jobTitleArr,
+            $companyArr,$yearFromArr,$yearToArr];
+            $experience->setExperience($experienceArr,$experienceIdArr);
         }
     }
 
@@ -1196,6 +1225,40 @@ class Model extends DB
             $this->insertData($stmt);
         }
         echo  $stmt;
+
+        if ($this->insertData($stmt) == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function updateExperience($experience) 
+    {
+        $experienceId = $experience->getExperienceId();
+
+
+        for ($i=0; $i < count($experienceId); $i++) { 
+            $stmt = "DELETE FROM `jobportal`.`experience` WHERE `experience_id` = '$experienceId[$i]'; ";
+            $this->deleteData($stmt);
+
+        }
+        echo $stmt;
+
+
+        $jobTitle = $experience->getExperienceJobTitle();
+        $company = $experience->getExperienceCompany();
+        $yearFrom = $experience->getExperienceYearFrom();
+        $yearTo = $experience->getExperienceYearTo();
+        $userId = $experience->getExperienceUserId();
+
+        for ($i = 0; $i < count($jobTitle); $i++) {
+            $stmt = "INSERT INTO `jobportal`.`experience` (`experience_user_id`, `job_title`, `company`, `year_from`, `year_to`) 
+            VALUES ('$userId', '$jobTitle[$i]', '$company[$i]', '$yearFrom[$i]', '$yearTo[$i]'); ";
+
+            // $this->insertData($stmt);
+        }
+        // echo  $stmt;
 
         if ($this->insertData($stmt) == true) {
             return true;

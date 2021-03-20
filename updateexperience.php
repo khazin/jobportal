@@ -5,6 +5,55 @@ include 'includes/settings.php';
 
 <?php include './includes/ClassAutoloader.php'; ?>
 
+<?php
+///////////////////SHOW WORK EXPERIENCE//////////////////////////
+$userId = $_SESSION['user_id'];
+
+//initialise experience model
+$experience = new Experience();
+
+// store experience object in experience controller
+$experienceController = new ExperienceController($experience);
+
+//set experience id
+$experienceController->setExperienceUserId($userId);
+
+// store experience object in experience view
+$experienceView = new ExperienceView($experience);
+
+$model = new Model();
+$view = new View();
+
+$experienceAttr = $view->showExperience($model, $experience, $experienceView);
+// print_r($experienceAttr);
+
+if (isset($_POST['update'])) {
+  
+  ///////////////////CREATE APPLICANTS PROFILE//////////////////////////
+
+  $deleteIdArr = $_POST['deleteId'];
+  $jobTitlesArr = $_POST['jobTitlesArr'];
+  $companiesArr = $_POST['companiesArr'];
+  $startYearsArr = $_POST['startYearsArr'];
+  $endYearsArr = $_POST['endYearsArr'];
+
+  //initialise experience model
+  $experience = new Experience();
+
+  // store experience object in experience controller
+  $experienceController = new ExperienceController($experience);
+
+  $userId = $_SESSION['user_id']; // id take from session id
+  
+  $experienceArr = [$userId, $jobTitlesArr, $companiesArr, $startYearsArr, $endYearsArr];
+  $experienceController->setExperience($experienceArr, $deleteIdArr);
+
+  $model = new Model();
+
+  $controller = new Controller();
+  $controller->updateExperience($model, $experience);
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -50,11 +99,18 @@ include 'includes/settings.php';
               <input type="number" class="form-control" name="endYear" id="endYear">
               <h6>Work experience</h6>
               <div class="row" class="container__experiences" id="experiencesContainer">
-                <!-- <span class="badge rounded-pill bg-light ml-3 mb-2">Web developer - ABC pte ltd,2013 - 2015<a href="">&times;</a></span>
-                <span class="badge rounded-pill bg-light ml-3 mb-2">App developer - xyz pte ltd,2015 - 2017<a href="">&times;</a></span> -->
+              <?php for ($i=0; $i < count($experienceAttr->id); $i++) { 
+                ?>
+                
+                 <span class="badge rounded-pill bg-light ml-3 mb-2"><?=$experienceAttr->jobTitle[$i]?> - <?=$experienceAttr->company[$i]?>,<?=$experienceAttr->yearFrom[$i]?> - <?=$experienceAttr->yearTo[$i]?><i class="fas fa-times ml-1 btn-icon__remove" onclick="deletePill(this)"></i></span>
+                 <input type="hidden" class="experienceId" name="" value="<?= $experienceAttr->id[$i]?>">
+
+                <?php
+              }?>
+               
               </div>
             </div>
-            <button type="submit" class="btn btn-primary" name="create">Update</button>
+            <button type="submit" class="btn btn-primary" name="update">Update</button>
             <button type="button" class="btn btn-success" onclick="return addExperiences()">Add</button>
           </div>
         </div>
@@ -70,24 +126,4 @@ include 'includes/settings.php';
 </html>
 
   <?php 
-  ///////////////////SHOW APPLICANT PROFILE//////////////////////////
-
-  $userId = $_SESSION['user_id'];
-
-  //initialise experience model
-  $experience = new Experience();
-
-  // store experience object in experience controller
-  $experienceController = new ExperienceController($experience);
-
-  //set experience id
-  $experienceController->setExperienceUserId($userId);
-
-  // store experience object in experience view
-  $experienceView = new ExperienceView($experience);
-
-
-  $model = new Model();
-  $view = new View();
-
-//   $experienceAttr = $view->showExperience($model, $experience, $experienceView);
+  

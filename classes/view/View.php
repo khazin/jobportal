@@ -336,5 +336,14 @@ class View
         echo "showing selected education";
         echo "<br>";
     }
+    public function showExperience($model, $experience, $experienceView)
+    {
+        echo "View initiated. retrieving experience data";
+        echo "<br>";
+        $model->showExperience($experience);
+        return $experienceView->getExperience();
 
+        echo "showing selected experience";
+        echo "<br>";
+    }
 }

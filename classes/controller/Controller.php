@@ -112,4 +112,11 @@ class Controller
         echo 'education updated';
         echo '<br>';
     }
+
+    public function updateExperience($model, $experience)
+    {
+        return $model->updateExperience($experience);
+        echo 'experience updated';
+        echo '<br>';
+    }
 }
