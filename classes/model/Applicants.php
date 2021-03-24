@@ -17,15 +17,15 @@ class Applicants
 
     public function __construct()
     {
-        echo "Applicants initiated. Applicants data is stored";
-        echo "<br>";
+        // echo "Applicants initiated. Applicants data is stored";
+        // echo "<br>";
     }
 
     public function setApplicantId($id)
     {
         $this->id = $id;
-        echo 'applicant id is set';
-        echo '<br>';
+        // echo 'applicant id is set';
+        // echo '<br>';
     }
 
     public function getApplicantId()
@@ -36,8 +36,8 @@ class Applicants
     public function setApplicantFirstname($firstname)
     {
         $this->firstname = $firstname;
-        echo 'applicant firstname is set';
-        echo '<br>';
+        // echo 'applicant firstname is set';
+        // echo '<br>';
     }
 
     public function getApplicantFirstname()
@@ -48,8 +48,8 @@ class Applicants
     public function setApplicantLastname($lastname)
     {
         $this->lastname = $lastname;
-        echo 'applicant lastname is set';
-        echo '<br>';
+        // echo 'applicant lastname is set';
+        // echo '<br>';
     }
 
     public function getApplicantLastname()
@@ -60,8 +60,8 @@ class Applicants
     public function setApplicantGender($gender)
     {
         $this->gender = $gender;
-        echo 'applicant gender is set';
-        echo '<br>';
+        // echo 'applicant gender is set';
+        // echo '<br>';
     }
 
     public function getApplicantGender()
@@ -72,8 +72,8 @@ class Applicants
     public function setApplicantDob($dob)
     {
         $this->dob = $dob;
-        echo 'applicant dob is set';
-        echo '<br>';
+        // echo 'applicant dob is set';
+        // echo '<br>';
     }
 
     public function getApplicantDob()
@@ -84,8 +84,8 @@ class Applicants
     public function setApplicantJobTitle($jobTitle)
     {
         $this->jobTitle = $jobTitle;
-        echo 'applicant jobTitle is set';
-        echo '<br>';
+        // echo 'applicant jobTitle is set';
+        // echo '<br>';
     }
 
     public function getApplicantJobTitle()
@@ -96,8 +96,8 @@ class Applicants
     public function setApplicantCompany($company)
     {
         $this->company = $company;
-        echo 'applicant company is set';
-        echo '<br>';
+        // echo 'applicant company is set';
+        // echo '<br>';
     }
 
     public function getApplicantCompany()
@@ -108,8 +108,8 @@ class Applicants
     public function setApplicantCountry($country)
     {
         $this->country = $country;
-        echo 'applicant country is set';
-        echo '<br>';
+        // echo 'applicant country is set';
+        // echo '<br>';
     }
 
     public function getApplicantCountry()
@@ -120,8 +120,8 @@ class Applicants
     public function setApplicantCity($city)
     {
         $this->city = $city;
-        echo 'applicant city is set';
-        echo '<br>';
+        // echo 'applicant city is set';
+        // echo '<br>';
     }
 
     public function getApplicantCity()
@@ -146,8 +146,8 @@ class Applicants
         $this->setApplicantCity($applicantArr[7]);
 
 
-        echo "setApplicant data is set";
-        echo "<br>";
+        // echo "setApplicant data is set";
+        // echo "<br>";
     }
 
 
@@ -170,8 +170,8 @@ class Applicants
     public function setAllApplicants(Object $allApplicants)
     {
         $this->allApplicants = $allApplicants;
-        echo "setAllApplicants data is set";
-        echo "<br>";
+        // echo "setAllApplicants data is set";
+        // echo "<br>";
     }
 
     public function getAllApplicants()

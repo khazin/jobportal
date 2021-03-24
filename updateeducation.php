@@ -78,7 +78,7 @@ if (isset($_POST['update'])) {
 </head>
 
 <body>
-  <?php include 'includes/header.php' ?>
+  <?php include 'includes/header2.php' ?>
 
 
   <div class="container col-12 d-flex flex-column align-items-center bg-light">

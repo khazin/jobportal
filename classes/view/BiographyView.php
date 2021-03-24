@@ -7,8 +7,8 @@ class BiographyView
     public function __construct($biography)//remember to put type declaration in arguments
     {
         $this->biography = $biography;
-        echo "biographysView initiated. biography object is stored";
-        echo "<br>";
+        // echo "biographysView initiated. biography object is stored";
+        // echo "<br>";
     }
 
     public function getBiographyId()

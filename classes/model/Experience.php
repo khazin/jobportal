@@ -12,15 +12,15 @@ class Experience
 
     public function __construct()
     {
-        echo "experience is initiated";
-        echo "<br>";
+        // echo "experience is initiated";
+        // echo "<br>";
     }
 
     public function setExperienceId($id)
     {
         $this->id = $id;
-        echo "experience id is set";
-        echo "<br>";
+        // echo "experience id is set";
+        // echo "<br>";
     }
 
     public function getExperienceId()
@@ -31,8 +31,8 @@ class Experience
     public function setExperienceUserId($userId)
     {
         $this->userId = $userId;
-        echo "experience userId is set";
-        echo "<br>";
+        // echo "experience userId is set";
+        // echo "<br>";
     }
 
     public function getExperienceUserId()
@@ -43,8 +43,8 @@ class Experience
     public function setExperienceJobTitle($jobTitle)
     {
         $this->jobTitle = $jobTitle;
-        echo "experience jobTitle is set";
-        echo "<br>";
+        // echo "experience jobTitle is set";
+        // echo "<br>";
     }
 
     public function getExperienceJobTitle()
@@ -55,8 +55,8 @@ class Experience
     public function setExperienceCompany($company)
     {
         $this->company = $company;
-        echo "experience company is set";
-        echo "<br>";
+        // echo "experience company is set";
+        // echo "<br>";
     }
 
     public function getExperienceCompany()
@@ -67,8 +67,8 @@ class Experience
     public function setExperienceYearFrom($yearFrom)
     {
         $this->yearFrom = $yearFrom;
-        echo "experience yearFrom is set";
-        echo "<br>";
+        // echo "experience yearFrom is set";
+        // echo "<br>";
     }
 
     public function getExperienceYearFrom()
@@ -79,8 +79,8 @@ class Experience
     public function setExperienceYearTo($yearTo)
     {
         $this->yearTo = $yearTo;
-        echo "experience yearTo is set";
-        echo "<br>";
+        // echo "experience yearTo is set";
+        // echo "<br>";
     }
 
     public function getExperienceYearTo()
@@ -98,8 +98,8 @@ class Experience
         $this->setExperienceYearFrom($experienceArr[3]);
         $this->setExperienceYearTo($experienceArr[4]);
 
-        echo "experience is set";
-        echo "<br>";
+        // echo "experience is set";
+        // echo "<br>";
     }
 
 
@@ -115,7 +115,7 @@ class Experience
         $experienceAttr->yearTo = $this->getExperienceYearTo();
 
         return $experienceAttr;
-        echo "getExperience is run. returning data from DB";
-        echo "<br>";
+        // echo "getExperience is run. returning data from DB";
+        // echo "<br>";
     }
 }

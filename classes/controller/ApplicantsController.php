@@ -7,8 +7,8 @@ class ApplicantsController
     public function __construct( $applicant)//remember to put type declaration in arguments
     {
         $this->applicant = $applicant;
-        echo "applicantscontroller initiated. applicants object is stored";
-        echo "<br>";
+        // echo "applicantscontroller initiated. applicants object is stored";
+        // echo "<br>";
 
     }
 

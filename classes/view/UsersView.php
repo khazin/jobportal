@@ -7,8 +7,8 @@ class UsersView
     public function __construct($user) //remember to put type declaration in arguments
     {
         $this->user = $user;
-        echo "usersView initiated. user object is stored";
-        echo "<br>";
+        // echo "usersView initiated. user object is stored";
+        // echo "<br>";
     }
 
 

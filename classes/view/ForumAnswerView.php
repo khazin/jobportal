@@ -7,8 +7,8 @@ class ForumAnswerView
     public function __construct($forumAnswer) //remember to put type declaration in arguments
     {
         $this->forumAnswer = $forumAnswer;
-        echo "forumAnswersView initiated. forumAnswer object is stored";
-        echo "<br>";
+        // echo "forumAnswersView initiated. forumAnswer object is stored";
+        // echo "<br>";
     }
 
     public function getAnswerId()

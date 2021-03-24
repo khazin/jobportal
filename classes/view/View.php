@@ -28,8 +28,8 @@ class View
 
     public function showEmployerProfile($model, $modelArr, $viewArr)
     { //remember to put type declaration
-        echo "View initiated. retrieveing applicants data";
-        echo "<br>";
+        // echo "View initiated. retrieveing applicants data";
+        // echo "<br>";
 
         $employerView = $viewArr[0];
         $biographyView = $viewArr[1];
@@ -55,14 +55,14 @@ class View
 
         
  
-        echo "employer profile is shown";
-        echo "<br>";
+        // echo "employer profile is shown";
+        // echo "<br>";
     }
 
     public function showApplicantProfile($model, $modelArr, $viewArr)
     { //remember to put type declaration
-        echo "View initiated. retrieveing applicants data";
-        echo "<br>";
+        // echo "View initiated. retrieveing applicants data";
+        // echo "<br>";
         
         $applicantView = $viewArr[0];
         $biographyView = $viewArr[1];
@@ -104,13 +104,13 @@ class View
         }
         return $applicantProfObj;
  
-        echo "applicant profile is shown";
-        echo "<br>";
+        // echo "applicant profile is shown";
+        // echo "<br>";
     }
 
     public function searchApplicant($model, $modelArr, $viewArr) {
-        echo "View initiated. retrieving applicabnts  data";
-        echo "<br>";
+        // echo "View initiated. retrieving applicabnts  data";
+        // echo "<br>";
         $applicantsView = $viewArr[0];
         $skillsView = $viewArr[1];
         $biographyView = $viewArr[2];
@@ -124,13 +124,13 @@ class View
         return $searchApplicantsAttr;
     
 
-        echo "user is searched";
-        echo "<br>";
+        // echo "user is searched";
+        // echo "<br>";
     }
 
     public function searchEmployer($model, $modelArr, $viewArr) {
-        echo "View initiated. retrieving employers  data";
-        echo "<br>";
+        // echo "View initiated. retrieving employers  data";
+        // echo "<br>";
         $EmployerView = $viewArr[0];
         $biographyView = $viewArr[1];
         $model->searchEmployer($modelArr);
@@ -142,14 +142,14 @@ class View
         return $searchEmployerAttr;
     
 
-        echo "user is searched";
-        echo "<br>";
+        // echo "user is searched";
+        // echo "<br>";
     }
 
     public function showAllJobs($model, $job, $jobView)
     {
-        echo "View initiated. retrieving job data";
-        echo "<br>";
+        // echo "View initiated. retrieving job data";
+        // echo "<br>";
         if ($model->showAllJobs($job) == true) {
             return $jobView->getAllJobs();
         } else {
@@ -157,24 +157,24 @@ class View
         }
         ;
 
-        echo "showing all jobs";
-        echo "<br>";
+        // echo "showing all jobs";
+        // echo "<br>";
     }
 
     public function showJob($model, $job, $jobView)
     {
-        echo "View initiated. retrieving job data";
-        echo "<br>";
+        // echo "View initiated. retrieving job data";
+        // echo "<br>";
         $model->showJob($job);
         return $jobView->getJob();
 
-        echo "showing selected job";
-        echo "<br>";
+        // echo "showing selected job";
+        // echo "<br>";
     }
 
     public function searchJob($model,$modelArr,$viewArr){
-        echo "View initiated. retrieving job data";
-        echo "<br>";
+        // echo "View initiated. retrieving job data";
+        // echo "<br>";
         $jobView = $viewArr[0];
         $employerView = $viewArr[1];
         $model->searchJob($modelArr);
@@ -185,13 +185,13 @@ class View
         $searchJobObj->companyType = explode(',',$employerView->getEmployerCompanyType());
 
         return $searchJobObj;
-        echo "showing searched  job";
-        echo "<br>";
+        // echo "showing searched  job";
+        // echo "<br>";
     }
 
     public function searchJob2($model,$modelArr,$viewArr){
-        echo "View initiated. retrieving job data";
-        echo "<br>";
+        // echo "View initiated. retrieving job data";
+        // echo "<br>";
         $jobView = $viewArr[0];
         $employerView = $viewArr[1];
         $model->searchJob2($modelArr);
@@ -202,29 +202,29 @@ class View
         $searchJobObj->companyType = explode(',',$employerView->getEmployerCompanyType());
 
         return $searchJobObj;
-        echo "showing searched  job";
-        echo "<br>";
+        // echo "showing searched  job";
+        // echo "<br>";
     }
 
     public function checkAppliedJob($model, $modelArr)
     {
-        echo "View initiated. retrieving job applied data";
-        echo "<br>";
+        // echo "View initiated. retrieving job applied data";
+        // echo "<br>";
       
         return $model->checkAppliedJob($modelArr);
     }
     public function checkConnectUser($model, $connection,$connectionView)
     {
-        echo "View initiated. retrieving check connection data";
-        echo "<br>";
+        // echo "View initiated. retrieving check connection data";
+        // echo "<br>";
 
         return $model->checkConnectUser($connection);
     }
 
     public function getMsgSender($model, $modelArr,$viewArr)
     {
-        echo "View initiated. retrieving check connection data";
-        echo "<br>";
+        // echo "View initiated. retrieving check connection data";
+        // echo "<br>";
         $messageView = $viewArr[0];
         $applicantsView = $viewArr[1];
         $model->getMsgSender($modelArr);
@@ -239,8 +239,8 @@ class View
 
     public function showAllQuestions(Object $model,Object $modelObj,Object $viewObj) 
     {
-        echo "View initiated. retrieving forum data";
-        echo "<br>";
+        // echo "View initiated. retrieving forum data";
+        // echo "<br>";
         $forumQuestionView = $viewObj->forumQuestionView;
         $applicantView = $viewObj->applicantView;
 
@@ -262,8 +262,8 @@ class View
 
     public function showQuestion(Object $model,Object $modelObj,Object $viewObj) 
     {
-        echo "View initiated. retrieving forum data";
-        echo "<br>";
+        // echo "View initiated. retrieving forum data";
+        // echo "<br>";
         $forumQuestionView = $viewObj->forumQuestionView;
         $applicantView = $viewObj->applicantView;
 
@@ -282,8 +282,8 @@ class View
 
     public function showAllAnswers(Object $model,Object $modelObj,Object $viewObj) 
     {
-        echo "View initiated. retrieving forum data";
-        echo "<br>";
+        // echo "View initiated. retrieving forum data";
+        // echo "<br>";
         $forumAnswerView = $viewObj->forumAnswerView;
         $applicantView = $viewObj->applicantView;
 
@@ -306,44 +306,44 @@ class View
 
     public function showBiography($model, $biography, $biographyView)
     {
-        echo "View initiated. retrieving Biography data";
-        echo "<br>";
+        // echo "View initiated. retrieving Biography data";
+        // echo "<br>";
         $model->showBiography($biography);
         return $biographyView->getBiography();
 
-        echo "showing selected Biography";
-        echo "<br>";
+        // echo "showing selected Biography";
+        // echo "<br>";
     }
 
     public function showSkills($model, $skills, $skillsView)
     {
-        echo "View initiated. retrieving skills data";
-        echo "<br>";
+        // echo "View initiated. retrieving skills data";
+        // echo "<br>";
         $model->showSkills($skills);
         return $skillsView->getSkills();
 
-        echo "showing selected skills";
-        echo "<br>";
+        // echo "showing selected skills";
+        // echo "<br>";
     }
 
     public function showEducation($model, $education, $educationView)
     {
-        echo "View initiated. retrieving education data";
-        echo "<br>";
+        // echo "View initiated. retrieving education data";
+        // echo "<br>";
         $model->showEducation($education);
         return $educationView->getEducation();
 
-        echo "showing selected education";
-        echo "<br>";
+        // echo "showing selected education";
+        // echo "<br>";
     }
     public function showExperience($model, $experience, $experienceView)
     {
-        echo "View initiated. retrieving experience data";
-        echo "<br>";
+        // echo "View initiated. retrieving experience data";
+        // echo "<br>";
         $model->showExperience($experience);
         return $experienceView->getExperience();
 
-        echo "showing selected experience";
-        echo "<br>";
+        // echo "showing selected experience";
+        // echo "<br>";
     }
 }

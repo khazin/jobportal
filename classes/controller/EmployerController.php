@@ -7,8 +7,8 @@ class EmployerController
     public function __construct($employer) //remember to put type declaration in arguments
     {
         $this->employer = $employer;
-        echo "employerscontroller initiated. employers object is stored";
-        echo "<br>";
+        // echo "employerscontroller initiated. employers object is stored";
+        // echo "<br>";
     }
 
     public function setEmployerId($id)

@@ -47,16 +47,10 @@
   <script src="js/script.js"></script>
   <script src="library/node_modules/jquery/dist/jquery.min.js"></script>
 </body>
-
-
-
-
 </html>
-
 <?php
 
 
-print_r($_SESSION);
 if (isset($_POST['create'])) {
     ///////////////////CREATE EMPLOYER PROFILE//////////////////////////
     $biographyBio = $_POST['bio'];

@@ -12,14 +12,14 @@ class Education
 
     public function __construct()
     {
-        echo "education is initiated";
-        echo "<br>";
+        // echo "education is initiated";
+        // echo "<br>";
     }
     public function setEducationId($id)
     {
         $this->id = $id;
-        echo "education id is set";
-        echo "<br>";
+        // echo "education id is set";
+        // echo "<br>";
     }
 
     public function getEducationId()
@@ -30,8 +30,8 @@ class Education
     public function setEducationUserId($userId)
     {
         $this->userId = $userId;
-        echo "education userId is set";
-        echo "<br>";
+        // echo "education userId is set";
+        // echo "<br>";
     }
 
     public function getEducationUserId()
@@ -42,8 +42,8 @@ class Education
     public function setEducationCertification($certification)
     {
         $this->certification = $certification;
-        echo "education certification is set";
-        echo "<br>";
+        // echo "education certification is set";
+        // echo "<br>";
     }
 
     public function getEducationCertification()
@@ -54,8 +54,8 @@ class Education
     public function setEducationSchool($school)
     {
         $this->school = $school;
-        echo "education school is set";
-        echo "<br>";
+        // echo "education school is set";
+        // echo "<br>";
     }
 
     public function getEducationSchool()
@@ -66,8 +66,8 @@ class Education
     public function setEducationCourse($course)
     {
         $this->course = $course;
-        echo "education course is set";
-        echo "<br>";
+        // echo "education course is set";
+        // echo "<br>";
     }
 
     public function getEducationCourse()
@@ -78,8 +78,8 @@ class Education
     public function setEducationGraduateYear($graduateYear)
     {
         $this->graduateYear = $graduateYear;
-        echo "education graduateYear is set";
-        echo "<br>";
+        // echo "education graduateYear is set";
+        // echo "<br>";
     }
 
     public function getEducationGraduateYear()
@@ -96,8 +96,8 @@ class Education
         $this->setEducationCourse($educationArr[3]);
         $this->setEducationGraduateYear($educationArr[4]);
 
-        echo "education is set";
-        echo "<br>";
+        // echo "education is set";
+        // echo "<br>";
     }
 
 
@@ -114,7 +114,7 @@ class Education
       
         return $educationAttr;
 
-        echo "getEducation is run. returning data from DB";
-        echo "<br>";
+        // echo "getEducation is run. returning data from DB";
+        // echo "<br>";
     }
 }

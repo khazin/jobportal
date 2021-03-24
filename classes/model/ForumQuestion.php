@@ -12,15 +12,15 @@ class ForumQuestion
 
     public function __construct()
     {
-        echo "forumQuestion is initiated";
-        echo "<br>";
+        // echo "forumQuestion is initiated";
+        // echo "<br>";
     }
 
     public function setForumId($forumId)
     {
         $this->forumId = $forumId;
-        echo 'forumQuestion forumId is set';
-        echo '<br>';
+        // echo 'forumQuestion forumId is set';
+        // echo '<br>';
     }
 
     public function getForumId()
@@ -31,8 +31,8 @@ class ForumQuestion
     public function setQuestionUserId($questionUserId)
     {
         $this->questionUserId = $questionUserId;
-        echo 'forumquestionUserId question is set';
-        echo '<br>';
+        // echo 'forumquestionUserId question is set';
+        // echo '<br>';
     }
 
     public function getQuestionUserId()
@@ -43,8 +43,8 @@ class ForumQuestion
     public function setQuestion($question)
     {
         $this->question = $question;
-        echo 'forumQuestion question is set';
-        echo '<br>';
+        // echo 'forumQuestion question is set';
+        // echo '<br>';
     }
 
     public function getQuestion()
@@ -55,8 +55,8 @@ class ForumQuestion
     public function setQuestionVote($questionVote)
     {
         $this->questionVote = $questionVote;
-        echo 'forumQuestion questionVoteReceiverId is set';
-        echo '<br>';
+        // echo 'forumQuestion questionVoteReceiverId is set';
+        // echo '<br>';
     }
 
     public function getQuestionVote()
@@ -72,8 +72,8 @@ class ForumQuestion
         $this->setQuestion($forumQuestionObj->question);
         $this->setQuestionVote($forumQuestionObj->questionVote);
    
-        echo "forumQuestion attribute is set";
-        echo "<br>";
+        // echo "forumQuestion attribute is set";
+        // echo "<br>";
     }
 
     public function getforumQuestion()
@@ -95,8 +95,8 @@ class ForumQuestion
     {
         $this->allForumQuestion = $allForumQuestion;
 
-        echo "all forumQuestion attribute is set";
-        echo "<br>";
+        // echo "all forumQuestion attribute is set";
+        // echo "<br>";
     }
 
     public function getAllforumQuestion()

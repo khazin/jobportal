@@ -13,15 +13,15 @@ class ForumAnswer
 
     public function __construct()
     {
-        echo "forumQuestion is initiated";
-        echo "<br>";
+        // echo "forumQuestion is initiated";
+        // echo "<br>";
     }
 
     public function setAnswerId($answerId)
     {
         $this->answerId = $answerId;
-        echo 'forumQuestion answerId is set';
-        echo '<br>';
+        // echo 'forumQuestion answerId is set';
+        // echo '<br>';
     }
 
     public function getAnswerId()
@@ -32,8 +32,8 @@ class ForumAnswer
     public function setQuestionId($questionId)
     {
         $this->questionId = $questionId;
-        echo 'forumanswer questionId is set';
-        echo '<br>';
+        // echo 'forumanswer questionId is set';
+        // echo '<br>';
     }
 
     public function getQuestionId()
@@ -44,8 +44,8 @@ class ForumAnswer
     public function setAnswerUserId($answerUserId)
     {
         $this->answerUserId = $answerUserId;
-        echo 'forumanswer answerUserId is set';
-        echo '<br>';
+        // echo 'forumanswer answerUserId is set';
+        // echo '<br>';
     }
 
     public function getAnswerUserId()
@@ -56,8 +56,8 @@ class ForumAnswer
     public function setAnswer($answer)
     {
         $this->answer = $answer;
-        echo 'forumanswer answer is set';
-        echo '<br>';
+        // echo 'forumanswer answer is set';
+        // echo '<br>';
     }
 
     public function getAnswer()
@@ -69,8 +69,8 @@ class ForumAnswer
     public function setAnswerVote($answerVote)
     {
         $this->answerVote = $answerVote;
-        echo 'forumanswer answerVoteReceiverId is set';
-        echo '<br>';
+        // echo 'forumanswer answerVoteReceiverId is set';
+        // echo '<br>';
     }
 
     public function getAnswerVote()
@@ -87,8 +87,8 @@ class ForumAnswer
         $this->setAnswer($forumAnswerObj->answer);
         $this->setAnswerVote($forumAnswerObj->answerVote);
    
-        echo "forumAnswer attribute is set";
-        echo "<br>";
+        // echo "forumAnswer attribute is set";
+        // echo "<br>";
     }
 
     public function getforumAnswer()
@@ -111,8 +111,8 @@ class ForumAnswer
     {
         $this->allForumAnswer = $allForumAnswer;
 
-        echo "all forumQuestion attribute is set";
-        echo "<br>";
+        // echo "all forumQuestion attribute is set";
+        // echo "<br>";
     }
 
     public function getAllForumAnswer()

@@ -8,18 +8,18 @@ class Biography
 
     private array $allBiographys;
 
-    public function __construct() //remember to put type declaration in arguments
+    public function __construct() 
     {
 
-        echo "biographys is initiated";
-        echo "<br>";
+        // echo "biographys is initiated";
+        // echo "<br>";
     }
 
     public function setBiographyId($id)
     {
         $this->id = $id;
-        echo "biography id is set";
-        echo "<br>";
+        // echo "biography id is set";
+        // echo "<br>";
     }
 
     public function getBiographyId()
@@ -29,8 +29,8 @@ class Biography
     public function setBiographyBio($bio)
     {
         $this->bio = $bio;
-        echo "biography bio is set";
-        echo "<br>";
+        // echo "biography bio is set";
+        // echo "<br>";
     }
 
     public function getBiographyBio()
@@ -43,8 +43,8 @@ class Biography
         $this->setBiographyId($id);
         $this->setBiographyBio($bio);
 
-        echo "biography attribute is set";
-        echo "<br>";
+        // echo "biography attribute is set";
+        // echo "<br>";
     }
 
 
@@ -55,15 +55,15 @@ class Biography
         $biographyObj->bio = $this->getBiographyBio();
 
         return $biographyObj;
-        echo "getBiography is run. returning data from DB";
-        echo "<br>";
+        // echo "getBiography is run. returning data from DB";
+        // echo "<br>";
     }
 
     public function setAllBiographys($allBiographys)
     {
         $this->allBiographys = $allBiographys;
-        echo "setAllBiographys data is set";
-        echo "<br>";
+        // echo "setAllBiographys data is set";
+        // echo "<br>";
     }
 
     public function getAllBiographys()

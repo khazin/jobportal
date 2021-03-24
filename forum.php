@@ -52,7 +52,7 @@ $questionVoteArr = $forumAttr->forumQuestionObj->questionVoteArr;
     <?php include 'includes/header2.php'; ?>
 
 
-    <div class="container col-12 d-flex flex-column justify-content-start bg-success">
+    <div class="container col-12 d-flex flex-column justify-content-start bg-light">
 
         <div class="container col-6 ">
             <?php if (count($forumIdArr) > 0) { ?>

@@ -7,8 +7,8 @@ class ForumQuestionController
     public function __construct($forumQuestion) //remember to put type declaration in arguments
     {
         $this->forumQuestion = $forumQuestion;
-        echo "forumQuestionsController initiated. forumQuestion object is stored";
-        echo "<br>";
+        // echo "forumQuestionsController initiated. forumQuestion object is stored";
+        // echo "<br>";
     }
 
     public function setForumId($forumId)

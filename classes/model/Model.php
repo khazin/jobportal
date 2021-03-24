@@ -4,7 +4,7 @@ class Model extends DB
     public $result;
     public function __construct()
     {
-        echo "Model initialised";
+        // echo "Model initialised";
     }
 
 
@@ -572,7 +572,8 @@ class Model extends DB
 
     public function showAllJobs($job)
     {
-        $stmt = "SELECT * FROM jobs";
+        $employerUserId = $job->getJobEmployerId();
+        $stmt = "SELECT * FROM jobs WHERE `employer_id` = $employerUserId";
         $this->retrieveData($stmt);
         $jobId = [];
         $jobTitle = [];

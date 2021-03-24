@@ -7,8 +7,8 @@ class ForumAnswerController
     public function __construct($forumAnswer) //remember to put type declaration in arguments
     {
         $this->forumAnswer = $forumAnswer;
-        echo "forumAnswersController initiated. forumAnswer object is stored";
-        echo "<br>";
+        // echo "forumAnswersController initiated. forumAnswer object is stored";
+        // echo "<br>";
     }
 
     public function setAnswerId($answerId)

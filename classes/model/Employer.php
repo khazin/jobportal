@@ -13,15 +13,15 @@ class Employer
 
     public function __construct()
     {
-        echo "Employers initiated. Employers data is stored";
-        echo "<br>";
+        // echo "Employers initiated. Employers data is stored";
+        // echo "<br>";
     }
 
     public function setEmployerId($id)
     {
         $this->id = $id;
-        echo 'employer id is set';
-        echo '<br>';
+        // echo 'employer id is set';
+        // echo '<br>';
     }
 
     public function getEmployerId()
@@ -32,8 +32,8 @@ class Employer
     public function setEmployerCompanyName($companyName)
     {
         $this->companyName = $companyName;
-        echo 'employer companyName is set';
-        echo '<br>';
+        // echo 'employer companyName is set';
+        // echo '<br>';
     }
 
     public function getEmployerCompanyName()
@@ -44,8 +44,8 @@ class Employer
     public function setEmployerCompanyType($companyType)
     {
         $this->companyType = $companyType;
-        echo 'employer companyType is set';
-        echo '<br>';
+        // echo 'employer companyType is set';
+        // echo '<br>';
     }
 
     public function getEmployerCompanyType()
@@ -56,8 +56,8 @@ class Employer
     public function setEmployerCompanyContact($companyContact)
     {
         $this->companyContact = $companyContact;
-        echo 'employer companyContact is set';
-        echo '<br>';
+        // echo 'employer companyContact is set';
+        // echo '<br>';
     }
 
     public function getEmployerCompanyContact()
@@ -68,8 +68,8 @@ class Employer
     public function setEmployerCompanyAdmin($companyAdmin)
     {
         $this->companyAdmin = $companyAdmin;
-        echo 'employer companyAdmin is set';
-        echo '<br>';
+        // echo 'employer companyAdmin is set';
+        // echo '<br>';
     }
 
     public function getEmployerCompanyAdmin()
@@ -88,8 +88,8 @@ class Employer
         $this->setEmployerCompanyContact($employerArr[2]);
         $this->setEmployerCompanyAdmin($employerArr[3]);
 
-        echo "setEmployer is run";
-        echo "<br>";
+        // echo "setEmployer is run";
+        // echo "<br>";
     }
 
 
@@ -105,15 +105,15 @@ class Employer
 
         return $employerObj;
 
-        echo "getEmployer is run. returning data from DB";
-        echo "<br>";
+        // echo "getEmployer is run. returning data from DB";
+        // echo "<br>";
     }
 
     public function setAllEmployers($allEmployers)
     {
         $this->allEmployers = $allEmployers;
-        echo "setAllEmployers data is set";
-        echo "<br>";
+        // echo "setAllEmployers data is set";
+        // echo "<br>";
     }
 
     public function getAllEmployers()

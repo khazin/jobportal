@@ -117,9 +117,9 @@ include 'includes/settings.php';
                 <span class="badge rounded-pill bg-light ml-3 mb-2">App developer - xyz pte ltd,2015 - 2017<a href="">&times;</a></span> -->
               </div>
             </div>
-            <button type="button" class="btn btn-secondary" onclick="return addExperiences()">Add</button>
-            <button type="button" class="btn btn-secondary" onclick="return nextForm(formExperience, formEducation)">Back</button>
+            <button type="button" class="btn btn-danger" onclick="return nextForm(formExperience, formEducation)">Back</button>
             <button type="submit" class="btn btn-primary" name="create">Confirm</button>
+            <button type="button" class="btn btn-success" onclick="return addExperiences()">Add</button>
           </div>
         </div>
       </div>
@@ -140,7 +140,6 @@ include 'includes/settings.php';
 <?php
 
 
-print_r($_SESSION);
 if (isset($_POST['create'])) {
 
 

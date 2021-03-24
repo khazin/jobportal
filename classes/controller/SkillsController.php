@@ -7,8 +7,8 @@ class SkillsController
     public function __construct($skills)//remember to put type declaration in arguments
     {
         $this->skills = $skills;
-        echo "skillscontroller initiated. skills object is stored";
-        echo "<br>";
+        // echo "skillscontroller initiated. skills object is stored";
+        // echo "<br>";
 
     }
 

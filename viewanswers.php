@@ -108,7 +108,7 @@ if (isset($_POST['post'])) {
   <?php include 'includes/header2.php'; ?>
 
 
-  <div class="container col-12 d-flex flex-column justify-content-start bg-success">
+  <div class="container col-12 d-flex flex-column justify-content-start bg-light">
     <div class="container col-6 ">
       <!-- card profile -->
       <div class="card my-5">

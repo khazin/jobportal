@@ -7,8 +7,8 @@ class ExperienceController
     public function __construct($experience) 
     {
         $this->experience = $experience;
-        echo "experiencecontroller initiated";
-        echo "<br>";
+        // echo "experiencecontroller initiated";
+        // echo "<br>";
     }
 
     public function setExperienceId($id)

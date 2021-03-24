@@ -13,8 +13,8 @@ class Skills
     public function setSkillsId($id)
     {
         $this->id = $id;
-        echo "Skills id is set.";
-        echo "<br>";
+        // echo "Skills id is set.";
+        // echo "<br>";
     }
 
     public function getSkillsId()
@@ -25,8 +25,8 @@ class Skills
     public function setSkillsSkills($skills)
     {
         $this->skills = $skills;
-        echo "Skills skills is set.";
-        echo "<br>";
+        // echo "Skills skills is set.";
+        // echo "<br>";
     }
 
     public function getSkillsSkills()
@@ -40,8 +40,8 @@ class Skills
         $this->setSkillsId($id);
         $this->setSkillsSkills($skillsArr);
 
-        echo "Skills is set.";
-        echo "<br>";
+        // echo "Skills is set.";
+        // echo "<br>";
     }
 
 
@@ -54,7 +54,7 @@ class Skills
 
         return $skillsAttr;
 
-        echo "getSkills is run. returning data from DB";
-        echo "<br>";
+        // echo "getSkills is run. returning data from DB";
+        // echo "<br>";
     }
 }

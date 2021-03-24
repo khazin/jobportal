@@ -7,8 +7,6 @@ class JobController
     public function __construct($job) 
     {
         $this->job = $job;
-        echo "jobcontroller initiated";
-        echo "<br>";
     }
 
     public function setjobId($id)

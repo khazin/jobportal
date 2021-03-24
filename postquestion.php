@@ -50,8 +50,8 @@ if (isset($_POST['post'])) {
 </head>
 
 <body>
-    <?php include './includes/settings.php' ?>
-    <div class="container col-12 d-flex flex-column align-items-center bg-success">
+    <?php include './includes/header2.php' ?>
+    <div class="container col-12 d-flex flex-column align-items-center bg-light">
 
         <!-- SEND MESSAGE FORM -->
         <form method="post" action="" class="form col-6">

@@ -7,8 +7,8 @@ class ApplicantsView
     public function __construct($applicant) //remember to put type declaration in arguments
     {
         $this->applicant = $applicant;
-        echo "applicantsView initiated. applicants object is stored";
-        echo "<br>";
+        // echo "applicantsView initiated. applicants object is stored";
+        // echo "<br>";
     }
 
     public function getApplicantId()

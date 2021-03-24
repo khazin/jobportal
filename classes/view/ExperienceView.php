@@ -7,8 +7,8 @@ class ExperienceView
     public function __construct($experience)//remember to put type declaration in arguments
     {
         $this->experience = $experience;
-        echo "experienceView initiated. experience object is stored";
-        echo "<br>";
+        // echo "experienceView initiated. experience object is stored";
+        // echo "<br>";
     }
 
     public function getExperienceId(){

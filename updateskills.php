@@ -23,7 +23,6 @@ $model = new Model();
 $view = new View();
 
 $skillsAttr = $view->showSkills($model, $skills, $skillsView);
-print_r($skillsAttr->skills);
 
 if (isset($_POST['update'])) {
     $skillsArr = $_POST['skillsArr'];

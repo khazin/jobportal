@@ -101,7 +101,7 @@ if ($_SESSION['role'] == 'applicant') {
   $employerProfObj = $view->showEmployerProfile($model, $modelArr, $viewArr);
   $employerAttr = $employerProfObj->employerAttr;
   $biographyAttr = $employerProfObj->biographyAttr;
-  print_r($employerProfObj);
+  // print_r($employerProfObj);
 
   $_SESSION['name'] = $employerAttr->companyName;
 }
@@ -209,6 +209,9 @@ if ($_SESSION['role'] == 'applicant') {
         // store job object in job view
         $jobView = new JobView($job);
 
+        // store job object in job controller
+        $jobController = new JobController($job);
+        $jobController->setJobEmployerId($_SESSION['user_id']);
         $model = new Model();
         $view = new View();
 

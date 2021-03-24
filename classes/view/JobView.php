@@ -7,8 +7,8 @@ class JobView
     public function __construct($job)//remember to put type declaration in arguments
     {
         $this->job = $job;
-        echo "JobView initiated. Job object is stored";
-        echo "<br>";
+        // echo "JobView initiated. Job object is stored";
+        // echo "<br>";
     }
 
     public function getJobId(){

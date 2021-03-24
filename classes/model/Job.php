@@ -18,15 +18,15 @@ class Job
 
     public function __construct()
     {
-        echo "Job is initiated";
-        echo "<br>";
+        // echo "Job is initiated";
+        // echo "<br>";
     }
 
     public function setJobId($id)
     {
         $this->id = $id;
-        echo "Job id is set";
-        echo "<br>";
+        // echo "Job id is set";
+        // echo "<br>";
     }
 
     public function getJobId()
@@ -37,8 +37,8 @@ class Job
     public function setJobTitle($jobTitle)
     {
         $this->jobTitle = $jobTitle;
-        echo "Job jobTitle is set";
-        echo "<br>";
+        // echo "Job jobTitle is set";
+        // echo "<br>";
     }
 
     public function getJobTitle()
@@ -49,8 +49,8 @@ class Job
     public function setJobEmployerId($employerId)
     {
         $this->employerId = $employerId;
-        echo "Job employerId is set";
-        echo "<br>";
+        // echo "Job employerId is set";
+        // echo "<br>";
     }
 
     public function getJobEmployerId()
@@ -61,8 +61,8 @@ class Job
     public function setJobLocation($location)
     {
         $this->location = $location;
-        echo "Job location is set";
-        echo "<br>";
+        // echo "Job location is set";
+        // echo "<br>";
     }
 
     public function getJobLocation()
@@ -73,8 +73,8 @@ class Job
     public function setJobMinSalary($minSalary)
     {
         $this->minSalary = $minSalary;
-        echo "Job minSalary is set";
-        echo "<br>";
+        // echo "Job minSalary is set";
+        // echo "<br>";
     }
 
     public function getJobMinSalary()
@@ -86,8 +86,8 @@ class Job
     public function setJobMaxSalary($maxSalary)
     {
         $this->maxSalary = $maxSalary;
-        echo "Job maxSalary is set";
-        echo "<br>";
+        // echo "Job maxSalary is set";
+        // echo "<br>";
     }
 
     public function getJobMaxSalary()
@@ -98,8 +98,8 @@ class Job
     public function setJobDescription($description)
     {
         $this->description = $description;
-        echo "Job description is set";
-        echo "<br>";
+        // echo "Job description is set";
+        // echo "<br>";
     }
 
     public function getJobDescription()
@@ -110,8 +110,8 @@ class Job
     public function setJobSkills($skills)
     {
         $this->skills = $skills;
-        echo "Job skills is set";
-        echo "<br>";
+        // echo "Job skills is set";
+        // echo "<br>";
     }
 
     public function getJobSkills()
@@ -122,8 +122,8 @@ class Job
     public function setJobType($jobType)
     {
         $this->jobType = $jobType;
-        echo "Job jobType is set";
-        echo "<br>";
+        // echo "Job jobType is set";
+        // echo "<br>";
     }
 
     public function getJobType()
@@ -134,8 +134,8 @@ class Job
     public function setJobExperience($jobExperience)
     {
         $this->jobExperience = $jobExperience;
-        echo "Job jobExperience is set";
-        echo "<br>";
+        // echo "Job jobExperience is set";
+        // echo "<br>";
     }
 
     public function getJobExperience()
@@ -157,8 +157,8 @@ class Job
         $this->setJobType($jobArr[7]);
         $this->setJobExperience($jobArr[8]);
 
-        echo "Job is set";
-        echo "<br>";
+        // echo "Job is set";
+        // echo "<br>";
     }
 
 
@@ -178,8 +178,8 @@ class Job
         $jobAttr->jobExperience = $this->getJobExperience();
 
         return $jobAttr;
-        echo "getJob is run. returning data from DB";
-        echo "<br>";
+        // echo "getJob is run. returning data from DB";
+        // echo "<br>";
     }
 
 

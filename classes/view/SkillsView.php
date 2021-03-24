@@ -7,8 +7,8 @@ class SkillsView
     public function __construct($skills) //remember to put type declaration in arguments
     {
         $this->skills = $skills;
-        echo "skillsView initiated. skill object is stored";
-        echo "<br>";
+        // echo "skillsView initiated. skill object is stored";
+        // echo "<br>";
     }
 
     public function getSkillsId()

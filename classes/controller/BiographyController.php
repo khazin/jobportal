@@ -7,8 +7,8 @@ class BiographyController
     public function __construct($biography)//remember to put type declaration in arguments
     {
         $this->biography = $biography;
-        echo "biographycontroller initiated. biography object is stored";
-        echo "<br>";
+        // echo "biographycontroller initiated. biography object is stored";
+        // echo "<br>";
 
     }
 

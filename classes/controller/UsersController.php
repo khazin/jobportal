@@ -7,8 +7,8 @@ class UsersController
     public function __construct( $user)//remember to put type declaration in arguments
     {
         $this->user = $user;
-        echo "usercontroller initiated. user object is stored";
-        echo "<br>";
+        // echo "usercontroller initiated. user object is stored";
+        // echo "<br>";
 
     }
 
@@ -41,13 +41,8 @@ class UsersController
      
        $this->user->setUser($userArr, $id);
 
-        echo "user attribute is set";
-        echo "<br>";
+        // echo "user attribute is set";
+        // echo "<br>";
 
     }
-
-    
-    
-
-
 }

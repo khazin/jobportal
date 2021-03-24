@@ -7,8 +7,8 @@ class EmployerView
     public function __construct($employer)//remember to put type declaration in arguments
     {
         $this->employer = $employer;
-        echo "employersView initiated. employers object is stored";
-        echo "<br>";
+        // echo "employersView initiated. employers object is stored";
+        // echo "<br>";
     }
 
     public function getEmployerId(){

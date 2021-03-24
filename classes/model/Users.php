@@ -11,15 +11,15 @@ class Users
 
     public function __construct()
     {
-        echo "Users is initiated";
-        echo "<br>";
+        // echo "Users is initiated";
+        // echo "<br>";
     }
 
     public function setUserId($id)
     {
         $this->id = $id;
-        echo 'user id is set';
-        echo '<br>';
+        // echo 'user id is set';
+        // echo '<br>';
     }
 
     public function getUserId()
@@ -30,8 +30,8 @@ class Users
     public function setUserEmail($email)
     {
         $this->email = $email;
-        echo 'user email is set';
-        echo '<br>';
+        // echo 'user email is set';
+        // echo '<br>';
     }
 
     public function getUserEmail()
@@ -42,8 +42,8 @@ class Users
     public function setUserPassword($password)
     {
         $this->password = $password;
-        echo 'user password is set';
-        echo '<br>';
+        // echo 'user password is set';
+        // echo '<br>';
     }
 
     public function getUserPassword()
@@ -54,8 +54,8 @@ class Users
     public function setUserRole($role)
     {
         $this->role = $role;
-        echo 'user role is set';
-        echo '<br>';
+        // echo 'user role is set';
+        // echo '<br>';
     }
 
     public function getUserRole()
@@ -66,8 +66,8 @@ class Users
     public function setUserFirstLogin($firstLogin)
     {
         $this->firstLogin = $firstLogin;
-        echo 'User first login is set';
-        echo '<br>';
+        // echo 'User first login is set';
+        // echo '<br>';
     }
 
     public function getUserFirstLogin()
@@ -85,8 +85,8 @@ class Users
         $this->setUserPassword($userArr[1]);
         $this->setUserRole($userArr[2]);
 
-        echo "user attribute is set";
-        echo "<br>";
+        // echo "user attribute is set";
+        // echo "<br>";
     }
 
 

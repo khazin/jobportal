@@ -7,8 +7,8 @@ class EducationView
     public function __construct($education)//remember to put type declaration in arguments
     {
         $this->education = $education;
-        echo "educationView initiated. education object is stored";
-        echo "<br>";
+        // echo "educationView initiated. education object is stored";
+        // echo "<br>";
     }
 
     public function getEducationId(){

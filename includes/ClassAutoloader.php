@@ -37,7 +37,6 @@ include './classes/model/ForumQuestion.php';
 include './classes/model/ForumAnswer.php';
 
 //view
-include './classes/view/ViewInterface.php';
 include './classes/view/View.php';
 include './classes/view/UsersView.php';
 include './classes/view/ApplicantsView.php';
@@ -53,7 +52,6 @@ include './classes/view/ForumAnswerView.php';
 include './classes/view/MessageView.php';
 
 //controller
-include './classes/controller/ControllerInterface.php';
 include './classes/controller/UsersController.php';
 include './classes/controller/ApplicantsController.php';
 include './classes/controller/EmployerController.php';
