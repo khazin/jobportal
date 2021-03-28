@@ -7,8 +7,8 @@ class MessageView
     public function __construct($message) //remember to put type declaration in arguments
     {
         $this->message = $message;
-        echo "MessagesView initiated. Message object is stored";
-        echo "<br>";
+        // echo "MessagesView initiated. Message object is stored";
+        // echo "<br>";
     }
 
     public function getMsgSenderId()

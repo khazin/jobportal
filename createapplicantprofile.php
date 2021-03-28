@@ -1,5 +1,5 @@
-<?php 
-session_start(); 
+<?php
+session_start();
 include 'includes/settings.php';
 ?>
 
@@ -19,7 +19,7 @@ include 'includes/settings.php';
 </head>
 
 <body>
-<?php include 'includes/header.php' ?>
+  <?php include 'includes/header.php' ?>
 
 
   <div class="container col-12 d-flex flex-column align-items-center bg-light">
@@ -50,6 +50,11 @@ include 'includes/settings.php';
                 <option value="Javscript">
                 <option value="Linux">
                 <option value="AWS">
+                <option value="Java">
+                <option value="C#">
+                <option value="C++">
+                <option value="PHP">
+                <option value="Python">
               </datalist>
               <h6>Skills</h6>
               <div class="row container__skills" id="skillsContainer">
@@ -104,6 +109,10 @@ include 'includes/settings.php';
                 <option value="Mobile App developer">
                 <option value="Network engineer">
                 <option value="Software engineer">
+                <option value="Desktop engineer">
+                <option value="Data engineer">
+                <option value="Data analyst">
+                <option value="Data scientist">
               </datalist>
               <label for="company" class="form-label">Company</label>
               <input type="text" class="form-control" name="company" id="company">
@@ -144,72 +153,57 @@ if (isset($_POST['create'])) {
 
 
 
-    ///////////////////CREATE APPLICANTS PROFILE//////////////////////////
+  ///////////////////CREATE APPLICANTS PROFILE//////////////////////////
 
-    $biographyBio = $_POST['bio'];
+  $biographyBio = $_POST['bio'];
 
-    $skillsArr = $_POST['skillsArr'];
+  $skillsArr = $_POST['skillsArr'];
 
-    $certificationsArr = $_POST['certificationsArr'];
-    $schoolsArr = $_POST['schoolsArr'];
-    $coursesArr = $_POST['coursesArr'];
-    $graduateYearsArr = $_POST['graduateYearsArr'];
+  $certificationsArr = $_POST['certificationsArr'];
+  $schoolsArr = $_POST['schoolsArr'];
+  $coursesArr = $_POST['coursesArr'];
+  $graduateYearsArr = $_POST['graduateYearsArr'];
 
-    $jobTitlesArr = $_POST['jobTitlesArr'];
-    $companiesArr = $_POST['companiesArr'];
-    $startYearsArr = $_POST['startYearsArr'];
-    $endYearsArr = $_POST['endYearsArr'];
+  $jobTitlesArr = $_POST['jobTitlesArr'];
+  $companiesArr = $_POST['companiesArr'];
+  $startYearsArr = $_POST['startYearsArr'];
+  $endYearsArr = $_POST['endYearsArr'];
 
-    //initialise biography model
-    $biography = new Biography();
-    //initialise skills model
-    $skills = new Skills();
-    //initialise education model
-    $education = new Education();
-    //initialise experience model
-    $experience = new Experience();
+  //initialise biography model
+  $biography = new Biography();
+  //initialise skills model
+  $skills = new Skills();
+  //initialise education model
+  $education = new Education();
+  //initialise experience model
+  $experience = new Experience();
 
-    // store biography object in biography controller
-    $biographyController = new biographyController($biography);
-    // store skills object in skills controller
-    $skillsController = new skillsController($skills);
-    // store education object in education controller
-    $educationController = new EducationController($education);
-    // store experience object in experience controller
-    $experienceController = new ExperienceController($experience);
+  // store biography object in biography controller
+  $biographyController = new biographyController($biography);
+  // store skills object in skills controller
+  $skillsController = new skillsController($skills);
+  // store education object in education controller
+  $educationController = new EducationController($education);
+  // store experience object in experience controller
+  $experienceController = new ExperienceController($experience);
 
-    $userId = $_SESSION['user_id']; // id take from session id
-    //set biography data
+  $userId = $_SESSION['user_id']; // id take from session id
+  //set biography data
 
-    $biographyController->setBiography($biographyBio, $userId);
-    //set skills data
-    $skillsController->setSkills($skillsArr, $userId);
-    //set education data
-    $educationArr = [$userId, $certificationsArr, $schoolsArr, $coursesArr, $graduateYearsArr];
-    $educationController->setEducation($educationArr, $id = []);
-    //set experience data
-    $experienceArr = [$userId, $jobTitlesArr, $companiesArr, $startYearsArr, $endYearsArr];
-    $experienceController->setExperience($experienceArr, $id = []);
+  $biographyController->setBiography($biographyBio, $userId);
+  //set skills data
+  $skillsController->setSkills($skillsArr, $userId);
+  //set education data
+  $educationArr = [$userId, $certificationsArr, $schoolsArr, $coursesArr, $graduateYearsArr];
+  $educationController->setEducation($educationArr, $id = []);
+  //set experience data
+  $experienceArr = [$userId, $jobTitlesArr, $companiesArr, $startYearsArr, $endYearsArr];
+  $experienceController->setExperience($experienceArr, $id = []);
 
-    $model = new Model();
-    $modelArr = [$biography, $skills, $education, $experience];
+  $model = new Model();
+  $modelArr = [$biography, $skills, $education, $experience];
 
-    $controller = new Controller();
-    $controller->createApplicantProfile($model, $modelArr);
-    header('Location: home.php');
-    
-
-  }
-  
-
-
-
-
-
-
-
-
-
-
-
-
+  $controller = new Controller();
+  $controller->createApplicantProfile($model, $modelArr);
+  header('Location: home.php');
+}

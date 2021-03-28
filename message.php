@@ -1,5 +1,6 @@
 <?php session_start(); ?>
 <?php include './includes/ClassAutoloader.php'; ?>
+<?php include './includes/settings.php'; ?>
 <?php
 
 
@@ -43,7 +44,6 @@ $msgIdArr = $messageAttr->msgId;
 $msgSenderIdArr = $messageAttr->msgSenderId;
 $msgArr = $messageAttr->msg;
 
-print_r($msgSenderId);
 
 if (isset($_GET['firstname'])) {
     $firstname = $_GET['firstname'];
@@ -66,49 +66,10 @@ if (isset($_GET['firstname'])) {
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-            <div class="container ">
-                <a class="navbar-brand col-2" href="index.php">JOB PORTAL</a>
+<?php include './includes/header2.php'; ?>
+   
 
-                <div class="collapse navbar-collapse col-8 d-flex justify-content-around">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Search users</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Find jobs</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Find company</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Post</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-2 mt-3 d-flex justify-content-around">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <i class="far fa-user bg-light"></i>
-                        </li>
-                        <li class="nav-item">
-                            <p class="text-light">Firstname Lastname</p>
-                        </li>
-                    </ul>
-
-
-                </div>
-            </div>
-        </nav>
-        </div>
-        <script src="https://unpkg.com/@popperjs/core@2.4.0/dist/umd/popper.min.js"></script>
-    </header>
-
-    <div class="container col-12 d-flex  justify-content-center bg-success">
+    <div class="container col-12 d-flex  justify-content-center bg-light">
 
         <div class="container mt-5 col-12 bg-light row">
 
@@ -135,7 +96,7 @@ if (isset($_GET['firstname'])) {
 
                     <p class="card-text"><?= $msg ?></p>
 
-
+                    <button>    sdgsdg</button>
                 </div>
 
 

@@ -9,15 +9,15 @@ class Connection
 
     public function __construct()
     {
-        echo "connections is initiated";
-        echo "<br>";
+        // echo "connections is initiated";
+        // echo "<br>";
     }
 
     public function setUserRequestId($userRequestId)
     {
         $this->userRequestId = $userRequestId;
-        echo 'connection userRequestId is set';
-        echo '<br>';
+        // echo 'connection userRequestId is set';
+        // echo '<br>';
     }
 
     public function getUserRequestId()
@@ -28,8 +28,8 @@ class Connection
     public function setUserReceiveId($userReceiveId)
     {
         $this->userReceiveId = $userReceiveId;
-        echo 'connection userReceiveId is set';
-        echo '<br>';
+        // echo 'connection userReceiveId is set';
+        // echo '<br>';
     }
 
     public function getUserReceiveId()
@@ -46,8 +46,8 @@ class Connection
         $this->setUserReceiveId($userReceiveId);
    
 
-        echo "connection attribute is set";
-        echo "<br>";
+        // echo "connection attribute is set";
+        // echo "<br>";
     }
 
 

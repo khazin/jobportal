@@ -22,7 +22,7 @@ if (isset($_POST['search'])) {
     }
     $skillsArr = $_POST['skillsArr'];
     
-    print_r($_POST);
+    // print_r($_POST);
     $applicantArr = [
         $firstname, $lastname, $gender, $birthday = '',
         $country, $city, $jobTitle, $company

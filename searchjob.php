@@ -65,7 +65,6 @@ if (isset($_POST['search'])) {
     $minSalary = $_POST['minSalary'];
     $maxSalary = $_POST['maxSalary'];
 
-    print_r($_POST);
     //job model initiated
     $job = new Job();
     //Employer model initiated
@@ -136,15 +135,14 @@ if (isset($_POST['search'])) {
                 <form method="post" class="form mt-5">
                     <input type="text" placeholder="Job" class="form-control mb-3" id="jobTitle" name="jobTitle">
                     <input type="text" placeholder="Location" class="form-control mb-3" id="jobLocation" name="jobLocation">
-                    <input type="text" placeholder="Specialisation" class="form-control mb-3" id="companyType" name="companyType">
                     <input type="text" placeholder="Company" class="form-control mb-3" id="companyName" name="companyName">
-                    <div class="input-group ">
-                        <input type="text" class="form-control mb-3" placeholder="Experience" id="experience" name="jobExperience" list='experiences'>
-                        <datalist id="experiences">
-                            <option value="entry level">
-                            <option value="junior">
-                            <option value="senior">
-                        </datalist>
+                    <input type="text" placeholder="Company type" class="form-control mb-3" id="companyType" name="companyType">
+                    <div class="input-group">
+                        <select class="form-control mb-3" placeholder="Experience" id="experience" name="jobExperience" list='experiences'>
+                            <option value="entry level">Entry Level</option>
+                            <option value="junior">Junior</option>
+                            <option value="senior">Senior</option>
+                        </select>
                     </div>
                     <div class="input-group ">
                         <input type="text" class="form-control" placeholder="Skills" id="skill" name="skills" list='skills'>
@@ -154,6 +152,11 @@ if (isset($_POST['search'])) {
                             <option value="Javscript">
                             <option value="Linux">
                             <option value="AWS">
+                            <option value="Java">
+                            <option value="C#">
+                            <option value="C++">
+                            <option value="PHP">
+                            <option value="Python">
                         </datalist>
                         <div class="btn btn-outline-secondary" onclick="return addSkills();"><i class="fas fa-plus"></i></div>
                     </div>

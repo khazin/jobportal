@@ -11,15 +11,15 @@ class Message
 
     public function __construct()
     {
-        echo "Messages is initiated";
-        echo "<br>";
+        // echo "Messages is initiated";
+        // echo "<br>";
     }
 
     public function setMsgSenderId($msgSenderId)
     {
         $this->msgSenderId = $msgSenderId;
-        echo 'Message msgSenderId is set';
-        echo '<br>';
+        // echo 'Message msgSenderId is set';
+        // echo '<br>';
     }
 
     public function getMsgSenderId()
@@ -30,8 +30,8 @@ class Message
     public function setMsgReceiverId($msgReceiverId)
     {
         $this->msgReceiverId = $msgReceiverId;
-        echo 'Message msgReceiverId is set';
-        echo '<br>';
+        // echo 'Message msgReceiverId is set';
+        // echo '<br>';
     }
 
     public function getMsgReceiverId()
@@ -43,8 +43,8 @@ class Message
     public function setMsg($msg)
     {
         $this->msg = $msg;
-        echo 'Message msgReceiverId is set';
-        echo '<br>';
+        // echo 'Message msgReceiverId is set';
+        // echo '<br>';
     }
 
     public function getMsg()
@@ -59,8 +59,8 @@ class Message
         $this->setMsgReceiverId($msgReceiverId);
         $this->setMsg($msg);
    
-        echo "Message attribute is set";
-        echo "<br>";
+        // echo "Message attribute is set";
+        // echo "<br>";
     }
 
     public function getMessage()
@@ -81,8 +81,8 @@ class Message
     {
         $this->allMessages = $allMessages;
 
-        echo "all Message attribute is set";
-        echo "<br>";
+        // echo "all Message attribute is set";
+        // echo "<br>";
     }
 
     public function getAllMessages()

@@ -7,8 +7,8 @@ class ConnectionView
     public function __construct($connection) //remember to put type declaration in arguments
     {
         $this->connection = $connection;
-        echo "connectionsView initiated. connection object is stored";
-        echo "<br>";
+        // echo "connectionsView initiated. connection object is stored";
+        // echo "<br>";
     }
 
 

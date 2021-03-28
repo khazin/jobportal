@@ -7,8 +7,8 @@ class MessageController
     public function __construct($message)//remember to put type declaration in arguments
     {
         $this->message = $message;
-        echo "messagecontroller initiated. Message object is stored";
-        echo "<br>";
+        // echo "messagecontroller initiated. Message object is stored";
+        // echo "<br>";
 
     }
 

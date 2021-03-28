@@ -1,5 +1,6 @@
 <?php session_start(); ?>
 <?php include './includes/ClassAutoloader.php'; ?>
+<?php include './includes/settings.php'; ?>
 
 <?php
 if (isset($_GET['id'])) {
@@ -65,6 +66,7 @@ if (isset($_GET['id'])) {
 }
 
 if (isset($_POST['connect'])) {
+  
   $userRequestId = $_SESSION['user_id'];
   $userReceiveId = $_GET['id'];
 
@@ -122,7 +124,7 @@ $result = $view->checkConnectUser($model, $connection, $connectionView);
 <body>
  <?php include './includes/header2.php' ?>
 
-  <div class="container col-12 d-flex flex-column align-items-center bg-success">
+  <div class="container col-12 d-flex flex-column align-items-center bg-light">
 
     <div class="col-6 card__container" id="cardContainerApplicant">
 
@@ -150,7 +152,7 @@ $result = $view->checkConnectUser($model, $connection, $connectionView);
 
             </form>
           </div>
-          <div class="col-1"><i class="far fa-edit ml-3"></i></div>
+          <!-- <div class="col-1"><i class="far fa-edit ml-3"></i></div> -->
         </div>
       </div>
 
@@ -170,7 +172,7 @@ $result = $view->checkConnectUser($model, $connection, $connectionView);
             </div>
           </div>
           <div class="col-2"></div>
-          <div class="col-1"><i class="far fa-edit ml-3"></i></div>
+          <!-- <div class="col-1"><i class="far fa-edit ml-3"></i></div> -->
         </div>
       </div>
 
@@ -188,7 +190,7 @@ $result = $view->checkConnectUser($model, $connection, $connectionView);
             ?>
           </div>
           <div class="col-2"></div>
-          <div class="col-1"><i class="far fa-edit ml-3"></i></div>
+          <!-- <div class="col-1"><i class="far fa-edit ml-3"></i></div> -->
 
         </div>
       </div>
@@ -207,7 +209,7 @@ $result = $view->checkConnectUser($model, $connection, $connectionView);
             ?>
           </div>
           <div class="col-2"></div>
-          <div class="col-1"><i class="far fa-edit ml-3"></i></div>
+          <!-- <div class="col-1"><i class="far fa-edit ml-3"></i></div> -->
 
         </div>
       </div>

@@ -831,7 +831,7 @@ class Model extends DB
         $stmt = "SELECT * FROM `connection` 
         WHERE `user_request_id` = '$userRequestId' AND 
         `user_receive_id` = '$userReceiveId'";
-        echo $stmt;
+        // echo $stmt;
         $this->retrieveData($stmt);
 
         if (mysqli_num_rows($this->result) > 0) {

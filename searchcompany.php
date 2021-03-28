@@ -47,6 +47,7 @@ if (isset($_POST['search'])) {
     $companyAdminArr = $employersObj->companyAdmin;
 
     $bioArr = $biographysObj->bio;
+    // print(count($bioArr));
 }
 ?>
 <!DOCTYPE html>

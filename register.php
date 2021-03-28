@@ -55,7 +55,6 @@ include './includes/ClassAutoloader.php';
                   </div>
                </div>
 
-
                <div class="d-flex justify-content-between">
                   <div class="mb-3">
                      <label for="country" class="form-label">Country</label>

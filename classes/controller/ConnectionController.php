@@ -7,8 +7,8 @@ class ConnectionController
     public function __construct($connection)//remember to put type declaration in arguments
     {
         $this->connection = $connection;
-        echo "connectioncontroller initiated. connection object is stored";
-        echo "<br>";
+        // echo "connectioncontroller initiated. connection object is stored";
+        // echo "<br>";
 
     }
 
@@ -24,8 +24,8 @@ class ConnectionController
      
        $this->connection->setConnection($userRequestId, $userReceiveId);
 
-        echo "connection attribute is set";
-        echo "<br>";
+        // echo "connection attribute is set";
+        // echo "<br>";
 
     }
 
