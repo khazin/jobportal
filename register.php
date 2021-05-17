@@ -81,8 +81,6 @@ include './includes/ClassAutoloader.php';
 
             </div>
 
-
-
             <!-- form 2 employer particular-->
             <div class="card-body col-12 form__employer" id="formEmployer">
                <h6 class="card-subtitle mb-2 text-muted text-center">Fill in your company details</h6>
@@ -129,13 +127,8 @@ include './includes/ClassAutoloader.php';
                <button type="submit" class="btn btn-success" id="formCredentialSubmitBtn" name="register" onclick="return validateCredentials()">Confirm</button>
             </div>
          </div>
-
-
       </form>
-
    </div>
-
-
 </body>
 
 <script src="library/node_modules/jquery/dist/jquery.min.js"></script>
@@ -151,8 +144,6 @@ if (isset($_POST['register'])) {
    $password = $_POST['password'];
    $role = $_POST['role'];
 
-   $userArr = [$email, $password, $role];
-
    //user model initiated
    $user = new Users();
 
@@ -160,7 +151,10 @@ if (isset($_POST['register'])) {
    $userController = new UsersController($user);
 
    //set user data
-   $userController->setUser($userArr, $userid = 0);
+   $userController->setUserId($id = 0);
+   $userController->setUserEmail($email);
+   $userController->setUserPassword($password);
+   $userController->setUserRole($role);
    if ($role == 'applicant') {
 
       ///////////////////////REGISTER APPLICANT//////////////////////////
@@ -175,8 +169,6 @@ if (isset($_POST['register'])) {
       $job = $_POST['job'];
       $company = $_POST['company'];
 
-      $applicantArr = [$firstname, $lastname, $gender, $birthday, $country, $city, $job, $company];
-
       //applicant model initiated
       $applicant = new Applicants();
 
@@ -184,13 +176,24 @@ if (isset($_POST['register'])) {
       $applicantController = new ApplicantsController($applicant);
 
       //set applicant data
-      $applicantController->setapplicant($applicantArr, $id = 0);
+      $applicantController->setApplicantId($id = 0);
+      $applicantController->setApplicantFirstname($firstname);
+      $applicantController->setApplicantLastname($lastname);
+      $applicantController->setApplicantGender($gender);
+      $applicantController->setApplicantDob($birthday);
+      $applicantController->setApplicantJobTitle($job);
+      $applicantController->setApplicantCompany($company);
+      $applicantController->setApplicantCountry($country);
+      $applicantController->setApplicantCity($city);
 
       $model = new Model();
-      $modelArr = [$user, $applicant];
+
+      $modelObjs = new stdClass();
+      $modelObjs->user = $user;
+      $modelObjs->applicant = $applicant;
 
       $controller = new Controller();
-      $controller->registerApplicant($model, $modelArr);
+      $controller->registerApplicant($model, $modelObjs);
       header("Location: registersuccess.php?email=$email&role=$role");
    } elseif ($role == 'employer') {
 
@@ -201,8 +204,6 @@ if (isset($_POST['register'])) {
       $companyContact = $_POST['companyContact'];
       $companyAdmin = $_POST['companyAdmin'];
 
-      $employerArr = [$companyName, $companyType, $companyContact, $companyAdmin];
-
       //employer model initiated
       $employer = new Employer();
 
@@ -210,14 +211,21 @@ if (isset($_POST['register'])) {
       $employerController = new EmployerController($employer);
 
       //set employer data
-      $employerController->setEmployer($employerArr, $id = 0);
+      $employerController->setEmployerId($id = 0);
+      $employerController->setEmployerCompanyName($companyName);
+      $employerController->setEmployerCompanyType($companyType);
+      $employerController->setEmployerCompanyContact($companyContact);
+      $employerController->setEmployerCompanyAdmin($companyAdmin);
 
       $model = new Model();
-      $modelArr = [$user, $employer];
+
+      $modelObjs = new stdClass();
+      $modelObjs->user = $user;
+      $modelObjs->employer = $employer;
 
       $controller = new Controller();
 
-      if ($controller->registerEmployer($model, $modelArr) == false) {
+      if ($controller->registerEmployer($model, $modelObjs) == false) {
          echo '<script>
        alert("This email has been used. Please choose another email address.");
       </script>';

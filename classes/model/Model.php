@@ -62,16 +62,16 @@ class Model extends DB
 
  
 
-    public function registerApplicant($modelArr)
+    public function registerApplicant(object $modelObjs)
     {
-        $user = $modelArr[0];
+        $user = $modelObjs->user;
 
         $id = $user->getUserId();
         $email = $user->getUserEmail();
         $password = $user->getUserPassword();
         $role = $user->getUserRole();
 
-        $applicant = $modelArr[1];
+        $applicant = $modelObjs->applicant;
 
         $firstname = $applicant->getApplicantFirstname();
         $lastname = $applicant->getApplicantLastname();
@@ -92,16 +92,16 @@ class Model extends DB
         $this->insertData($stmt);
     }
 
-    public function registerEmployer($modelArr)
+    public function registerEmployer(object $modelObjs)
     {
-        $user = $modelArr[0];
+        $user = $modelObjs->user;
 
         $id = $user->getUserId();
         $email = $user->getUserEmail();
         $password = $user->getUserPassword();
         $role = $user->getUserRole();
 
-        $employer = $modelArr[1];
+        $employer = $modelObjs->employer;
 
         $companyName = $employer->getEmployerCompanyName();
         $companyType = $employer->getEmployerCompanyType();
@@ -1201,7 +1201,7 @@ class Model extends DB
     }
 
         
-    public function updateEducation($education) 
+    public function updateEducation(object $education) 
     {
         $educationId = $education->getEducationId();
 
@@ -1234,7 +1234,7 @@ class Model extends DB
         }
     }
 
-    public function updateExperience($experience) 
+    public function updateExperience(object $experience) 
     {
         $experienceId = $experience->getExperienceId();
 

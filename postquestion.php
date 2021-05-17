@@ -16,7 +16,6 @@ if (isset($_POST['post'])) {
     // store forumQuestion object in forumQuestion controller
     $forumQuestionController = new forumQuestionController($forumQuestion);
 
-
     //set forumQuestion
     $forumQuestionController->setQuestionUserId($questionUserId);
     $forumQuestionController->setQuestion($question);

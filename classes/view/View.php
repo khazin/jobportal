@@ -9,7 +9,7 @@ class View
     }
 
     public function login($model, $user, $userView)
-    { //remember to put type declaration
+    { 
         if ($model->login($user) == true) {
             return $userView->getUser();
         } else {
@@ -18,7 +18,7 @@ class View
     }
 
     public function login2($model, $user, $userView)
-    { //remember to put type declaration
+    { 
         if ($model->login2($user) == true) {
             return $userView->getUser();
         } else {
@@ -27,9 +27,7 @@ class View
     }
 
     public function showEmployerProfile($model, $modelArr, $viewArr)
-    { //remember to put type declaration
-        // echo "View initiated. retrieveing applicants data";
-        // echo "<br>";
+    { 
 
         $employerView = $viewArr[0];
         $biographyView = $viewArr[1];
@@ -55,15 +53,12 @@ class View
 
         
  
-        // echo "employer profile is shown";
-        // echo "<br>";
+       
     }
 
     public function showApplicantProfile($model, $modelArr, $viewArr)
-    { //remember to put type declaration
-        // echo "View initiated. retrieveing applicants data";
-        // echo "<br>";
-        
+    { 
+    
         $applicantView = $viewArr[0];
         $biographyView = $viewArr[1];
         $skillsView = $viewArr[2];
@@ -104,13 +99,11 @@ class View
         }
         return $applicantProfObj;
  
-        // echo "applicant profile is shown";
-        // echo "<br>";
+      
     }
 
     public function searchApplicant($model, $modelArr, $viewArr) {
-        // echo "View initiated. retrieving applicabnts  data";
-        // echo "<br>";
+    
         $applicantsView = $viewArr[0];
         $skillsView = $viewArr[1];
         $biographyView = $viewArr[2];
@@ -124,13 +117,11 @@ class View
         return $searchApplicantsAttr;
     
 
-        // echo "user is searched";
-        // echo "<br>";
+     
     }
 
     public function searchEmployer($model, $modelArr, $viewArr) {
-        // echo "View initiated. retrieving employers  data";
-        // echo "<br>";
+    
         $EmployerView = $viewArr[0];
         $biographyView = $viewArr[1];
         $model->searchEmployer($modelArr);
@@ -142,14 +133,12 @@ class View
         return $searchEmployerAttr;
     
 
-        // echo "user is searched";
-        // echo "<br>";
+      
     }
 
     public function showAllJobs($model, $job, $jobView)
     {
-        // echo "View initiated. retrieving job data";
-        // echo "<br>";
+        
         if ($model->showAllJobs($job) == true) {
             return $jobView->getAllJobs();
         } else {
@@ -157,8 +146,7 @@ class View
         }
         ;
 
-        // echo "showing all jobs";
-        // echo "<br>";
+      
     }
 
     public function showJob($model, $job, $jobView)

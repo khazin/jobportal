@@ -46,7 +46,12 @@ if (isset($_POST['update'])) {
   $userId = $_SESSION['user_id']; // id take from session id
   
   $experienceArr = [$userId, $jobTitlesArr, $companiesArr, $startYearsArr, $endYearsArr];
-  $experienceController->setExperience($experienceArr, $deleteIdArr);
+  $experienceController->setExperienceId($deleteIdArr);
+  $experienceController->setExperienceUserId($userId);
+  $experienceController->setExperienceJobTitle($jobTitlesArr);
+  $experienceController->setExperienceCompany($companiesArr);
+  $experienceController->setExperienceYearFrom($startYearsArr);
+  $experienceController->setExperienceYearTo($endYearsArr);
 
   $model = new Model();
 

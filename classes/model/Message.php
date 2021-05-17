@@ -15,7 +15,7 @@ class Message
         // echo "<br>";
     }
 
-    public function setMsgSenderId($msgSenderId)
+    public function setMsgSenderId(int $msgSenderId)
     {
         $this->msgSenderId = $msgSenderId;
         // echo 'Message msgSenderId is set';
@@ -27,11 +27,10 @@ class Message
         return $this->msgSenderId;
     }
 
-    public function setMsgReceiverId($msgReceiverId)
+    public function setMsgReceiverId(int $msgReceiverId)
     {
         $this->msgReceiverId = $msgReceiverId;
-        // echo 'Message msgReceiverId is set';
-        // echo '<br>';
+     
     }
 
     public function getMsgReceiverId()
@@ -40,11 +39,10 @@ class Message
     }
 
     
-    public function setMsg($msg)
+    public function setMsg(String $msg)
     {
         $this->msg = $msg;
-        // echo 'Message msgReceiverId is set';
-        // echo '<br>';
+    
     }
 
     public function getMsg()

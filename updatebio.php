@@ -68,7 +68,9 @@ $biographyAttr = $view->showBiography($model, $biography, $biographyView);
 <?php 
 
 if (isset($_POST['update'])) {
-    $biographyController->setBiography($_POST['bio'], $userId);
+    // $biographyController->setBiography($_POST['bio'], $userId);
+    $biographyController->setBiographyId($userId);
+    $biographyController->setBiographyBio($_POST['bio']);
     $controller = new Controller();
         
         if ($controller->updateBiography($model, $biography) == true) {

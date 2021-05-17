@@ -19,7 +19,9 @@ if (isset($_POST['send'])) {
 
 
     //set message
-    $messageController->setMessage($msgSenderId, $msgReceiverId, $msg);
+    $messageController->setMsgSenderId($msgSenderId);
+    $messageController->setMsgReceiverId($msgReceiverId);
+    $messageController->setMsg($msg);
 
     $model = new Model();
     $controller = new Controller();

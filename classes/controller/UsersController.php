@@ -12,37 +12,33 @@ class UsersController
 
     }
 
-    public function setUserId($id) {
+    public function setUserId(int $id) {
         $this->user->setUserId($id);
     }
 
-    public function setUserEmail($email) {
+    public function setUserEmail(String $email) {
         $this->user->setUserEmail($email);
     }
 
 
-    public function setUserPassword($password) {
+    public function setUserPassword(String $password) {
         $this->user->setUserPassword($password);
     }
 
   
-    public function setUserRole($role) {
+    public function setUserRole(String $role) {
         $this->user->setUserRole($role);
     }
 
-    public function setUserFirstLogin($firstLogin)
+    public function setUserFirstLogin(int $firstLogin)
     {
         $this->user->setUserFirstLogin($firstLogin);
      
     }
 
     
-    public function setUser($userArr, $id){ //remember to put type declaration in arguments
+    public function setUser(object $userObjs){ //remember to put type declaration in arguments
      
-       $this->user->setUser($userArr, $id);
-
-        // echo "user attribute is set";
-        // echo "<br>";
-
+       $this->user->setUser($userObjs);
     }
 }

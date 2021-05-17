@@ -96,7 +96,6 @@ if (isset($_GET['firstname'])) {
 
                     <p class="card-text"><?= $msg ?></p>
 
-                    <button>    sdgsdg</button>
                 </div>
 
 

@@ -16,7 +16,7 @@ class Experience
         // echo "<br>";
     }
 
-    public function setExperienceId($id)
+    public function setExperienceId(array $id)
     {
         $this->id = $id;
         // echo "experience id is set";
@@ -28,7 +28,7 @@ class Experience
         return $this->id;
     }
 
-    public function setExperienceUserId($userId)
+    public function setExperienceUserId(int $userId)
     {
         $this->userId = $userId;
         // echo "experience userId is set";
@@ -40,7 +40,7 @@ class Experience
         return $this->userId;
     }
 
-    public function setExperienceJobTitle($jobTitle)
+    public function setExperienceJobTitle(array $jobTitle)
     {
         $this->jobTitle = $jobTitle;
         // echo "experience jobTitle is set";
@@ -52,7 +52,7 @@ class Experience
         return $this->jobTitle;
     }
 
-    public function setExperienceCompany($company)
+    public function setExperienceCompany(array $company)
     {
         $this->company = $company;
         // echo "experience company is set";
@@ -64,7 +64,7 @@ class Experience
         return $this->company;
     }
 
-    public function setExperienceYearFrom($yearFrom)
+    public function setExperienceYearFrom(array $yearFrom)
     {
         $this->yearFrom = $yearFrom;
         // echo "experience yearFrom is set";
@@ -76,7 +76,7 @@ class Experience
         return $this->yearFrom;
     }
 
-    public function setExperienceYearTo($yearTo)
+    public function setExperienceYearTo(array $yearTo)
     {
         $this->yearTo = $yearTo;
         // echo "experience yearTo is set";

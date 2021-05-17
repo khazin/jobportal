@@ -16,7 +16,7 @@ class ForumQuestion
         // echo "<br>";
     }
 
-    public function setForumId($forumId)
+    public function setForumId(int $forumId)
     {
         $this->forumId = $forumId;
         // echo 'forumQuestion forumId is set';
@@ -28,7 +28,7 @@ class ForumQuestion
         return $this->forumId;
     }
 
-    public function setQuestionUserId($questionUserId)
+    public function setQuestionUserId(int $questionUserId)
     {
         $this->questionUserId = $questionUserId;
         // echo 'forumquestionUserId question is set';
@@ -40,7 +40,7 @@ class ForumQuestion
         return $this->questionUserId;
     }
     
-    public function setQuestion($question)
+    public function setQuestion(String $question)
     {
         $this->question = $question;
         // echo 'forumQuestion question is set';
@@ -52,7 +52,7 @@ class ForumQuestion
         return $this->question;
     }
     
-    public function setQuestionVote($questionVote)
+    public function setQuestionVote(int $questionVote)
     {
         $this->questionVote = $questionVote;
         // echo 'forumQuestion questionVoteReceiverId is set';

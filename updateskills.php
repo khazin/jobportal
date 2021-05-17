@@ -30,6 +30,8 @@ if (isset($_POST['update'])) {
     print_r($skillsArr);
 
     $skillsController->setSkills($_POST['skillsArr'], $userId);
+    $skillsController->setSkillsId($userId);
+    $skillsController->setSkillsSkills($_POST['skillsArr']);
     $controller = new Controller();
         
         if ($controller->updateSkills($model, $skills) == true) {
